@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -45,6 +55,40 @@
 			</div>
 		</div>
 	</div>
-
+<script type="text/javascript">
+$('#islogin').click(function() {
+    
+	var loginName = document.getElementById("name").value;
+	var loginPwd = document.getElementById("pwd").value;
+	if(loginName==null || loginPwd==null){
+		alert("账号密码不能为空");
+	}else{
+	$.ajax({				   
+			url : '${pageContext.request.contextPath }/pc/user/userLogin.action',
+			contentType:'application/x-www-form-urlencoded',
+			type : "POST",
+			data:{
+				"loginName":loginName,
+				"loginPwd":loginPwd
+			},
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				if(data.flag){
+					alert("登录成功");
+					window.location='${pageContext.request.contextPath }/pc/user/allSelectUser.action';
+				}
+				else{
+					alert("登录失败,账号/密码错误");
+					window.location='${pageContext.request.contextPath }/login.jsp';
+				}
+			},
+		   error : function() {
+					alert("数据错误");
+					},
+		})
+}
+})
+</script>
 </body>
 </html>
