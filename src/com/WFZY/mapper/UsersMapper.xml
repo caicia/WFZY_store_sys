@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Users" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="loginName" property="loginname" jdbcType="VARCHAR" />
+    <result column="loginPwd" property="loginpwd" jdbcType="VARCHAR" />
+    <result column="userType" property="usertype" jdbcType="TINYINT" />
+    <result column="userSex" property="usersex" jdbcType="TINYINT" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userRealName" property="userrealname" jdbcType="VARCHAR" />
+    <result column="userBrithday" property="userbrithday" jdbcType="DATE" />
+    <result column="userPhoto" property="userphoto" jdbcType="VARCHAR" />
+    <result column="userGrade" property="usergrade" jdbcType="VARCHAR" />
+    <result column="userQQ" property="userqq" jdbcType="VARCHAR" />
+    <result column="userPhone" property="userphone" jdbcType="VARCHAR" />
+    <result column="userEmail" property="useremail" jdbcType="VARCHAR" />
+    <result column="userSignature" property="usersignature" jdbcType="VARCHAR" />
+    <result column="userRemark" property="userremark" jdbcType="VARCHAR" />
+    <result column="userDomicile" property="userdomicile" jdbcType="VARCHAR" />
+    <result column="loginLastIP" property="loginlastip" jdbcType="VARCHAR" />
+    <result column="loginLastTime" property="loginlasttime" jdbcType="TIMESTAMP" />
+    <result column="userStatus" property="userstatus" jdbcType="TINYINT" />
+    <result column="userDataFlag" property="userdataflag" jdbcType="TINYINT" />
+    <result column="loginNumber" property="loginnumber" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    userId, loginName, loginPwd, userType, userSex, userName, userRealName, userBrithday, 
+    userPhoto, userGrade, userQQ, userPhone, userEmail, userSignature, userRemark, userDomicile, 
+    loginLastIP, loginLastTime, userStatus, userDataFlag, loginNumber, createTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.UsersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.UsersExample" >
+    delete from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.Users" >
+    insert into users (userId, loginName, loginPwd, 
+      userType, userSex, userName, 
+      userRealName, userBrithday, userPhoto, 
+      userGrade, userQQ, userPhone, 
+      userEmail, userSignature, userRemark, 
+      userDomicile, loginLastIP, loginLastTime, 
+      userStatus, userDataFlag, loginNumber, 
+      createTime)
+    values (#{userid,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, #{loginpwd,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=TINYINT}, #{usersex,jdbcType=TINYINT}, #{username,jdbcType=VARCHAR}, 
+      #{userrealname,jdbcType=VARCHAR}, #{userbrithday,jdbcType=DATE}, #{userphoto,jdbcType=VARCHAR}, 
+      #{usergrade,jdbcType=VARCHAR}, #{userqq,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, 
+      #{useremail,jdbcType=VARCHAR}, #{usersignature,jdbcType=VARCHAR}, #{userremark,jdbcType=VARCHAR}, 
+      #{userdomicile,jdbcType=VARCHAR}, #{loginlastip,jdbcType=VARCHAR}, #{loginlasttime,jdbcType=TIMESTAMP}, 
+      #{userstatus,jdbcType=TINYINT}, #{userdataflag,jdbcType=TINYINT}, #{loginnumber,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Users" >
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="loginname != null" >
+        loginName,
+      </if>
+      <if test="loginpwd != null" >
+        loginPwd,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="usersex != null" >
+        userSex,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="userrealname != null" >
+        userRealName,
+      </if>
+      <if test="userbrithday != null" >
+        userBrithday,
+      </if>
+      <if test="userphoto != null" >
+        userPhoto,
+      </if>
+      <if test="usergrade != null" >
+        userGrade,
+      </if>
+      <if test="userqq != null" >
+        userQQ,
+      </if>
+      <if test="userphone != null" >
+        userPhone,
+      </if>
+      <if test="useremail != null" >
+        userEmail,
+      </if>
+      <if test="usersignature != null" >
+        userSignature,
+      </if>
+      <if test="userremark != null" >
+        userRemark,
+      </if>
+      <if test="userdomicile != null" >
+        userDomicile,
+      </if>
+      <if test="loginlastip != null" >
+        loginLastIP,
+      </if>
+      <if test="loginlasttime != null" >
+        loginLastTime,
+      </if>
+      <if test="userstatus != null" >
+        userStatus,
+      </if>
+      <if test="userdataflag != null" >
+        userDataFlag,
+      </if>
+      <if test="loginnumber != null" >
+        loginNumber,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null" >
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpwd != null" >
+        #{loginpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=TINYINT},
+      </if>
+      <if test="usersex != null" >
+        #{usersex,jdbcType=TINYINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userrealname != null" >
+        #{userrealname,jdbcType=VARCHAR},
+      </if>
+      <if test="userbrithday != null" >
+        #{userbrithday,jdbcType=DATE},
+      </if>
+      <if test="userphoto != null" >
+        #{userphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="usergrade != null" >
+        #{usergrade,jdbcType=VARCHAR},
+      </if>
+      <if test="userqq != null" >
+        #{userqq,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="usersignature != null" >
+        #{usersignature,jdbcType=VARCHAR},
+      </if>
+      <if test="userremark != null" >
+        #{userremark,jdbcType=VARCHAR},
+      </if>
+      <if test="userdomicile != null" >
+        #{userdomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginlastip != null" >
+        #{loginlastip,jdbcType=VARCHAR},
+      </if>
+      <if test="loginlasttime != null" >
+        #{loginlasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userstatus != null" >
+        #{userstatus,jdbcType=TINYINT},
+      </if>
+      <if test="userdataflag != null" >
+        #{userdataflag,jdbcType=TINYINT},
+      </if>
+      <if test="loginnumber != null" >
+        #{loginnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.UsersExample" resultType="java.lang.Integer" >
+    select count(*) from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update users
+    <set >
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginname != null" >
+        loginName = #{record.loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginpwd != null" >
+        loginPwd = #{record.loginpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertype != null" >
+        userType = #{record.usertype,jdbcType=TINYINT},
+      </if>
+      <if test="record.usersex != null" >
+        userSex = #{record.usersex,jdbcType=TINYINT},
+      </if>
+      <if test="record.username != null" >
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userrealname != null" >
+        userRealName = #{record.userrealname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userbrithday != null" >
+        userBrithday = #{record.userbrithday,jdbcType=DATE},
+      </if>
+      <if test="record.userphoto != null" >
+        userPhoto = #{record.userphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usergrade != null" >
+        userGrade = #{record.usergrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userqq != null" >
+        userQQ = #{record.userqq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userphone != null" >
+        userPhone = #{record.userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useremail != null" >
+        userEmail = #{record.useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersignature != null" >
+        userSignature = #{record.usersignature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userremark != null" >
+        userRemark = #{record.userremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userdomicile != null" >
+        userDomicile = #{record.userdomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginlastip != null" >
+        loginLastIP = #{record.loginlastip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginlasttime != null" >
+        loginLastTime = #{record.loginlasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userstatus != null" >
+        userStatus = #{record.userstatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.userdataflag != null" >
+        userDataFlag = #{record.userdataflag,jdbcType=TINYINT},
+      </if>
+      <if test="record.loginnumber != null" >
+        loginNumber = #{record.loginnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update users
+    set userId = #{record.userid,jdbcType=INTEGER},
+      loginName = #{record.loginname,jdbcType=VARCHAR},
+      loginPwd = #{record.loginpwd,jdbcType=VARCHAR},
+      userType = #{record.usertype,jdbcType=TINYINT},
+      userSex = #{record.usersex,jdbcType=TINYINT},
+      userName = #{record.username,jdbcType=VARCHAR},
+      userRealName = #{record.userrealname,jdbcType=VARCHAR},
+      userBrithday = #{record.userbrithday,jdbcType=DATE},
+      userPhoto = #{record.userphoto,jdbcType=VARCHAR},
+      userGrade = #{record.usergrade,jdbcType=VARCHAR},
+      userQQ = #{record.userqq,jdbcType=VARCHAR},
+      userPhone = #{record.userphone,jdbcType=VARCHAR},
+      userEmail = #{record.useremail,jdbcType=VARCHAR},
+      userSignature = #{record.usersignature,jdbcType=VARCHAR},
+      userRemark = #{record.userremark,jdbcType=VARCHAR},
+      userDomicile = #{record.userdomicile,jdbcType=VARCHAR},
+      loginLastIP = #{record.loginlastip,jdbcType=VARCHAR},
+      loginLastTime = #{record.loginlasttime,jdbcType=TIMESTAMP},
+      userStatus = #{record.userstatus,jdbcType=TINYINT},
+      userDataFlag = #{record.userdataflag,jdbcType=TINYINT},
+      loginNumber = #{record.loginnumber,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Users" >
+    update users
+    <set >
+      <if test="loginname != null" >
+        loginName = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpwd != null" >
+        loginPwd = #{loginpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=TINYINT},
+      </if>
+      <if test="usersex != null" >
+        userSex = #{usersex,jdbcType=TINYINT},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userrealname != null" >
+        userRealName = #{userrealname,jdbcType=VARCHAR},
+      </if>
+      <if test="userbrithday != null" >
+        userBrithday = #{userbrithday,jdbcType=DATE},
+      </if>
+      <if test="userphoto != null" >
+        userPhoto = #{userphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="usergrade != null" >
+        userGrade = #{usergrade,jdbcType=VARCHAR},
+      </if>
+      <if test="userqq != null" >
+        userQQ = #{userqq,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        userPhone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        userEmail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="usersignature != null" >
+        userSignature = #{usersignature,jdbcType=VARCHAR},
+      </if>
+      <if test="userremark != null" >
+        userRemark = #{userremark,jdbcType=VARCHAR},
+      </if>
+      <if test="userdomicile != null" >
+        userDomicile = #{userdomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginlastip != null" >
+        loginLastIP = #{loginlastip,jdbcType=VARCHAR},
+      </if>
+      <if test="loginlasttime != null" >
+        loginLastTime = #{loginlasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userstatus != null" >
+        userStatus = #{userstatus,jdbcType=TINYINT},
+      </if>
+      <if test="userdataflag != null" >
+        userDataFlag = #{userdataflag,jdbcType=TINYINT},
+      </if>
+      <if test="loginnumber != null" >
+        loginNumber = #{loginnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Users" >
+    update users
+    set loginName = #{loginname,jdbcType=VARCHAR},
+      loginPwd = #{loginpwd,jdbcType=VARCHAR},
+      userType = #{usertype,jdbcType=TINYINT},
+      userSex = #{usersex,jdbcType=TINYINT},
+      userName = #{username,jdbcType=VARCHAR},
+      userRealName = #{userrealname,jdbcType=VARCHAR},
+      userBrithday = #{userbrithday,jdbcType=DATE},
+      userPhoto = #{userphoto,jdbcType=VARCHAR},
+      userGrade = #{usergrade,jdbcType=VARCHAR},
+      userQQ = #{userqq,jdbcType=VARCHAR},
+      userPhone = #{userphone,jdbcType=VARCHAR},
+      userEmail = #{useremail,jdbcType=VARCHAR},
+      userSignature = #{usersignature,jdbcType=VARCHAR},
+      userRemark = #{userremark,jdbcType=VARCHAR},
+      userDomicile = #{userdomicile,jdbcType=VARCHAR},
+      loginLastIP = #{loginlastip,jdbcType=VARCHAR},
+      loginLastTime = #{loginlasttime,jdbcType=TIMESTAMP},
+      userStatus = #{userstatus,jdbcType=TINYINT},
+      userDataFlag = #{userdataflag,jdbcType=TINYINT},
+      loginNumber = #{loginnumber,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.ShopsMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Shops" >
+    <id column="shopId" property="shopid" jdbcType="INTEGER" />
+    <result column="shopClassifyId" property="shopclassifyid" jdbcType="INTEGER" />
+    <result column="shopSn" property="shopsn" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="isSelf" property="isself" jdbcType="TINYINT" />
+    <result column="shopName" property="shopname" jdbcType="VARCHAR" />
+    <result column="shopkeeper" property="shopkeeper" jdbcType="VARCHAR" />
+    <result column="shopTelephone" property="shoptelephone" jdbcType="VARCHAR" />
+    <result column="shopImg" property="shopimg" jdbcType="VARCHAR" />
+    <result column="shopWangWang" property="shopwangwang" jdbcType="VARCHAR" />
+    <result column="shopAddress" property="shopaddress" jdbcType="VARCHAR" />
+    <result column="bankId" property="bankid" jdbcType="INTEGER" />
+    <result column="isInvoice" property="isinvoice" jdbcType="TINYINT" />
+    <result column="invoiceRemarks" property="invoiceremarks" jdbcType="VARCHAR" />
+    <result column="serviceStartTime" property="servicestarttime" jdbcType="TIME" />
+    <result column="serviceEndTime" property="serviceendtime" jdbcType="TIME" />
+    <result column="shopAtive" property="shopative" jdbcType="TINYINT" />
+    <result column="shopStatus" property="shopstatus" jdbcType="TINYINT" />
+    <result column="statusDesc" property="statusdesc" jdbcType="VARCHAR" />
+    <result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="shopMoney" property="shopmoney" jdbcType="DECIMAL" />
+    <result column="lockMoney" property="lockmoney" jdbcType="DECIMAL" />
+    <result column="noSettledOrderNum" property="nosettledordernum" jdbcType="INTEGER" />
+    <result column="shopApplyReason" property="shopapplyreason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shopId, shopClassifyId, shopSn, userId, isSelf, shopName, shopkeeper, shopTelephone, 
+    shopImg, shopWangWang, shopAddress, bankId, isInvoice, invoiceRemarks, serviceStartTime, 
+    serviceEndTime, shopAtive, shopStatus, statusDesc, dataFlag, createTime, shopMoney, 
+    lockMoney, noSettledOrderNum, shopApplyReason
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.ShopsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shops
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shops
+    where shopId = #{shopid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shops
+    where shopId = #{shopid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.ShopsExample" >
+    delete from shops
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.Shops" >
+    insert into shops (shopId, shopClassifyId, shopSn, 
+      userId, isSelf, shopName, 
+      shopkeeper, shopTelephone, shopImg, 
+      shopWangWang, shopAddress, bankId, 
+      isInvoice, invoiceRemarks, serviceStartTime, 
+      serviceEndTime, shopAtive, shopStatus, 
+      statusDesc, dataFlag, createTime, 
+      shopMoney, lockMoney, noSettledOrderNum, 
+      shopApplyReason)
+    values (#{shopid,jdbcType=INTEGER}, #{shopclassifyid,jdbcType=INTEGER}, #{shopsn,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=INTEGER}, #{isself,jdbcType=TINYINT}, #{shopname,jdbcType=VARCHAR}, 
+      #{shopkeeper,jdbcType=VARCHAR}, #{shoptelephone,jdbcType=VARCHAR}, #{shopimg,jdbcType=VARCHAR}, 
+      #{shopwangwang,jdbcType=VARCHAR}, #{shopaddress,jdbcType=VARCHAR}, #{bankid,jdbcType=INTEGER}, 
+      #{isinvoice,jdbcType=TINYINT}, #{invoiceremarks,jdbcType=VARCHAR}, #{servicestarttime,jdbcType=TIME}, 
+      #{serviceendtime,jdbcType=TIME}, #{shopative,jdbcType=TINYINT}, #{shopstatus,jdbcType=TINYINT}, 
+      #{statusdesc,jdbcType=VARCHAR}, #{dataflag,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{shopmoney,jdbcType=DECIMAL}, #{lockmoney,jdbcType=DECIMAL}, #{nosettledordernum,jdbcType=INTEGER}, 
+      #{shopapplyreason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Shops" >
+    insert into shops
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopid != null" >
+        shopId,
+      </if>
+      <if test="shopclassifyid != null" >
+        shopClassifyId,
+      </if>
+      <if test="shopsn != null" >
+        shopSn,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="isself != null" >
+        isSelf,
+      </if>
+      <if test="shopname != null" >
+        shopName,
+      </if>
+      <if test="shopkeeper != null" >
+        shopkeeper,
+      </if>
+      <if test="shoptelephone != null" >
+        shopTelephone,
+      </if>
+      <if test="shopimg != null" >
+        shopImg,
+      </if>
+      <if test="shopwangwang != null" >
+        shopWangWang,
+      </if>
+      <if test="shopaddress != null" >
+        shopAddress,
+      </if>
+      <if test="bankid != null" >
+        bankId,
+      </if>
+      <if test="isinvoice != null" >
+        isInvoice,
+      </if>
+      <if test="invoiceremarks != null" >
+        invoiceRemarks,
+      </if>
+      <if test="servicestarttime != null" >
+        serviceStartTime,
+      </if>
+      <if test="serviceendtime != null" >
+        serviceEndTime,
+      </if>
+      <if test="shopative != null" >
+        shopAtive,
+      </if>
+      <if test="shopstatus != null" >
+        shopStatus,
+      </if>
+      <if test="statusdesc != null" >
+        statusDesc,
+      </if>
+      <if test="dataflag != null" >
+        dataFlag,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="shopmoney != null" >
+        shopMoney,
+      </if>
+      <if test="lockmoney != null" >
+        lockMoney,
+      </if>
+      <if test="nosettledordernum != null" >
+        noSettledOrderNum,
+      </if>
+      <if test="shopapplyreason != null" >
+        shopApplyReason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="shopclassifyid != null" >
+        #{shopclassifyid,jdbcType=INTEGER},
+      </if>
+      <if test="shopsn != null" >
+        #{shopsn,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="isself != null" >
+        #{isself,jdbcType=TINYINT},
+      </if>
+      <if test="shopname != null" >
+        #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="shopkeeper != null" >
+        #{shopkeeper,jdbcType=VARCHAR},
+      </if>
+      <if test="shoptelephone != null" >
+        #{shoptelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="shopimg != null" >
+        #{shopimg,jdbcType=VARCHAR},
+      </if>
+      <if test="shopwangwang != null" >
+        #{shopwangwang,jdbcType=VARCHAR},
+      </if>
+      <if test="shopaddress != null" >
+        #{shopaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        #{bankid,jdbcType=INTEGER},
+      </if>
+      <if test="isinvoice != null" >
+        #{isinvoice,jdbcType=TINYINT},
+      </if>
+      <if test="invoiceremarks != null" >
+        #{invoiceremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="servicestarttime != null" >
+        #{servicestarttime,jdbcType=TIME},
+      </if>
+      <if test="serviceendtime != null" >
+        #{serviceendtime,jdbcType=TIME},
+      </if>
+      <if test="shopative != null" >
+        #{shopative,jdbcType=TINYINT},
+      </if>
+      <if test="shopstatus != null" >
+        #{shopstatus,jdbcType=TINYINT},
+      </if>
+      <if test="statusdesc != null" >
+        #{statusdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dataflag != null" >
+        #{dataflag,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopmoney != null" >
+        #{shopmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="lockmoney != null" >
+        #{lockmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="nosettledordernum != null" >
+        #{nosettledordernum,jdbcType=INTEGER},
+      </if>
+      <if test="shopapplyreason != null" >
+        #{shopapplyreason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.ShopsExample" resultType="java.lang.Integer" >
+    select count(*) from shops
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shops
+    <set >
+      <if test="record.shopid != null" >
+        shopId = #{record.shopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopclassifyid != null" >
+        shopClassifyId = #{record.shopclassifyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopsn != null" >
+        shopSn = #{record.shopsn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isself != null" >
+        isSelf = #{record.isself,jdbcType=TINYINT},
+      </if>
+      <if test="record.shopname != null" >
+        shopName = #{record.shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopkeeper != null" >
+        shopkeeper = #{record.shopkeeper,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoptelephone != null" >
+        shopTelephone = #{record.shoptelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopimg != null" >
+        shopImg = #{record.shopimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopwangwang != null" >
+        shopWangWang = #{record.shopwangwang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopaddress != null" >
+        shopAddress = #{record.shopaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankid != null" >
+        bankId = #{record.bankid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isinvoice != null" >
+        isInvoice = #{record.isinvoice,jdbcType=TINYINT},
+      </if>
+      <if test="record.invoiceremarks != null" >
+        invoiceRemarks = #{record.invoiceremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicestarttime != null" >
+        serviceStartTime = #{record.servicestarttime,jdbcType=TIME},
+      </if>
+      <if test="record.serviceendtime != null" >
+        serviceEndTime = #{record.serviceendtime,jdbcType=TIME},
+      </if>
+      <if test="record.shopative != null" >
+        shopAtive = #{record.shopative,jdbcType=TINYINT},
+      </if>
+      <if test="record.shopstatus != null" >
+        shopStatus = #{record.shopstatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.statusdesc != null" >
+        statusDesc = #{record.statusdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataflag != null" >
+        dataFlag = #{record.dataflag,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shopmoney != null" >
+        shopMoney = #{record.shopmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lockmoney != null" >
+        lockMoney = #{record.lockmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nosettledordernum != null" >
+        noSettledOrderNum = #{record.nosettledordernum,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopapplyreason != null" >
+        shopApplyReason = #{record.shopapplyreason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shops
+    set shopId = #{record.shopid,jdbcType=INTEGER},
+      shopClassifyId = #{record.shopclassifyid,jdbcType=INTEGER},
+      shopSn = #{record.shopsn,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=INTEGER},
+      isSelf = #{record.isself,jdbcType=TINYINT},
+      shopName = #{record.shopname,jdbcType=VARCHAR},
+      shopkeeper = #{record.shopkeeper,jdbcType=VARCHAR},
+      shopTelephone = #{record.shoptelephone,jdbcType=VARCHAR},
+      shopImg = #{record.shopimg,jdbcType=VARCHAR},
+      shopWangWang = #{record.shopwangwang,jdbcType=VARCHAR},
+      shopAddress = #{record.shopaddress,jdbcType=VARCHAR},
+      bankId = #{record.bankid,jdbcType=INTEGER},
+      isInvoice = #{record.isinvoice,jdbcType=TINYINT},
+      invoiceRemarks = #{record.invoiceremarks,jdbcType=VARCHAR},
+      serviceStartTime = #{record.servicestarttime,jdbcType=TIME},
+      serviceEndTime = #{record.serviceendtime,jdbcType=TIME},
+      shopAtive = #{record.shopative,jdbcType=TINYINT},
+      shopStatus = #{record.shopstatus,jdbcType=TINYINT},
+      statusDesc = #{record.statusdesc,jdbcType=VARCHAR},
+      dataFlag = #{record.dataflag,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      shopMoney = #{record.shopmoney,jdbcType=DECIMAL},
+      lockMoney = #{record.lockmoney,jdbcType=DECIMAL},
+      noSettledOrderNum = #{record.nosettledordernum,jdbcType=INTEGER},
+      shopApplyReason = #{record.shopapplyreason,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Shops" >
+    update shops
+    <set >
+      <if test="shopclassifyid != null" >
+        shopClassifyId = #{shopclassifyid,jdbcType=INTEGER},
+      </if>
+      <if test="shopsn != null" >
+        shopSn = #{shopsn,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="isself != null" >
+        isSelf = #{isself,jdbcType=TINYINT},
+      </if>
+      <if test="shopname != null" >
+        shopName = #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="shopkeeper != null" >
+        shopkeeper = #{shopkeeper,jdbcType=VARCHAR},
+      </if>
+      <if test="shoptelephone != null" >
+        shopTelephone = #{shoptelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="shopimg != null" >
+        shopImg = #{shopimg,jdbcType=VARCHAR},
+      </if>
+      <if test="shopwangwang != null" >
+        shopWangWang = #{shopwangwang,jdbcType=VARCHAR},
+      </if>
+      <if test="shopaddress != null" >
+        shopAddress = #{shopaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        bankId = #{bankid,jdbcType=INTEGER},
+      </if>
+      <if test="isinvoice != null" >
+        isInvoice = #{isinvoice,jdbcType=TINYINT},
+      </if>
+      <if test="invoiceremarks != null" >
+        invoiceRemarks = #{invoiceremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="servicestarttime != null" >
+        serviceStartTime = #{servicestarttime,jdbcType=TIME},
+      </if>
+      <if test="serviceendtime != null" >
+        serviceEndTime = #{serviceendtime,jdbcType=TIME},
+      </if>
+      <if test="shopative != null" >
+        shopAtive = #{shopative,jdbcType=TINYINT},
+      </if>
+      <if test="shopstatus != null" >
+        shopStatus = #{shopstatus,jdbcType=TINYINT},
+      </if>
+      <if test="statusdesc != null" >
+        statusDesc = #{statusdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dataflag != null" >
+        dataFlag = #{dataflag,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopmoney != null" >
+        shopMoney = #{shopmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="lockmoney != null" >
+        lockMoney = #{lockmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="nosettledordernum != null" >
+        noSettledOrderNum = #{nosettledordernum,jdbcType=INTEGER},
+      </if>
+      <if test="shopapplyreason != null" >
+        shopApplyReason = #{shopapplyreason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shopId = #{shopid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Shops" >
+    update shops
+    set shopClassifyId = #{shopclassifyid,jdbcType=INTEGER},
+      shopSn = #{shopsn,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      isSelf = #{isself,jdbcType=TINYINT},
+      shopName = #{shopname,jdbcType=VARCHAR},
+      shopkeeper = #{shopkeeper,jdbcType=VARCHAR},
+      shopTelephone = #{shoptelephone,jdbcType=VARCHAR},
+      shopImg = #{shopimg,jdbcType=VARCHAR},
+      shopWangWang = #{shopwangwang,jdbcType=VARCHAR},
+      shopAddress = #{shopaddress,jdbcType=VARCHAR},
+      bankId = #{bankid,jdbcType=INTEGER},
+      isInvoice = #{isinvoice,jdbcType=TINYINT},
+      invoiceRemarks = #{invoiceremarks,jdbcType=VARCHAR},
+      serviceStartTime = #{servicestarttime,jdbcType=TIME},
+      serviceEndTime = #{serviceendtime,jdbcType=TIME},
+      shopAtive = #{shopative,jdbcType=TINYINT},
+      shopStatus = #{shopstatus,jdbcType=TINYINT},
+      statusDesc = #{statusdesc,jdbcType=VARCHAR},
+      dataFlag = #{dataflag,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      shopMoney = #{shopmoney,jdbcType=DECIMAL},
+      lockMoney = #{lockmoney,jdbcType=DECIMAL},
+      noSettledOrderNum = #{nosettledordernum,jdbcType=INTEGER},
+      shopApplyReason = #{shopapplyreason,jdbcType=VARCHAR}
+    where shopId = #{shopid,jdbcType=INTEGER}
+  </update>
+</mapper>

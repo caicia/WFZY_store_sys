@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.ExpressMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Express" >
+    <id column="expressId" property="expressid" jdbcType="INTEGER" />
+    <result column="expressName" property="expressname" jdbcType="VARCHAR" />
+    <result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    expressId, expressName, dataFlag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.ExpressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from express
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from express
+    where expressId = #{expressid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from express
+    where expressId = #{expressid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.ExpressExample" >
+    delete from express
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.Express" >
+    insert into express (expressId, expressName, dataFlag
+      )
+    values (#{expressid,jdbcType=INTEGER}, #{expressname,jdbcType=VARCHAR}, #{dataflag,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Express" >
+    insert into express
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="expressid != null" >
+        expressId,
+      </if>
+      <if test="expressname != null" >
+        expressName,
+      </if>
+      <if test="dataflag != null" >
+        dataFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="expressid != null" >
+        #{expressid,jdbcType=INTEGER},
+      </if>
+      <if test="expressname != null" >
+        #{expressname,jdbcType=VARCHAR},
+      </if>
+      <if test="dataflag != null" >
+        #{dataflag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.ExpressExample" resultType="java.lang.Integer" >
+    select count(*) from express
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update express
+    <set >
+      <if test="record.expressid != null" >
+        expressId = #{record.expressid,jdbcType=INTEGER},
+      </if>
+      <if test="record.expressname != null" >
+        expressName = #{record.expressname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataflag != null" >
+        dataFlag = #{record.dataflag,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update express
+    set expressId = #{record.expressid,jdbcType=INTEGER},
+      expressName = #{record.expressname,jdbcType=VARCHAR},
+      dataFlag = #{record.dataflag,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Express" >
+    update express
+    <set >
+      <if test="expressname != null" >
+        expressName = #{expressname,jdbcType=VARCHAR},
+      </if>
+      <if test="dataflag != null" >
+        dataFlag = #{dataflag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where expressId = #{expressid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Express" >
+    update express
+    set expressName = #{expressname,jdbcType=VARCHAR},
+      dataFlag = #{dataflag,jdbcType=TINYINT}
+    where expressId = #{expressid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.OrderrefundsMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Orderrefunds" >
+    <id column="orderRefundsId" property="orderrefundsid" jdbcType="INTEGER" />
+    <result column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="refundTo" property="refundto" jdbcType="INTEGER" />
+    <result column="refundTradeNo" property="refundtradeno" jdbcType="VARCHAR" />
+    <result column="refundRemark" property="refundremark" jdbcType="VARCHAR" />
+    <result column="refundTime" property="refundtime" jdbcType="TIMESTAMP" />
+    <result column="refundReson" property="refundreson" jdbcType="INTEGER" />
+    <result column="refundOtherReson" property="refundotherreson" jdbcType="VARCHAR" />
+    <result column="backMoney" property="backmoney" jdbcType="DECIMAL" />
+    <result column="shopRejectReason" property="shoprejectreason" jdbcType="VARCHAR" />
+    <result column="refundStatus" property="refundstatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    orderRefundsId, orderId, refundTo, refundTradeNo, refundRemark, refundTime, refundReson, 
+    refundOtherReson, backMoney, shopRejectReason, refundStatus, createTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.OrderrefundsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orderrefunds
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderrefunds
+    where orderRefundsId = #{orderrefundsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orderrefunds
+    where orderRefundsId = #{orderrefundsid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.OrderrefundsExample" >
+    delete from orderrefunds
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.Orderrefunds" >
+    insert into orderrefunds (orderRefundsId, orderId, refundTo, 
+      refundTradeNo, refundRemark, refundTime, 
+      refundReson, refundOtherReson, backMoney, 
+      shopRejectReason, refundStatus, createTime
+      )
+    values (#{orderrefundsid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{refundto,jdbcType=INTEGER}, 
+      #{refundtradeno,jdbcType=VARCHAR}, #{refundremark,jdbcType=VARCHAR}, #{refundtime,jdbcType=TIMESTAMP}, 
+      #{refundreson,jdbcType=INTEGER}, #{refundotherreson,jdbcType=VARCHAR}, #{backmoney,jdbcType=DECIMAL}, 
+      #{shoprejectreason,jdbcType=VARCHAR}, #{refundstatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Orderrefunds" >
+    insert into orderrefunds
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderrefundsid != null" >
+        orderRefundsId,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="refundto != null" >
+        refundTo,
+      </if>
+      <if test="refundtradeno != null" >
+        refundTradeNo,
+      </if>
+      <if test="refundremark != null" >
+        refundRemark,
+      </if>
+      <if test="refundtime != null" >
+        refundTime,
+      </if>
+      <if test="refundreson != null" >
+        refundReson,
+      </if>
+      <if test="refundotherreson != null" >
+        refundOtherReson,
+      </if>
+      <if test="backmoney != null" >
+        backMoney,
+      </if>
+      <if test="shoprejectreason != null" >
+        shopRejectReason,
+      </if>
+      <if test="refundstatus != null" >
+        refundStatus,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderrefundsid != null" >
+        #{orderrefundsid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="refundto != null" >
+        #{refundto,jdbcType=INTEGER},
+      </if>
+      <if test="refundtradeno != null" >
+        #{refundtradeno,jdbcType=VARCHAR},
+      </if>
+      <if test="refundremark != null" >
+        #{refundremark,jdbcType=VARCHAR},
+      </if>
+      <if test="refundtime != null" >
+        #{refundtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundreson != null" >
+        #{refundreson,jdbcType=INTEGER},
+      </if>
+      <if test="refundotherreson != null" >
+        #{refundotherreson,jdbcType=VARCHAR},
+      </if>
+      <if test="backmoney != null" >
+        #{backmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="shoprejectreason != null" >
+        #{shoprejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundstatus != null" >
+        #{refundstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.OrderrefundsExample" resultType="java.lang.Integer" >
+    select count(*) from orderrefunds
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orderrefunds
+    <set >
+      <if test="record.orderrefundsid != null" >
+        orderRefundsId = #{record.orderrefundsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderid != null" >
+        orderId = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundto != null" >
+        refundTo = #{record.refundto,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundtradeno != null" >
+        refundTradeNo = #{record.refundtradeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundremark != null" >
+        refundRemark = #{record.refundremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundtime != null" >
+        refundTime = #{record.refundtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.refundreson != null" >
+        refundReson = #{record.refundreson,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundotherreson != null" >
+        refundOtherReson = #{record.refundotherreson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backmoney != null" >
+        backMoney = #{record.backmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shoprejectreason != null" >
+        shopRejectReason = #{record.shoprejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundstatus != null" >
+        refundStatus = #{record.refundstatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orderrefunds
+    set orderRefundsId = #{record.orderrefundsid,jdbcType=INTEGER},
+      orderId = #{record.orderid,jdbcType=INTEGER},
+      refundTo = #{record.refundto,jdbcType=INTEGER},
+      refundTradeNo = #{record.refundtradeno,jdbcType=VARCHAR},
+      refundRemark = #{record.refundremark,jdbcType=VARCHAR},
+      refundTime = #{record.refundtime,jdbcType=TIMESTAMP},
+      refundReson = #{record.refundreson,jdbcType=INTEGER},
+      refundOtherReson = #{record.refundotherreson,jdbcType=VARCHAR},
+      backMoney = #{record.backmoney,jdbcType=DECIMAL},
+      shopRejectReason = #{record.shoprejectreason,jdbcType=VARCHAR},
+      refundStatus = #{record.refundstatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Orderrefunds" >
+    update orderrefunds
+    <set >
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="refundto != null" >
+        refundTo = #{refundto,jdbcType=INTEGER},
+      </if>
+      <if test="refundtradeno != null" >
+        refundTradeNo = #{refundtradeno,jdbcType=VARCHAR},
+      </if>
+      <if test="refundremark != null" >
+        refundRemark = #{refundremark,jdbcType=VARCHAR},
+      </if>
+      <if test="refundtime != null" >
+        refundTime = #{refundtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundreson != null" >
+        refundReson = #{refundreson,jdbcType=INTEGER},
+      </if>
+      <if test="refundotherreson != null" >
+        refundOtherReson = #{refundotherreson,jdbcType=VARCHAR},
+      </if>
+      <if test="backmoney != null" >
+        backMoney = #{backmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="shoprejectreason != null" >
+        shopRejectReason = #{shoprejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="refundstatus != null" >
+        refundStatus = #{refundstatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where orderRefundsId = #{orderrefundsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Orderrefunds" >
+    update orderrefunds
+    set orderId = #{orderid,jdbcType=INTEGER},
+      refundTo = #{refundto,jdbcType=INTEGER},
+      refundTradeNo = #{refundtradeno,jdbcType=VARCHAR},
+      refundRemark = #{refundremark,jdbcType=VARCHAR},
+      refundTime = #{refundtime,jdbcType=TIMESTAMP},
+      refundReson = #{refundreson,jdbcType=INTEGER},
+      refundOtherReson = #{refundotherreson,jdbcType=VARCHAR},
+      backMoney = #{backmoney,jdbcType=DECIMAL},
+      shopRejectReason = #{shoprejectreason,jdbcType=VARCHAR},
+      refundStatus = #{refundstatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where orderRefundsId = #{orderrefundsid,jdbcType=INTEGER}
+  </update>
+</mapper>

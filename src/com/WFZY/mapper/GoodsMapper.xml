@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Goods" >
+    <id column="goodsId" property="goodsid" jdbcType="INTEGER" />
+    <result column="shopId" property="shopid" jdbcType="INTEGER" />
+    <result column="goodsClassifyId" property="goodsclassifyid" jdbcType="INTEGER" />
+    <result column="goodsSn" property="goodssn" jdbcType="VARCHAR" />
+    <result column="productNo" property="productno" jdbcType="VARCHAR" />
+    <result column="goodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="goodsImg" property="goodsimg" jdbcType="VARCHAR" />
+    <result column="goodsStatus" property="goodsstatus" jdbcType="TINYINT" />
+    <result column="saleTime" property="saletime" jdbcType="TIMESTAMP" />
+    <result column="visitNum" property="visitnum" jdbcType="INTEGER" />
+    <result column="appraiseNum" property="appraisenum" jdbcType="INTEGER" />
+    <result column="marketPrice" property="marketprice" jdbcType="DECIMAL" />
+    <result column="shopPrice" property="shopprice" jdbcType="DECIMAL" />
+    <result column="saleNum" property="salenum" jdbcType="INTEGER" />
+    <result column="goodsStock" property="goodsstock" jdbcType="INTEGER" />
+    <result column="isSale" property="issale" jdbcType="TINYINT" />
+    <result column="isBest" property="isbest" jdbcType="TINYINT" />
+    <result column="isHot" property="ishot" jdbcType="TINYINT" />
+    <result column="isNew" property="isnew" jdbcType="TINYINT" />
+    <result column="isRecom" property="isrecom" jdbcType="TINYINT" />
+    <result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.WFZY.pojo.GoodsWithBLOBs" extends="BaseResultMap" >
+    <result column="goodsDesc" property="goodsdesc" jdbcType="LONGVARCHAR" />
+    <result column="gallery" property="gallery" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goodsId, shopId, goodsClassifyId, goodsSn, productNo, goodsName, goodsImg, goodsStatus, 
+    saleTime, visitNum, appraiseNum, marketPrice, shopPrice, saleNum, goodsStock, isSale, 
+    isBest, isHot, isNew, isRecom, dataFlag, createTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    goodsDesc, gallery
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.WFZY.pojo.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.GoodsExample" >
+    delete from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.GoodsWithBLOBs" >
+    insert into goods (goodsId, shopId, goodsClassifyId, 
+      goodsSn, productNo, goodsName, 
+      goodsImg, goodsStatus, saleTime, 
+      visitNum, appraiseNum, marketPrice, 
+      shopPrice, saleNum, goodsStock, 
+      isSale, isBest, isHot, 
+      isNew, isRecom, dataFlag, 
+      createTime, goodsDesc, gallery
+      )
+    values (#{goodsid,jdbcType=INTEGER}, #{shopid,jdbcType=INTEGER}, #{goodsclassifyid,jdbcType=INTEGER}, 
+      #{goodssn,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, #{goodsname,jdbcType=VARCHAR}, 
+      #{goodsimg,jdbcType=VARCHAR}, #{goodsstatus,jdbcType=TINYINT}, #{saletime,jdbcType=TIMESTAMP}, 
+      #{visitnum,jdbcType=INTEGER}, #{appraisenum,jdbcType=INTEGER}, #{marketprice,jdbcType=DECIMAL}, 
+      #{shopprice,jdbcType=DECIMAL}, #{salenum,jdbcType=INTEGER}, #{goodsstock,jdbcType=INTEGER}, 
+      #{issale,jdbcType=TINYINT}, #{isbest,jdbcType=TINYINT}, #{ishot,jdbcType=TINYINT}, 
+      #{isnew,jdbcType=TINYINT}, #{isrecom,jdbcType=TINYINT}, #{dataflag,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{goodsdesc,jdbcType=LONGVARCHAR}, #{gallery,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.GoodsWithBLOBs" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="shopid != null" >
+        shopId,
+      </if>
+      <if test="goodsclassifyid != null" >
+        goodsClassifyId,
+      </if>
+      <if test="goodssn != null" >
+        goodsSn,
+      </if>
+      <if test="productno != null" >
+        productNo,
+      </if>
+      <if test="goodsname != null" >
+        goodsName,
+      </if>
+      <if test="goodsimg != null" >
+        goodsImg,
+      </if>
+      <if test="goodsstatus != null" >
+        goodsStatus,
+      </if>
+      <if test="saletime != null" >
+        saleTime,
+      </if>
+      <if test="visitnum != null" >
+        visitNum,
+      </if>
+      <if test="appraisenum != null" >
+        appraiseNum,
+      </if>
+      <if test="marketprice != null" >
+        marketPrice,
+      </if>
+      <if test="shopprice != null" >
+        shopPrice,
+      </if>
+      <if test="salenum != null" >
+        saleNum,
+      </if>
+      <if test="goodsstock != null" >
+        goodsStock,
+      </if>
+      <if test="issale != null" >
+        isSale,
+      </if>
+      <if test="isbest != null" >
+        isBest,
+      </if>
+      <if test="ishot != null" >
+        isHot,
+      </if>
+      <if test="isnew != null" >
+        isNew,
+      </if>
+      <if test="isrecom != null" >
+        isRecom,
+      </if>
+      <if test="dataflag != null" >
+        dataFlag,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="goodsdesc != null" >
+        goodsDesc,
+      </if>
+      <if test="gallery != null" >
+        gallery,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsclassifyid != null" >
+        #{goodsclassifyid,jdbcType=INTEGER},
+      </if>
+      <if test="goodssn != null" >
+        #{goodssn,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsimg != null" >
+        #{goodsimg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsstatus != null" >
+        #{goodsstatus,jdbcType=TINYINT},
+      </if>
+      <if test="saletime != null" >
+        #{saletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitnum != null" >
+        #{visitnum,jdbcType=INTEGER},
+      </if>
+      <if test="appraisenum != null" >
+        #{appraisenum,jdbcType=INTEGER},
+      </if>
+      <if test="marketprice != null" >
+        #{marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopprice != null" >
+        #{shopprice,jdbcType=DECIMAL},
+      </if>
+      <if test="salenum != null" >
+        #{salenum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsstock != null" >
+        #{goodsstock,jdbcType=INTEGER},
+      </if>
+      <if test="issale != null" >
+        #{issale,jdbcType=TINYINT},
+      </if>
+      <if test="isbest != null" >
+        #{isbest,jdbcType=TINYINT},
+      </if>
+      <if test="ishot != null" >
+        #{ishot,jdbcType=TINYINT},
+      </if>
+      <if test="isnew != null" >
+        #{isnew,jdbcType=TINYINT},
+      </if>
+      <if test="isrecom != null" >
+        #{isrecom,jdbcType=TINYINT},
+      </if>
+      <if test="dataflag != null" >
+        #{dataflag,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsdesc != null" >
+        #{goodsdesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="gallery != null" >
+        #{gallery,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update goods
+    <set >
+      <if test="record.goodsid != null" >
+        goodsId = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopid != null" >
+        shopId = #{record.shopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsclassifyid != null" >
+        goodsClassifyId = #{record.goodsclassifyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodssn != null" >
+        goodsSn = #{record.goodssn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productno != null" >
+        productNo = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsname != null" >
+        goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsimg != null" >
+        goodsImg = #{record.goodsimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsstatus != null" >
+        goodsStatus = #{record.goodsstatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.saletime != null" >
+        saleTime = #{record.saletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.visitnum != null" >
+        visitNum = #{record.visitnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.appraisenum != null" >
+        appraiseNum = #{record.appraisenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.marketprice != null" >
+        marketPrice = #{record.marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopprice != null" >
+        shopPrice = #{record.shopprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.salenum != null" >
+        saleNum = #{record.salenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsstock != null" >
+        goodsStock = #{record.goodsstock,jdbcType=INTEGER},
+      </if>
+      <if test="record.issale != null" >
+        isSale = #{record.issale,jdbcType=TINYINT},
+      </if>
+      <if test="record.isbest != null" >
+        isBest = #{record.isbest,jdbcType=TINYINT},
+      </if>
+      <if test="record.ishot != null" >
+        isHot = #{record.ishot,jdbcType=TINYINT},
+      </if>
+      <if test="record.isnew != null" >
+        isNew = #{record.isnew,jdbcType=TINYINT},
+      </if>
+      <if test="record.isrecom != null" >
+        isRecom = #{record.isrecom,jdbcType=TINYINT},
+      </if>
+      <if test="record.dataflag != null" >
+        dataFlag = #{record.dataflag,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodsdesc != null" >
+        goodsDesc = #{record.goodsdesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.gallery != null" >
+        gallery = #{record.gallery,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update goods
+    set goodsId = #{record.goodsid,jdbcType=INTEGER},
+      shopId = #{record.shopid,jdbcType=INTEGER},
+      goodsClassifyId = #{record.goodsclassifyid,jdbcType=INTEGER},
+      goodsSn = #{record.goodssn,jdbcType=VARCHAR},
+      productNo = #{record.productno,jdbcType=VARCHAR},
+      goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      goodsImg = #{record.goodsimg,jdbcType=VARCHAR},
+      goodsStatus = #{record.goodsstatus,jdbcType=TINYINT},
+      saleTime = #{record.saletime,jdbcType=TIMESTAMP},
+      visitNum = #{record.visitnum,jdbcType=INTEGER},
+      appraiseNum = #{record.appraisenum,jdbcType=INTEGER},
+      marketPrice = #{record.marketprice,jdbcType=DECIMAL},
+      shopPrice = #{record.shopprice,jdbcType=DECIMAL},
+      saleNum = #{record.salenum,jdbcType=INTEGER},
+      goodsStock = #{record.goodsstock,jdbcType=INTEGER},
+      isSale = #{record.issale,jdbcType=TINYINT},
+      isBest = #{record.isbest,jdbcType=TINYINT},
+      isHot = #{record.ishot,jdbcType=TINYINT},
+      isNew = #{record.isnew,jdbcType=TINYINT},
+      isRecom = #{record.isrecom,jdbcType=TINYINT},
+      dataFlag = #{record.dataflag,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      goodsDesc = #{record.goodsdesc,jdbcType=LONGVARCHAR},
+      gallery = #{record.gallery,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update goods
+    set goodsId = #{record.goodsid,jdbcType=INTEGER},
+      shopId = #{record.shopid,jdbcType=INTEGER},
+      goodsClassifyId = #{record.goodsclassifyid,jdbcType=INTEGER},
+      goodsSn = #{record.goodssn,jdbcType=VARCHAR},
+      productNo = #{record.productno,jdbcType=VARCHAR},
+      goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      goodsImg = #{record.goodsimg,jdbcType=VARCHAR},
+      goodsStatus = #{record.goodsstatus,jdbcType=TINYINT},
+      saleTime = #{record.saletime,jdbcType=TIMESTAMP},
+      visitNum = #{record.visitnum,jdbcType=INTEGER},
+      appraiseNum = #{record.appraisenum,jdbcType=INTEGER},
+      marketPrice = #{record.marketprice,jdbcType=DECIMAL},
+      shopPrice = #{record.shopprice,jdbcType=DECIMAL},
+      saleNum = #{record.salenum,jdbcType=INTEGER},
+      goodsStock = #{record.goodsstock,jdbcType=INTEGER},
+      isSale = #{record.issale,jdbcType=TINYINT},
+      isBest = #{record.isbest,jdbcType=TINYINT},
+      isHot = #{record.ishot,jdbcType=TINYINT},
+      isNew = #{record.isnew,jdbcType=TINYINT},
+      isRecom = #{record.isrecom,jdbcType=TINYINT},
+      dataFlag = #{record.dataflag,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.GoodsWithBLOBs" >
+    update goods
+    <set >
+      <if test="shopid != null" >
+        shopId = #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsclassifyid != null" >
+        goodsClassifyId = #{goodsclassifyid,jdbcType=INTEGER},
+      </if>
+      <if test="goodssn != null" >
+        goodsSn = #{goodssn,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        productNo = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        goodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsimg != null" >
+        goodsImg = #{goodsimg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsstatus != null" >
+        goodsStatus = #{goodsstatus,jdbcType=TINYINT},
+      </if>
+      <if test="saletime != null" >
+        saleTime = #{saletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitnum != null" >
+        visitNum = #{visitnum,jdbcType=INTEGER},
+      </if>
+      <if test="appraisenum != null" >
+        appraiseNum = #{appraisenum,jdbcType=INTEGER},
+      </if>
+      <if test="marketprice != null" >
+        marketPrice = #{marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopprice != null" >
+        shopPrice = #{shopprice,jdbcType=DECIMAL},
+      </if>
+      <if test="salenum != null" >
+        saleNum = #{salenum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsstock != null" >
+        goodsStock = #{goodsstock,jdbcType=INTEGER},
+      </if>
+      <if test="issale != null" >
+        isSale = #{issale,jdbcType=TINYINT},
+      </if>
+      <if test="isbest != null" >
+        isBest = #{isbest,jdbcType=TINYINT},
+      </if>
+      <if test="ishot != null" >
+        isHot = #{ishot,jdbcType=TINYINT},
+      </if>
+      <if test="isnew != null" >
+        isNew = #{isnew,jdbcType=TINYINT},
+      </if>
+      <if test="isrecom != null" >
+        isRecom = #{isrecom,jdbcType=TINYINT},
+      </if>
+      <if test="dataflag != null" >
+        dataFlag = #{dataflag,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsdesc != null" >
+        goodsDesc = #{goodsdesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="gallery != null" >
+        gallery = #{gallery,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.WFZY.pojo.GoodsWithBLOBs" >
+    update goods
+    set shopId = #{shopid,jdbcType=INTEGER},
+      goodsClassifyId = #{goodsclassifyid,jdbcType=INTEGER},
+      goodsSn = #{goodssn,jdbcType=VARCHAR},
+      productNo = #{productno,jdbcType=VARCHAR},
+      goodsName = #{goodsname,jdbcType=VARCHAR},
+      goodsImg = #{goodsimg,jdbcType=VARCHAR},
+      goodsStatus = #{goodsstatus,jdbcType=TINYINT},
+      saleTime = #{saletime,jdbcType=TIMESTAMP},
+      visitNum = #{visitnum,jdbcType=INTEGER},
+      appraiseNum = #{appraisenum,jdbcType=INTEGER},
+      marketPrice = #{marketprice,jdbcType=DECIMAL},
+      shopPrice = #{shopprice,jdbcType=DECIMAL},
+      saleNum = #{salenum,jdbcType=INTEGER},
+      goodsStock = #{goodsstock,jdbcType=INTEGER},
+      isSale = #{issale,jdbcType=TINYINT},
+      isBest = #{isbest,jdbcType=TINYINT},
+      isHot = #{ishot,jdbcType=TINYINT},
+      isNew = #{isnew,jdbcType=TINYINT},
+      isRecom = #{isrecom,jdbcType=TINYINT},
+      dataFlag = #{dataflag,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      goodsDesc = #{goodsdesc,jdbcType=LONGVARCHAR},
+      gallery = #{gallery,jdbcType=LONGVARCHAR}
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Goods" >
+    update goods
+    set shopId = #{shopid,jdbcType=INTEGER},
+      goodsClassifyId = #{goodsclassifyid,jdbcType=INTEGER},
+      goodsSn = #{goodssn,jdbcType=VARCHAR},
+      productNo = #{productno,jdbcType=VARCHAR},
+      goodsName = #{goodsname,jdbcType=VARCHAR},
+      goodsImg = #{goodsimg,jdbcType=VARCHAR},
+      goodsStatus = #{goodsstatus,jdbcType=TINYINT},
+      saleTime = #{saletime,jdbcType=TIMESTAMP},
+      visitNum = #{visitnum,jdbcType=INTEGER},
+      appraiseNum = #{appraisenum,jdbcType=INTEGER},
+      marketPrice = #{marketprice,jdbcType=DECIMAL},
+      shopPrice = #{shopprice,jdbcType=DECIMAL},
+      saleNum = #{salenum,jdbcType=INTEGER},
+      goodsStock = #{goodsstock,jdbcType=INTEGER},
+      isSale = #{issale,jdbcType=TINYINT},
+      isBest = #{isbest,jdbcType=TINYINT},
+      isHot = #{ishot,jdbcType=TINYINT},
+      isNew = #{isnew,jdbcType=TINYINT},
+      isRecom = #{isrecom,jdbcType=TINYINT},
+      dataFlag = #{dataflag,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+  </update>
+</mapper>

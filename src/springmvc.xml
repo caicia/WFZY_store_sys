@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:tool="http://www.springframework.org/schema/tool" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd ">
+	<!-- <context:component-scan base-package="com.xinghua.web"></context:component-scan> -->
+	<!--采用新的注射器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean> -->
+	<!-- 配置处理器适配器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" 
+		/> -->
+	<!-- 注解驱动 -->
+	<context:component-scan base-package="com.WFZY.homepage.controller"></context:component-scan>
+	<context:component-scan base-package="com.WFZY.shop.controller"></context:component-scan>
+	
+	<context:component-scan base-package="com.WFZY.goodsclassify.controller"></context:component-scan>
+	<context:component-scan base-package="com.WFZY.user_center.controller" />
+	<!--配置訪問後置名字 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<mvc:annotation-driven />
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--defaultEncoding：请求的编码格式必须和用户JSP的编码一致，以便正确读取表单中的内容。 uploadTempDir:文件上传过程中的临时目录，上传完成后，临时文件会自动删除 
+			maxUploadSize:设置文件上传大小上限（单位为字节） -->
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxUploadSize" value="102400000" />
+	</bean>
+	<context:component-scan base-package="com.WFZY.filter"></context:component-scan>
+    
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*" />
+			<bean class="com.WFZY.filter.AvoidDuplicateSubmissionInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

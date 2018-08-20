@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.ShopscoresMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Shopscores" >
+    <id column="scoreId" property="scoreid" jdbcType="INTEGER" />
+    <result column="shopId" property="shopid" jdbcType="INTEGER" />
+    <result column="totalScore" property="totalscore" jdbcType="INTEGER" />
+    <result column="totalUsers" property="totalusers" jdbcType="INTEGER" />
+    <result column="goodsScore" property="goodsscore" jdbcType="INTEGER" />
+    <result column="goodsUsers" property="goodsusers" jdbcType="INTEGER" />
+    <result column="serviceScore" property="servicescore" jdbcType="INTEGER" />
+    <result column="serviceUsers" property="serviceusers" jdbcType="INTEGER" />
+    <result column="timeScore" property="timescore" jdbcType="INTEGER" />
+    <result column="timeUsers" property="timeusers" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    scoreId, shopId, totalScore, totalUsers, goodsScore, goodsUsers, serviceScore, serviceUsers, 
+    timeScore, timeUsers
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.ShopscoresExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shopscores
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shopscores
+    where scoreId = #{scoreid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shopscores
+    where scoreId = #{scoreid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.ShopscoresExample" >
+    delete from shopscores
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.Shopscores" >
+    insert into shopscores (scoreId, shopId, totalScore, 
+      totalUsers, goodsScore, goodsUsers, 
+      serviceScore, serviceUsers, timeScore, 
+      timeUsers)
+    values (#{scoreid,jdbcType=INTEGER}, #{shopid,jdbcType=INTEGER}, #{totalscore,jdbcType=INTEGER}, 
+      #{totalusers,jdbcType=INTEGER}, #{goodsscore,jdbcType=INTEGER}, #{goodsusers,jdbcType=INTEGER}, 
+      #{servicescore,jdbcType=INTEGER}, #{serviceusers,jdbcType=INTEGER}, #{timescore,jdbcType=INTEGER}, 
+      #{timeusers,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Shopscores" >
+    insert into shopscores
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoreid != null" >
+        scoreId,
+      </if>
+      <if test="shopid != null" >
+        shopId,
+      </if>
+      <if test="totalscore != null" >
+        totalScore,
+      </if>
+      <if test="totalusers != null" >
+        totalUsers,
+      </if>
+      <if test="goodsscore != null" >
+        goodsScore,
+      </if>
+      <if test="goodsusers != null" >
+        goodsUsers,
+      </if>
+      <if test="servicescore != null" >
+        serviceScore,
+      </if>
+      <if test="serviceusers != null" >
+        serviceUsers,
+      </if>
+      <if test="timescore != null" >
+        timeScore,
+      </if>
+      <if test="timeusers != null" >
+        timeUsers,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoreid != null" >
+        #{scoreid,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="totalscore != null" >
+        #{totalscore,jdbcType=INTEGER},
+      </if>
+      <if test="totalusers != null" >
+        #{totalusers,jdbcType=INTEGER},
+      </if>
+      <if test="goodsscore != null" >
+        #{goodsscore,jdbcType=INTEGER},
+      </if>
+      <if test="goodsusers != null" >
+        #{goodsusers,jdbcType=INTEGER},
+      </if>
+      <if test="servicescore != null" >
+        #{servicescore,jdbcType=INTEGER},
+      </if>
+      <if test="serviceusers != null" >
+        #{serviceusers,jdbcType=INTEGER},
+      </if>
+      <if test="timescore != null" >
+        #{timescore,jdbcType=INTEGER},
+      </if>
+      <if test="timeusers != null" >
+        #{timeusers,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.ShopscoresExample" resultType="java.lang.Integer" >
+    select count(*) from shopscores
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shopscores
+    <set >
+      <if test="record.scoreid != null" >
+        scoreId = #{record.scoreid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopid != null" >
+        shopId = #{record.shopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalscore != null" >
+        totalScore = #{record.totalscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalusers != null" >
+        totalUsers = #{record.totalusers,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsscore != null" >
+        goodsScore = #{record.goodsscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsusers != null" >
+        goodsUsers = #{record.goodsusers,jdbcType=INTEGER},
+      </if>
+      <if test="record.servicescore != null" >
+        serviceScore = #{record.servicescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceusers != null" >
+        serviceUsers = #{record.serviceusers,jdbcType=INTEGER},
+      </if>
+      <if test="record.timescore != null" >
+        timeScore = #{record.timescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeusers != null" >
+        timeUsers = #{record.timeusers,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shopscores
+    set scoreId = #{record.scoreid,jdbcType=INTEGER},
+      shopId = #{record.shopid,jdbcType=INTEGER},
+      totalScore = #{record.totalscore,jdbcType=INTEGER},
+      totalUsers = #{record.totalusers,jdbcType=INTEGER},
+      goodsScore = #{record.goodsscore,jdbcType=INTEGER},
+      goodsUsers = #{record.goodsusers,jdbcType=INTEGER},
+      serviceScore = #{record.servicescore,jdbcType=INTEGER},
+      serviceUsers = #{record.serviceusers,jdbcType=INTEGER},
+      timeScore = #{record.timescore,jdbcType=INTEGER},
+      timeUsers = #{record.timeusers,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Shopscores" >
+    update shopscores
+    <set >
+      <if test="shopid != null" >
+        shopId = #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="totalscore != null" >
+        totalScore = #{totalscore,jdbcType=INTEGER},
+      </if>
+      <if test="totalusers != null" >
+        totalUsers = #{totalusers,jdbcType=INTEGER},
+      </if>
+      <if test="goodsscore != null" >
+        goodsScore = #{goodsscore,jdbcType=INTEGER},
+      </if>
+      <if test="goodsusers != null" >
+        goodsUsers = #{goodsusers,jdbcType=INTEGER},
+      </if>
+      <if test="servicescore != null" >
+        serviceScore = #{servicescore,jdbcType=INTEGER},
+      </if>
+      <if test="serviceusers != null" >
+        serviceUsers = #{serviceusers,jdbcType=INTEGER},
+      </if>
+      <if test="timescore != null" >
+        timeScore = #{timescore,jdbcType=INTEGER},
+      </if>
+      <if test="timeusers != null" >
+        timeUsers = #{timeusers,jdbcType=INTEGER},
+      </if>
+    </set>
+    where scoreId = #{scoreid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Shopscores" >
+    update shopscores
+    set shopId = #{shopid,jdbcType=INTEGER},
+      totalScore = #{totalscore,jdbcType=INTEGER},
+      totalUsers = #{totalusers,jdbcType=INTEGER},
+      goodsScore = #{goodsscore,jdbcType=INTEGER},
+      goodsUsers = #{goodsusers,jdbcType=INTEGER},
+      serviceScore = #{servicescore,jdbcType=INTEGER},
+      serviceUsers = #{serviceusers,jdbcType=INTEGER},
+      timeScore = #{timescore,jdbcType=INTEGER},
+      timeUsers = #{timeusers,jdbcType=INTEGER}
+    where scoreId = #{scoreid,jdbcType=INTEGER}
+  </update>
+</mapper>
