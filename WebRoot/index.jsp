@@ -24,7 +24,7 @@
 	/**退出系统**/
 	function logout() {
 		if (confirm("您确定要退出本系统吗？")) {
-			window.location.href = "login.html";
+			window.location.href = "${pageContext.request.contextPath }/userLoginOut.action";
 		}
 	}
 
