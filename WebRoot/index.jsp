@@ -255,7 +255,7 @@
 			"resourceType" : ""
 		},
 			{
-				"accessPath" : "house_list.html",
+				"accessPath" : "house_list.jsp",
 				"checked" : false,
 				"delFlag" : 0,
 				"parentID" : 3,
@@ -263,7 +263,7 @@
 				"resourceDesc" : "",
 				"resourceGrade" : 3,
 				"resourceID" : 7,
-				"resourceName" : "已卖出的模块",
+				"resourceName" : "已卖出的宝贝",
 				"resourceOrder" : 0,
 				"resourceType" : ""
 			},
@@ -451,7 +451,7 @@
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "",
+			"accessPath" : "${pageContext.request.contextPath }/shop/showApplyPage.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 12,
@@ -460,6 +460,19 @@
 			"resourceGrade" : 12,
 			"resourceID" : 121,
 			"resourceName" : "店铺基本设置",
+			"resourceOrder" : 0,
+			"resourceType" : ""
+		},
+		{
+			"accessPath" : "${pageContext.request.contextPath }/shop/showBanksPage.action",
+			"checked" : false,
+			"delFlag" : 0,
+			"parentID" : 12,
+			"resourceCode" : "",
+			"resourceDesc" : "",
+			"resourceGrade" : 12,
+			"resourceID" : 121,
+			"resourceName" : "银行设置",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
@@ -589,8 +602,9 @@
 		</div>
 		<div id="top_links">
 			<div id="top_op">
+			
 				<ul>
-					<li><img alt="当前用户" src="images/common/user.jpg">： <span>admin</span>
+					<li><img alt="当前用户" src="images/common/user.jpg">： <span>${loginUser.getUsername() }</span>
 					</li>
 					<li><img alt="事务月份" src="images/common/month.jpg">： <span
 						id="yue_fen"></span></li>

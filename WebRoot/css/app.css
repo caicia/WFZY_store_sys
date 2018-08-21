@@ -1,0 +1,106 @@
+.rowfouid{
+	display: 
+	flex;flex-direction: row;
+	align-items: center;
+	justify-content:space-between;
+}
+.rowfouid-item{
+	height: 100px;
+	width: 300px; 
+	display: inherit;
+	border: 1px solid; 
+	flex-direction: row;
+	align-items:center ;
+	justify-content: space-around;
+}
+.rowfouid-item-image{
+	background-color:#36a9e1 ;
+	height:70px; 
+	width:138px; 
+	padding: 10px; 
+	display: inherit;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.rowfouid-item-text{
+	display:inherit;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.table-users{
+	height: 400px;
+	width: 1200px;
+}
+
+.slider{position:relative;text-align:center; margin:0 auto;z-index:1}
+.slider .bd,.slider .bd li,.slider .bd img{width:960px; height:272px}/*璇风粰姣忎釜骞荤伅鐗囧涓猟iv骞惰缃甶d锛岄�氳繃id閲嶇疆杩欎釜鍦版柟鐨勫搴︼紝杈惧埌鑷畾涔夋晥鏋�*/
+.slider .bd{z-index:2;overflow:hidden}
+.slider .bd li{float:left;width: 100%;overflow:hidden; background-position:center; background-repeat:no-repeat}
+.slider .bd li a{ display:block; width: 100%; height: 100%}
+.slider .bd li img{display:block}
+.slider .hd{ position: absolute; z-index: 3; left: 0; right: 0; bottom:10px; padding: 0 10px; text-align: center}
+.slider .hd li{display:inline-block;text-align:center;margin-right:10px;cursor:pointer;background-color:#C2C2C2}
+.slider .hd li.active{background-color:#222}
+  /*鍦嗙偣*/
+  .dots li{width:10px; height:10px;font-size:0px;line-height:0px;border-radius:50%}
+  /*鏁板瓧*/
+  .numbox li{width:20px; height:20px; line-height:20px; font-size:13px;font-family:Arial;font-weight:bold; text-indent:inherit}
+  .numbox li.active{color:#fff}
+  /*闀挎柟鏉�*/
+  .rectangle li{width:40px; height:10px;font-size:0px;line-height:0px}
+  
+  /*榛樿table*/
+table{width:100%;empty-cells:show;background-color:transparent;border-collapse:collapse;border-spacing:0}
+table th{text-align:left; font-weight:400}
+/*甯︽按骞崇嚎*/
+.table th{font-weight:bold}
+.table th,.table td{padding:8px;line-height:20px}
+.table td{text-align:left}
+.table tbody tr.success > td{background-color:#dff0d8}
+.table tbody tr.error > td{background-color:#f2dede}
+.table tbody tr.warning > td{background-color:#fcf8e3}
+.table tbody tr.info > td{background-color:#d9edf7}
+.table tbody + tbody{border-top:2px solid #ddd}
+.table .table{background-color:#fff}
+ 
+/*甯︽í鍚戝垎鍓茬嚎*/
+.table-border{border-top:1px solid #ddd}
+.table-border th,.table-border td{border-bottom:1px solid #ddd}
+ 
+/*th甯﹁儗鏅�*/
+.table-bg thead th{background-color:#F5FAFE}
+/*甯﹀杈规*/
+.table-bordered{border:1px solid #ddd;border-collapse:separate;*border-collapse:collapse;border-left:0}
+.table-bordered th,.table-bordered td{border-left:1px solid #ddd}
+.table-border.table-bordered{border-bottom:0}
+ 
+/*濂囨暟琛岃儗鏅涓烘祬鐏拌壊*/
+.table-striped tbody > tr:nth-child(odd) > td,.table-striped tbody > tr:nth-child(odd) > th{background-color:#f9f9f9}
+/*绔栫洿鏂瑰悜padding缂╁噺涓�鍗�*/
+.table-condensed th,.table-condensed td{padding:4px 5px}
+/*榧犳爣鎮仠鏍峰紡*/
+.table-hover tbody tr:hover td,.table-hover tbody tr:hover th{background-color: #f5f5f5}
+/*瀹氫箟棰滆壊*/
+/*鎮仠鍦ㄨ*/
+.table tbody tr.active,.table tbody tr.active>td,.table tbody tr.active>th,.table tbody tr .active{background-color:#F5F5F5!important}
+/*鎴愬姛鎴栫Н鏋�*/
+.table tbody tr.success,.table tbody tr.success>td,.table tbody tr.success>th,.table tbody tr .success{background-color:#DFF0D8!important}
+ 
+/*璀﹀憡鎴栧嚭閿�*/
+.table tbody tr.warning,.table tbody tr.warning>td,.table tbody tr.warning>th,.table tbody tr .warning{background-color:#FCF8E3!important}
+/*鍗遍櫓*/
+.table tbody tr.danger,.table tbody tr.danger>td,.table tbody tr.danger>th,.table tbody tr .danger{background-color:#F2DEDE!important}
+ 
+/*琛ㄦ牸鏂囧瓧瀵归綈鏂瑰紡锛岄粯璁ゆ槸灞呭乏瀵归綈*/
+.table .text-c th,.table .text-c td{text-align:center}/*鏁磋灞呬腑*/
+.table .text-r th,.table .text-r td{text-align:right}/*鏁磋灞呭彸*/
+.table th.text-l,.table td.text-l{text-align:left!important}/*鍗曠嫭鍒楀眳宸�*/
+.table th.text-c,.table td.text-c{text-align:center!important}/*鍗曠嫭鍒楀眳涓�*/
+.table th.text-r,.table td.text-r{text-align:right!important}/*鍗曠嫭鍒楀眳鍙�*/
+
+
+.p-show{
+	
+}

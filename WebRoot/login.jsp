@@ -43,7 +43,6 @@
 	</div>
 <script type="text/javascript">
 $('#login_sub').click(function() {
-    alert("132")
 	var loginName = document.getElementById("name").value;
 	var loginPwd = document.getElementById("pwd").value;
 	if(loginName==null || loginPwd==null){

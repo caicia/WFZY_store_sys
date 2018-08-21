@@ -29,6 +29,7 @@ public class loginController {
 		int flag = loginService.selectUserLogin(loginName, loginPwd);
 		if (flag != 0) {
 			Users loginuser = loginService.selectUser(flag);
+			
 			session.setAttribute("loginUser", loginuser);
 			System.out.println(loginuser.getUsertype());
 			if(Integer.valueOf(loginuser.getUsertype())==2)
@@ -57,7 +58,7 @@ public class loginController {
 	public ModelAndView test()
 	{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/index");
+		modelAndView.setViewName("/house_list");
 		return modelAndView;
 	}
 }
