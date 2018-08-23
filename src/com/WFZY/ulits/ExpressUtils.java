@@ -14,7 +14,7 @@ import org.apache.http.util.EntityUtils;
  */
 public class ExpressUtils {
 	
-	public static void main(String[] args) {
+	public static String select() {
 	    String host = "https://allexp.market.alicloudapi.com";
 	    String path = "/expQuery";
 	    String method = "GET";
@@ -42,9 +42,11 @@ public class ExpressUtils {
 	    	//获取response的body
 	    	System.out.println("ExpressUtils.java的快递查询类的 main（）方法");
 	    	System.out.println(EntityUtils.toString(response.getEntity()));
+	    	return EntityUtils.toString(response.getEntity());
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    }
+	    return null;
 	}
 	
 }

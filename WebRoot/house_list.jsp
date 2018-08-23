@@ -23,7 +23,6 @@
 <script type="text/javascript" src="scripts/artDialog/artDialog.js?skin=default"></script>
 <title>信息管理系统</title>
 <script type="text/javascript">
-	
 	$(document).ready(function(){
 		/** 新增   **/
 	    $("#addBtn").fancybox({

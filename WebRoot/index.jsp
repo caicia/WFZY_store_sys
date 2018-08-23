@@ -359,7 +359,7 @@
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "",
+			"accessPath" : "${pageContext.request.contextPath }/shop/showWL.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 10,

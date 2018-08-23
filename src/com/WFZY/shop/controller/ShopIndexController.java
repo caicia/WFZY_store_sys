@@ -43,6 +43,7 @@ import com.WFZY.pojo.ShopsExample;
 import com.WFZY.pojo.Users;
 import com.WFZY.pojo.UsersExample;
 import com.WFZY.shop.service.ShopService;
+import com.WFZY.ulits.ExpressUtils;
 
 
 
@@ -54,10 +55,10 @@ public class ShopIndexController {
 	private ShopService shopservice;
 	
 
-
 	@RequestMapping("/updateShops.action")
-	@ResponseBody
-	public String showShopClassify(@RequestBody Shops shops,HttpServletRequest request) {
+	
+	public @ResponseBody String updateShops(@RequestBody Shops shops,HttpServletRequest request) {
+		System.out.println("哈哈，我进来了");
 		if(request.getSession().getAttribute("saveUrlUpdata")!=null)
 		{
 			shops.setShopimg(String.valueOf(request.getSession().getAttribute("saveUrlUpdata")));
@@ -68,9 +69,13 @@ public class ShopIndexController {
 	
 	@RequestMapping("/updateBanks.action")
 	@ResponseBody
-	public String updateBanks(@RequestBody Banks Banks,HttpServletRequest request) {
-		int flag = shopservice.updataBanks(Banks);
-		return "{\"flag\":" + flag + "}";
+	public String updateBanks(@RequestBody Banks banks,HttpServletRequest request) {
+
+		System.out.println(banks);
+		System.out.println(banks.getBankno());
+		System.out.println();
+		//int flag = shopservice.updataBanks(banks);
+		return "{\"flag\":" + 1 + "}";
 	}
 	
 	@RequestMapping("/checkBanksNumber")
@@ -175,6 +180,10 @@ public class ShopIndexController {
 		
 		List<Shopclassify> i=shopservice.getShopclassifyName(shopclassify);
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); 
+		shopList.get(0).setServicestarttimeNo(sdf.format(shopList.get(0).getServicestarttime()));
+		shopList.get(0).setServiceendtimeNo(sdf.format(shopList.get(0).getServiceendtime()));
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		UsersExample user = new UsersExample();
@@ -202,6 +211,7 @@ public class ShopIndexController {
 		bankCriteria.andBankidEqualTo(shopList.get(0).getBankid());
 		List<Banks> banks = shopservice.getBanksID(bankExceple);
 		
+
 		ModelAndView modelAndView = new ModelAndView();
 		
 		UsersExample user = new UsersExample();

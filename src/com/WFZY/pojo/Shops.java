@@ -53,6 +53,10 @@ public class Shops {
     private Integer nosettledordernum;
 
     private String shopapplyreason;
+    
+    private String servicestarttimeNO;
+    
+    private String serviceendtimeNO;
 
     public Integer getShopid() {
         return shopid;
@@ -166,14 +170,32 @@ public class Shops {
         this.invoiceremarks = invoiceremarks == null ? null : invoiceremarks.trim();
     }
 
+    public String getServicestarttimeNo() {
+        return servicestarttimeNO;
+    }
+
+    
+    public void setServicestarttimeNo(String starttime) {
+        this.servicestarttimeNO = starttime;
+    }
+    
     public Date getServicestarttime() {
         return servicestarttime;
     }
 
+    
     public void setServicestarttime(Date servicestarttime) {
         this.servicestarttime = servicestarttime;
     }
 
+    public String getServiceendtimeNo() {
+        return serviceendtimeNO;
+    }
+
+    public void setServiceendtimeNo(String serviceendtime) {
+        this.serviceendtimeNO = serviceendtime;
+    }
+    
     public Date getServiceendtime() {
         return serviceendtime;
     }

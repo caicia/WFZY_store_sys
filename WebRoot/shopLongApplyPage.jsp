@@ -129,28 +129,28 @@
 			<br>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>活动开始时间：</label>
+					class="c-red">*</span>营业开始时间：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input name="starttime" type="text"
 						onfocus="WdatePicker({dateFmt:'HH:mm:ss',maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})"
 						id="datemin" class="input-text Wdate" style="width:180px;"
-						placeholder=""  value="${i.servicestarttime} ">
+						placeholder=""  value="${i.getServicestarttimeNo()} ">
 				</div>
 			</div>
 			<br>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>活动结束时间：</label>
+					class="c-red">*</span>营业结束时间：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input name="endtime" type="text"
 						onfocus="WdatePicker({dateFmt:'HH:mm:ss',minDate:'#F{$dp.$D(\'datemin\')}'})"
 						id="datemax" class="input-text Wdate" style="width:180px;"
-						placeholder=""  value="${i.serviceendtime}">
+						placeholder=""  value="${i.getServiceendtimeNo()}">
 				</div>
 			</div>
 			<br>
 		
-		<button class="btn btn-primary radius" onclick="shopApplyAuccess(1,${i.shopid})" style="float:left;margin-left: 30%;width: 10%">
+		<button class="btn btn-primary radius" onclick="shopApplyAuccess(${i.shopid})" style="float:left;margin-left: 30%;width: 10%">
 					更改信息
 		</button>
 
@@ -192,8 +192,9 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 	<script type="text/javascript">
-	   function shopApplyAuccess(stats,shopid)
+	   function shopApplyAuccess(shopid)
 	   {
+	   		alert("123");
 	   		var shopid = shopid;
 			var datemin = document.getElementById("datemin").value;
 			var shopType = document.getElementById("shopType").value;
@@ -205,36 +206,40 @@
 			var datemax = document.getElementById("datemax").value;
 			var shopName = document.getElementById("shopName").value;
 			var obj={
-					shopType : shopType,
-					shopShowType : shopShowType,
-					telNumber : telNumber,
-					shopAddress : shopAddress,
-					shopShowPaper : shopShowPaper,
-					paperShow : paperShow, 
-					starttime : datemin,
-					endtime : datemax,
-					shopName : shopName,
-					shopid : shopid,
+					"shopType" : shopType,
+					"shopShowType" : shopShowType,
+					"telNumber" : telNumber,
+					"shopAddress" : shopAddress,
+					"shopShowPaper" : shopShowPaper,
+					"paperShow" : paperShow, 
+					"starttime" : datemin,
+					"endtime" : datemax,	
+					"shopName" : shopName,
+					"shopid" : shopid,
 			}
+			alert(obj.shopType);
 			obj = JOSN.stringify(obj);
-			$.ajax({
-			    type : "POST",
-				url : '${pageContext.request.contextPath }/updateShops.action',
-				data : obj,
-				async : false,
-				success : function(data) {
-					if(data.flag == 1)
-					{
-						alert("更新成功");
+			$.ajax({					   
+					url : '${pageContext.request.contextPath }/updateShops.action',
+					contentType:"application/json",
+			   	 	type : "POST",
+					data : obj,
+					dataType : "json",
+					async : false,
+					success : function(data) {
+					if(data.flag == 1){
+						alert("注册成功");
 					}
-					else
-					{
-						alert("更新失败");
+					else if(data.flag==-1){
+						alert("注册失败,手机号码已存在");
+					}else{
+						alert("注册失败");
 					}
-				},
-				error : function(data) {alert("0")},
-				dataType : "json"
-			})
+					},
+					error : function(data) {
+						alert("数据错误");
+					},
+				})		
 			}
 	</script>
 

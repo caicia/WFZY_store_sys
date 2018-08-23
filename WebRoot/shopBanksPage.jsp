@@ -8,7 +8,7 @@
 %>
 
 <!--_meta 作为公共模版分离出去-->
-<jsp:include page="../_meta.jsp"></jsp:include>
+<jsp:include page="/_meta.jsp"></jsp:include>
 <!--/meta 作为公共模版分离出去-->
 
 <link
@@ -24,7 +24,7 @@
 					class="c-red">*</span>银行卡号：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" name="bankno" id="bankno" placeholder="" value="${b.bankno} "
-						class="input-text" readonly="readonly">
+						class="input-text" >
 				</div>
 				<button class="btn btn-primary radius" onclick="banksCheck()">
 					 验证
@@ -64,8 +64,12 @@
 		<br>
 		<br>
 		
-		<button class="btn btn-primary radius" onclick="shopApplyAuccess(${b.bankno},${b.bankid})" style="float:left;margin-left: 30%;width: 10%">
+		<button class="btn btn-primary radius" onclick="shopApplyAuccess(${b.bankid})" style="float:left;margin-left: 30%;width: 10%">
 					更新银行卡
+		</button>
+		
+		<button class="btn btn-primary radius" onclick="shopApplyAuccess()">
+					 验证
 		</button>
 
 		</c:forEach>
@@ -77,7 +81,7 @@
 	</div>
 
 	<!--_footer 作为公共模版分离出去-->
-	<jsp:include page="../_footer.jsp"></jsp:include>
+	<jsp:include page="/_footer.jsp"></jsp:include>
 	<!--/_footer /作为公共模版分离出去-->
 
 	<!--请在下方写此页面业务相关的脚本-->
@@ -108,7 +112,7 @@
 		
 	<script type="text/javascript">
 	
-		$("#input1").bind("input propertychange",function(event){
+		$("#bankno").bind("input propertychange",function(event){
        			var bankName = document.getElementById("bankName");
 				var bankType = document.getElementById("bankType");
 				var bankStas = document.getElementById("bankStas");
@@ -151,36 +155,37 @@
 			})
 			
 		}
-		</script>
 		
-	<script type="text/javascript">
-	   function shopApplyAuccess(banksno,banksid)
+		 function shopApplyAuccess(bankid)
 	   {
-	   		var bankName = document.getElementById("bankName").value;
+	   		var bankname = document.getElementById("bankName").value;
 			var bankType = document.getElementById("bankType").value;
 			var bankStas = document.getElementById("bankStas").value;
 			var bankno = document.getElementById("bankno").value;
 	   		
-	   		if(bankName == "" && bankName == "none" && bankName == "****" && bankStas == "ok")
+	   		if(bankName == "" || bankName == "none" || bankType == "****" || bankStas != "ok")
 	   		{
 	   			alert("请填写正确信息，无需重复插入银行卡");
 	   		}
 	   		else
 	   		{
-
-			var obj={
-				bankno : bankno,
-				bankname : bankName,
-			}
-			obj = JOSN.stringify(obj);
+	   		alert(bankno);
+	   		alert(bankName);
+	   		var obj={
+	   			bankno : bankno,
+				bankname : bankname,
+	   		};
+	   		obj = JSON.stringify(obj);
 	   		$.ajax({
-			    type : "POST",
 				url : '${pageContext.request.contextPath }/updateBanks.action',
+				contentType : 'application/json;charset=utf-8',
+			   	type : "POST",
 				data : obj,
+				dataType : "json",
 				async : false,
 				success : function(data) {
 					
-					if(data.message == 1)
+					if(data.flag == 1)
 					{
 						alert("更新成功");
 					}
@@ -189,12 +194,10 @@
 						alert("更新失败");
 					}
 				},
-				error : function(data) {alert("error")},
-				dataType : "json"
+				error : function(data) {alert("error")}
 			})
 			}
 	   }
-	</script>
-
+		</script>
 </body>
 </html>
