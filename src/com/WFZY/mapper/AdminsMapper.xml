@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.AdminsMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Admins" >
+    <id column="adminId" property="adminid" jdbcType="INTEGER" />
+    <result column="adminPhone" property="adminphone" jdbcType="VARCHAR" />
+    <result column="adminPwd" property="adminpwd" jdbcType="VARCHAR" />
+    <result column="adminEmail" property="adminemail" jdbcType="VARCHAR" />
+    <result column="adminType" property="admintype" jdbcType="TINYINT" />
+    <result column="adminStatus" property="adminstatus" jdbcType="TINYINT" />
+    <result column="isSuperAdmin" property="issuperadmin" jdbcType="TINYINT" />
+    <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
+    <result column="loginIP" property="loginip" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    adminId, adminPhone, adminPwd, adminEmail, adminType, adminStatus, isSuperAdmin, 
+    loginTime, loginIP, createtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.AdminsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admins
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admins
+    where adminId = #{adminid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admins
+    where adminId = #{adminid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.AdminsExample" >
+    delete from admins
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.Admins" >
+    insert into admins (adminId, adminPhone, adminPwd, 
+      adminEmail, adminType, adminStatus, 
+      isSuperAdmin, loginTime, loginIP, 
+      createtime)
+    values (#{adminid,jdbcType=INTEGER}, #{adminphone,jdbcType=VARCHAR}, #{adminpwd,jdbcType=VARCHAR}, 
+      #{adminemail,jdbcType=VARCHAR}, #{admintype,jdbcType=TINYINT}, #{adminstatus,jdbcType=TINYINT}, 
+      #{issuperadmin,jdbcType=TINYINT}, #{logintime,jdbcType=TIMESTAMP}, #{loginip,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Admins" >
+    insert into admins
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminid != null" >
+        adminId,
+      </if>
+      <if test="adminphone != null" >
+        adminPhone,
+      </if>
+      <if test="adminpwd != null" >
+        adminPwd,
+      </if>
+      <if test="adminemail != null" >
+        adminEmail,
+      </if>
+      <if test="admintype != null" >
+        adminType,
+      </if>
+      <if test="adminstatus != null" >
+        adminStatus,
+      </if>
+      <if test="issuperadmin != null" >
+        isSuperAdmin,
+      </if>
+      <if test="logintime != null" >
+        loginTime,
+      </if>
+      <if test="loginip != null" >
+        loginIP,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="adminphone != null" >
+        #{adminphone,jdbcType=VARCHAR},
+      </if>
+      <if test="adminpwd != null" >
+        #{adminpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="adminemail != null" >
+        #{adminemail,jdbcType=VARCHAR},
+      </if>
+      <if test="admintype != null" >
+        #{admintype,jdbcType=TINYINT},
+      </if>
+      <if test="adminstatus != null" >
+        #{adminstatus,jdbcType=TINYINT},
+      </if>
+      <if test="issuperadmin != null" >
+        #{issuperadmin,jdbcType=TINYINT},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginip != null" >
+        #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.AdminsExample" resultType="java.lang.Integer" >
+    select count(*) from admins
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admins
+    <set >
+      <if test="record.adminid != null" >
+        adminId = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminphone != null" >
+        adminPhone = #{record.adminphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminpwd != null" >
+        adminPwd = #{record.adminpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminemail != null" >
+        adminEmail = #{record.adminemail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.admintype != null" >
+        adminType = #{record.admintype,jdbcType=TINYINT},
+      </if>
+      <if test="record.adminstatus != null" >
+        adminStatus = #{record.adminstatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.issuperadmin != null" >
+        isSuperAdmin = #{record.issuperadmin,jdbcType=TINYINT},
+      </if>
+      <if test="record.logintime != null" >
+        loginTime = #{record.logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginip != null" >
+        loginIP = #{record.loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admins
+    set adminId = #{record.adminid,jdbcType=INTEGER},
+      adminPhone = #{record.adminphone,jdbcType=VARCHAR},
+      adminPwd = #{record.adminpwd,jdbcType=VARCHAR},
+      adminEmail = #{record.adminemail,jdbcType=VARCHAR},
+      adminType = #{record.admintype,jdbcType=TINYINT},
+      adminStatus = #{record.adminstatus,jdbcType=TINYINT},
+      isSuperAdmin = #{record.issuperadmin,jdbcType=TINYINT},
+      loginTime = #{record.logintime,jdbcType=TIMESTAMP},
+      loginIP = #{record.loginip,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Admins" >
+    update admins
+    <set >
+      <if test="adminphone != null" >
+        adminPhone = #{adminphone,jdbcType=VARCHAR},
+      </if>
+      <if test="adminpwd != null" >
+        adminPwd = #{adminpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="adminemail != null" >
+        adminEmail = #{adminemail,jdbcType=VARCHAR},
+      </if>
+      <if test="admintype != null" >
+        adminType = #{admintype,jdbcType=TINYINT},
+      </if>
+      <if test="adminstatus != null" >
+        adminStatus = #{adminstatus,jdbcType=TINYINT},
+      </if>
+      <if test="issuperadmin != null" >
+        isSuperAdmin = #{issuperadmin,jdbcType=TINYINT},
+      </if>
+      <if test="logintime != null" >
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginip != null" >
+        loginIP = #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where adminId = #{adminid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Admins" >
+    update admins
+    set adminPhone = #{adminphone,jdbcType=VARCHAR},
+      adminPwd = #{adminpwd,jdbcType=VARCHAR},
+      adminEmail = #{adminemail,jdbcType=VARCHAR},
+      adminType = #{admintype,jdbcType=TINYINT},
+      adminStatus = #{adminstatus,jdbcType=TINYINT},
+      isSuperAdmin = #{issuperadmin,jdbcType=TINYINT},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      loginIP = #{loginip,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where adminId = #{adminid,jdbcType=INTEGER}
+  </update>
+</mapper>

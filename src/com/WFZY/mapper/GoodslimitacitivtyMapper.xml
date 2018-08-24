@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.WFZY.mapper.ExpressMapper" >
-  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Express" >
-    <id column="expressId" property="expressid" jdbcType="INTEGER" />
-    <result column="expressName" property="expressname" jdbcType="VARCHAR" />
-    <result column="expressCode" property="expresscode" jdbcType="VARCHAR" />
-    <result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
+<mapper namespace="com.WFZY.mapper.GoodslimitacitivtyMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Goodslimitacitivty" >
+    <result column="goodsid" property="goodsid" jdbcType="INTEGER" />
+    <result column="limitTime" property="limittime" jdbcType="TIMESTAMP" />
+    <result column="limitStock" property="limitstock" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    expressId, expressName, expressCode, dataFlag
+    goodsid, limitTime, limitStock
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.ExpressExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.GoodslimitacitivtyExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from express
+    from goodslimitacitivty
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,79 +81,60 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from express
-    where expressId = #{expressid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from express
-    where expressId = #{expressid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.WFZY.pojo.ExpressExample" >
-    delete from express
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.GoodslimitacitivtyExample" >
+    delete from goodslimitacitivty
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.WFZY.pojo.Express" >
-    insert into express (expressId, expressName, expressCode, 
-      dataFlag)
-    values (#{expressid,jdbcType=INTEGER}, #{expressname,jdbcType=VARCHAR}, #{expresscode,jdbcType=VARCHAR}, 
-      #{dataflag,jdbcType=TINYINT})
+  <insert id="insert" parameterType="com.WFZY.pojo.Goodslimitacitivty" >
+    insert into goodslimitacitivty (goodsid, limitTime, limitStock
+      )
+    values (#{goodsid,jdbcType=INTEGER}, #{limittime,jdbcType=TIMESTAMP}, #{limitstock,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.WFZY.pojo.Express" >
-    insert into express
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Goodslimitacitivty" >
+    insert into goodslimitacitivty
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="expressid != null" >
-        expressId,
+      <if test="goodsid != null" >
+        goodsid,
       </if>
-      <if test="expressname != null" >
-        expressName,
+      <if test="limittime != null" >
+        limitTime,
       </if>
-      <if test="expresscode != null" >
-        expressCode,
-      </if>
-      <if test="dataflag != null" >
-        dataFlag,
+      <if test="limitstock != null" >
+        limitStock,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="expressid != null" >
-        #{expressid,jdbcType=INTEGER},
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
       </if>
-      <if test="expressname != null" >
-        #{expressname,jdbcType=VARCHAR},
+      <if test="limittime != null" >
+        #{limittime,jdbcType=TIMESTAMP},
       </if>
-      <if test="expresscode != null" >
-        #{expresscode,jdbcType=VARCHAR},
-      </if>
-      <if test="dataflag != null" >
-        #{dataflag,jdbcType=TINYINT},
+      <if test="limitstock != null" >
+        #{limitstock,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.WFZY.pojo.ExpressExample" resultType="java.lang.Integer" >
-    select count(*) from express
+  <select id="countByExample" parameterType="com.WFZY.pojo.GoodslimitacitivtyExample" resultType="java.lang.Integer" >
+    select count(*) from goodslimitacitivty
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update express
+    update goodslimitacitivty
     <set >
-      <if test="record.expressid != null" >
-        expressId = #{record.expressid,jdbcType=INTEGER},
+      <if test="record.goodsid != null" >
+        goodsid = #{record.goodsid,jdbcType=INTEGER},
       </if>
-      <if test="record.expressname != null" >
-        expressName = #{record.expressname,jdbcType=VARCHAR},
+      <if test="record.limittime != null" >
+        limitTime = #{record.limittime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.expresscode != null" >
-        expressCode = #{record.expresscode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dataflag != null" >
-        dataFlag = #{record.dataflag,jdbcType=TINYINT},
+      <if test="record.limitstock != null" >
+        limitStock = #{record.limitstock,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -162,35 +142,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update express
-    set expressId = #{record.expressid,jdbcType=INTEGER},
-      expressName = #{record.expressname,jdbcType=VARCHAR},
-      expressCode = #{record.expresscode,jdbcType=VARCHAR},
-      dataFlag = #{record.dataflag,jdbcType=TINYINT}
+    update goodslimitacitivty
+    set goodsid = #{record.goodsid,jdbcType=INTEGER},
+      limitTime = #{record.limittime,jdbcType=TIMESTAMP},
+      limitStock = #{record.limitstock,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Express" >
-    update express
-    <set >
-      <if test="expressname != null" >
-        expressName = #{expressname,jdbcType=VARCHAR},
-      </if>
-      <if test="expresscode != null" >
-        expressCode = #{expresscode,jdbcType=VARCHAR},
-      </if>
-      <if test="dataflag != null" >
-        dataFlag = #{dataflag,jdbcType=TINYINT},
-      </if>
-    </set>
-    where expressId = #{expressid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Express" >
-    update express
-    set expressName = #{expressname,jdbcType=VARCHAR},
-      expressCode = #{expresscode,jdbcType=VARCHAR},
-      dataFlag = #{dataflag,jdbcType=TINYINT}
-    where expressId = #{expressid,jdbcType=INTEGER}
   </update>
 </mapper>

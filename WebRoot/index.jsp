@@ -471,26 +471,13 @@
 			"resourceCode" : "",
 			"resourceDesc" : "",
 			"resourceGrade" : 12,
-			"resourceID" : 121,
+			"resourceID" : 122,
 			"resourceName" : "银行设置",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "",
-			"checked" : false,
-			"delFlag" : 0,
-			"parentID" : 12,
-			"resourceCode" : "",
-			"resourceDesc" : "",
-			"resourceGrade" : 12,
-			"resourceID" : 122,
-			"resourceName" : "子账号管理",
-			"resourceOrder" : 0,
-			"resourceType" : ""
-		},
-		{
-			"accessPath" : "",
+			"accessPath" : "${pageContext.request.contextPath }/shop/showWLPage.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 12,
@@ -498,11 +485,10 @@
 			"resourceDesc" : "",
 			"resourceGrade" : 12,
 			"resourceID" : 123,
-			"resourceName" : "商家保障",
+			"resourceName" : "快递设置",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
-		
 		{
 			"accessPath" : "",
 			"checked" : false,

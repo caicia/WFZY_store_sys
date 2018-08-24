@@ -34,12 +34,15 @@ import com.WFZY.pojo.ActivityExample;
 import com.WFZY.pojo.ActivityWithBLOBs;
 import com.WFZY.pojo.Banks;
 import com.WFZY.pojo.BanksExample;
-
+import com.WFZY.pojo.Express;
+import com.WFZY.pojo.ExpressExample;
 import com.WFZY.pojo.Shopclassify;
 import com.WFZY.pojo.ShopclassifyExample;
 import com.WFZY.pojo.ShopclassifyExample.Criteria;
 import com.WFZY.pojo.Shops;
 import com.WFZY.pojo.ShopsExample;
+import com.WFZY.pojo.Shopsexpress;
+import com.WFZY.pojo.ShopsexpressExample;
 import com.WFZY.pojo.Users;
 import com.WFZY.pojo.UsersExample;
 import com.WFZY.shop.service.ShopService;
@@ -54,11 +57,30 @@ public class ShopIndexController {
 	@Resource(name = "ShopServiceImpl")
 	private ShopService shopservice;
 	
+	@RequestMapping("/insertShopsExpress.action")
+	@ResponseBody
+	public String insertShopsExpress(@RequestBody Shopsexpress shops,HttpServletRequest request) {
+		
+		int flag = shopservice.insertshopsExpress(shops);
+		return "{\"flag\":" + flag + "}";
+	}
+	
+	@RequestMapping("/delShopsExpress.action")
+	@ResponseBody
+	public String delShopsExpress(@RequestBody Shopsexpress shops,HttpServletRequest request) {
+		
+		ShopsexpressExample shopsexpressExample = new ShopsexpressExample();
+		ShopsexpressExample.Criteria speExCriteria = shopsexpressExample.createCriteria();
+		speExCriteria.andExpressidEqualTo(shops.getExpressid());
+		speExCriteria.andShopidEqualTo(shops.getShopid());
+		int flag = shopservice.delectshopsExpress(shopsexpressExample);
+		return "{\"flag\":" + flag + "}";
+	}
+	
 
 	@RequestMapping("/updateShops.action")
-	
-	public @ResponseBody String updateShops(@RequestBody Shops shops,HttpServletRequest request) {
-		System.out.println("哈哈，我进来了");
+	@ResponseBody
+	public String updateShops(@RequestBody Shops shops,HttpServletRequest request) {
 		if(request.getSession().getAttribute("saveUrlUpdata")!=null)
 		{
 			shops.setShopimg(String.valueOf(request.getSession().getAttribute("saveUrlUpdata")));
@@ -73,9 +95,8 @@ public class ShopIndexController {
 
 		System.out.println(banks);
 		System.out.println(banks.getBankno());
-		System.out.println();
-		//int flag = shopservice.updataBanks(banks);
-		return "{\"flag\":" + 1 + "}";
+		int flag = shopservice.updataBanks(banks);
+		return "{\"flag\":" + flag + "}";
 	}
 	
 	@RequestMapping("/checkBanksNumber")
@@ -214,10 +235,6 @@ public class ShopIndexController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		
-		UsersExample user = new UsersExample();
-		UsersExample.Criteria UserCriteria = user.createCriteria();
-		UserCriteria.andUseridEqualTo(shopList.get(0).getUserid());
- 		List<Users> user1 = shopservice.getUserID(user);
 		modelAndView.addObject("shopList", shopList);
 		modelAndView.addObject("banks", banks);
 		modelAndView.setViewName("/shopBanksPage");
@@ -225,6 +242,41 @@ public class ShopIndexController {
 	}
 	
 	
-	
+	@RequestMapping("/shop/showWLPage")
+	public ModelAndView showWLPage(HttpServletRequest request) {
+		Users users = (Users) request.getSession().getAttribute("loginUser");
+		ShopsExample record = new ShopsExample(); 
+		ShopsExample.Criteria shopCriteria = record.createCriteria();
+		shopCriteria.andUseridEqualTo(Integer.valueOf(users.getUserid()));
+		List<Shops> shopList = shopservice.getShopsID(record);
+		
+
+		ModelAndView modelAndView = new ModelAndView();
+		
+		ShopsexpressExample example = new ShopsexpressExample();
+		ShopsexpressExample.Criteria shopsexpressCriteria = example.createCriteria();
+		shopsexpressCriteria.andShopidEqualTo(shopList.get(0).getShopid());
+		List<Shopsexpress> shopsexpress = shopservice.getshopExpress(example);
+		
+		ExpressExample expExample = new ExpressExample();
+		List<Express> expresses = shopservice.getExpress(expExample);
+		for(int j=0;j<expresses.size();j++)
+		{
+			for(int k=0;k<shopsexpress.size();k++)
+			{
+				if(expresses.get(j).getExpressid() == shopsexpress.get(k).getExpressid())
+				{
+					expresses.get(j).setDataflag((byte) 2);
+					break;
+				}
+			}
+		}
+		System.out.println(expresses.get(0).getExpressname());
+		
+		modelAndView.addObject("shopList", shopList);
+		modelAndView.addObject("express", expresses);
+		modelAndView.setViewName("/showWLPage");
+		return modelAndView;
+	}
 
 }

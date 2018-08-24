@@ -8,7 +8,7 @@
 %>
 
 <!--_meta 作为公共模版分离出去-->
-<jsp:include page="_meta.jsp"></jsp:include>
+<jsp:include page="/_meta.jsp"></jsp:include>
 <!--/meta 作为公共模版分离出去-->
 
 <link
@@ -66,7 +66,7 @@
 					class="c-red">*</span>门店图标：</label>
 				
 				<div class="formControls col-xs-8 col-sm-9">
-					<img alt="" src="${i.shopimg} " width="160px" height="80px">
+					<img alt="" src="${i.shopimg} " width="160px" height="80px" id="shopimg">
 				</div>
 
 			</div>
@@ -150,10 +150,9 @@
 			</div>
 			<br>
 		
-		<button class="btn btn-primary radius" onclick="shopApplyAuccess(${i.shopid})" style="float:left;margin-left: 30%;width: 10%">
+		<button class="btn btn-primary radius" onclick="app(${i.shopid})" style="float:left;margin-left: 30%;width: 10%">
 					更改信息
 		</button>
-
 
 		</c:forEach>
 
@@ -163,7 +162,7 @@
 	</div>
 
 	<!--_footer 作为公共模版分离出去-->
-	<jsp:include page="_footer.jsp"></jsp:include>
+	<jsp:include page="/_footer.jsp"></jsp:include>
 	<!--/_footer /作为公共模版分离出去-->
 
 	<!--请在下方写此页面业务相关的脚本-->
@@ -191,11 +190,17 @@
 		src="${pageContext.request.contextPath }/lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+		
 	<script type="text/javascript">
-	   function shopApplyAuccess(shopid)
-	   {
-	   		alert("123");
-	   		var shopid = shopid;
+	
+			function StrToGMT(time){
+    			let GMT = new Date(time)
+    			return GMT
+			}
+			
+			function app(shopid){
+			
+			var shopid = shopid;
 			var datemin = document.getElementById("datemin").value;
 			var shopType = document.getElementById("shopType").value;
 			var shopShowType = document.getElementById("shopShowType").value;
@@ -205,41 +210,42 @@
 			var paperShow = document.getElementById("paperShow").value;
 			var datemax = document.getElementById("datemax").value;
 			var shopName = document.getElementById("shopName").value;
-			var obj={
-					"shopType" : shopType,
-					"shopShowType" : shopShowType,
-					"telNumber" : telNumber,
-					"shopAddress" : shopAddress,
-					"shopShowPaper" : shopShowPaper,
-					"paperShow" : paperShow, 
-					"starttime" : datemin,
-					"endtime" : datemax,	
-					"shopName" : shopName,
-					"shopid" : shopid,
-			}
-			alert(obj.shopType);
-			obj = JOSN.stringify(obj);
-			$.ajax({					   
-					url : '${pageContext.request.contextPath }/updateShops.action',
-					contentType:"application/json",
-			   	 	type : "POST",
-					data : obj,
-					dataType : "json",
-					async : false,
-					success : function(data) {
-					if(data.flag == 1){
-						alert("注册成功");
+			var shopimg = document.getElementById("shopimg").value;
+				var obj={
+	   				shopclassifyid : shopType,
+					isself : shopShowType,
+					shoptelephone : telNumber,
+					shopaddress : shopAddress,
+					isinvoice : shopShowPaper,
+					invoiceremarks : paperShow, 
+					servicestarttime : StrToGMT(datemin),
+					serviceendtime : StrToGMT(datemax),	
+					shopname : shopName,
+					shopid : shopid,
+					shopimg : shopimg,
+	   			};
+	   		obj = JSON.stringify(obj);
+	   		$.ajax({
+				url : '${pageContext.request.contextPath }/updateShops.action',
+				contentType : 'application/json;charset=utf-8',
+			   	type : "POST",
+				data : obj,
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					
+					if(data.flag == 1)
+					{
+						alert("更新成功");
+						window.location.reload();
 					}
-					else if(data.flag==-1){
-						alert("注册失败,手机号码已存在");
-					}else{
-						alert("注册失败");
+					else
+					{
+						alert("更新失败");
 					}
-					},
-					error : function(data) {
-						alert("数据错误");
-					},
-				})		
+				},
+				error : function(data) {alert("error")},
+			})
 			}
 	</script>
 

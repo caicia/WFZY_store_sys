@@ -11,19 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.WFZY.mapper.ActivityMapper;
 import com.WFZY.mapper.BanksMapper;
-
+import com.WFZY.mapper.ExpressMapper;
 import com.WFZY.mapper.ShopclassifyMapper;
 import com.WFZY.mapper.ShopsMapper;
+import com.WFZY.mapper.ShopsexpressMapper;
 import com.WFZY.mapper.UsersMapper;
 import com.WFZY.pojo.ActivityExample;
 import com.WFZY.pojo.ActivityWithBLOBs;
 import com.WFZY.pojo.Banks;
 import com.WFZY.pojo.BanksExample;
-
+import com.WFZY.pojo.Express;
+import com.WFZY.pojo.ExpressExample;
 import com.WFZY.pojo.Shopclassify;
 import com.WFZY.pojo.ShopclassifyExample;
 import com.WFZY.pojo.Shops;
 import com.WFZY.pojo.ShopsExample;
+import com.WFZY.pojo.Shopsexpress;
+import com.WFZY.pojo.ShopsexpressExample;
 import com.WFZY.pojo.Users;
 import com.WFZY.pojo.UsersExample;
 
@@ -39,10 +43,14 @@ public class ShopServiceImpl implements com.WFZY.shop.service.ShopService {
 	@Resource
 	private ShopsMapper shopsMapper;
 	
-
+	@Resource
+	private ShopsexpressMapper shopsexpressMapper;
 	
 	@Resource
 	private UsersMapper usersMapper;
+	
+	@Resource
+	private ExpressMapper expressMapper;
 
 	@Override
 	public List<Shopclassify> getShopclassifyName(ShopclassifyExample shopclassify) {
@@ -105,6 +113,38 @@ public class ShopServiceImpl implements com.WFZY.shop.service.ShopService {
 	public int updataBanks(Banks record) {
 		// TODO Auto-generated method stub
 		return banksMapper.updateByPrimaryKeySelective(record);
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public List<Shopsexpress> getshopExpress(ShopsexpressExample example) {
+		// TODO Auto-generated method stub
+		return shopsexpressMapper.selectByExample(example);
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public List<Express> getExpress(ExpressExample example) {
+		// TODO Auto-generated method stub
+		return expressMapper.selectByExample(example);
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public int delectshopsExpress(ShopsexpressExample example) {
+		// TODO Auto-generated method stub
+		return shopsexpressMapper.deleteByExample(example);
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public int insertshopsExpress(Shopsexpress record) {
+		// TODO Auto-generated method stub
+		return shopsexpressMapper.insertSelective(record);
 	}
 	
 }

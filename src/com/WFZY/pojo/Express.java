@@ -5,6 +5,8 @@ public class Express {
 
     private String expressname;
 
+    private String expresscode;
+
     private Byte dataflag;
 
     public Integer getExpressid() {
@@ -21,6 +23,14 @@ public class Express {
 
     public void setExpressname(String expressname) {
         this.expressname = expressname == null ? null : expressname.trim();
+    }
+
+    public String getExpresscode() {
+        return expresscode;
+    }
+
+    public void setExpresscode(String expresscode) {
+        this.expresscode = expresscode == null ? null : expresscode.trim();
     }
 
     public Byte getDataflag() {

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Message" >
+    <id column="messageId" property="messageid" jdbcType="INTEGER" />
+    <result column="sAccepterId" property="saccepterid" jdbcType="INTEGER" />
+    <result column="uAccepterId" property="uaccepterid" jdbcType="INTEGER" />
+    <result column="sSendId" property="ssendid" jdbcType="INTEGER" />
+    <result column="uSendId" property="usendid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.WFZY.pojo.Message" extends="BaseResultMap" >
+    <result column="context" property="context" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    messageId, sAccepterId, uAccepterId, sSendId, uSendId
+  </sql>
+  <sql id="Blob_Column_List" >
+    context
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.WFZY.pojo.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.MessageExample" >
+    delete from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.Message" >
+    insert into message (messageId, sAccepterId, uAccepterId, 
+      sSendId, uSendId, context
+      )
+    values (#{messageid,jdbcType=INTEGER}, #{saccepterid,jdbcType=INTEGER}, #{uaccepterid,jdbcType=INTEGER}, 
+      #{ssendid,jdbcType=INTEGER}, #{usendid,jdbcType=INTEGER}, #{context,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        messageId,
+      </if>
+      <if test="saccepterid != null" >
+        sAccepterId,
+      </if>
+      <if test="uaccepterid != null" >
+        uAccepterId,
+      </if>
+      <if test="ssendid != null" >
+        sSendId,
+      </if>
+      <if test="usendid != null" >
+        uSendId,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        #{messageid,jdbcType=INTEGER},
+      </if>
+      <if test="saccepterid != null" >
+        #{saccepterid,jdbcType=INTEGER},
+      </if>
+      <if test="uaccepterid != null" >
+        #{uaccepterid,jdbcType=INTEGER},
+      </if>
+      <if test="ssendid != null" >
+        #{ssendid,jdbcType=INTEGER},
+      </if>
+      <if test="usendid != null" >
+        #{usendid,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.MessageExample" resultType="java.lang.Integer" >
+    select count(*) from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message
+    <set >
+      <if test="record.messageid != null" >
+        messageId = #{record.messageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.saccepterid != null" >
+        sAccepterId = #{record.saccepterid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uaccepterid != null" >
+        uAccepterId = #{record.uaccepterid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ssendid != null" >
+        sSendId = #{record.ssendid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usendid != null" >
+        uSendId = #{record.usendid,jdbcType=INTEGER},
+      </if>
+      <if test="record.context != null" >
+        context = #{record.context,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update message
+    set messageId = #{record.messageid,jdbcType=INTEGER},
+      sAccepterId = #{record.saccepterid,jdbcType=INTEGER},
+      uAccepterId = #{record.uaccepterid,jdbcType=INTEGER},
+      sSendId = #{record.ssendid,jdbcType=INTEGER},
+      uSendId = #{record.usendid,jdbcType=INTEGER},
+      context = #{record.context,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message
+    set messageId = #{record.messageid,jdbcType=INTEGER},
+      sAccepterId = #{record.saccepterid,jdbcType=INTEGER},
+      uAccepterId = #{record.uaccepterid,jdbcType=INTEGER},
+      sSendId = #{record.ssendid,jdbcType=INTEGER},
+      uSendId = #{record.usendid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Message" >
+    update message
+    <set >
+      <if test="saccepterid != null" >
+        sAccepterId = #{saccepterid,jdbcType=INTEGER},
+      </if>
+      <if test="uaccepterid != null" >
+        uAccepterId = #{uaccepterid,jdbcType=INTEGER},
+      </if>
+      <if test="ssendid != null" >
+        sSendId = #{ssendid,jdbcType=INTEGER},
+      </if>
+      <if test="usendid != null" >
+        uSendId = #{usendid,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.WFZY.pojo.Message" >
+    update message
+    set sAccepterId = #{saccepterid,jdbcType=INTEGER},
+      uAccepterId = #{uaccepterid,jdbcType=INTEGER},
+      sSendId = #{ssendid,jdbcType=INTEGER},
+      uSendId = #{usendid,jdbcType=INTEGER},
+      context = #{context,jdbcType=LONGVARCHAR}
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Message" >
+    update message
+    set sAccepterId = #{saccepterid,jdbcType=INTEGER},
+      uAccepterId = #{uaccepterid,jdbcType=INTEGER},
+      sSendId = #{ssendid,jdbcType=INTEGER},
+      uSendId = #{usendid,jdbcType=INTEGER}
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </update>
+</mapper>

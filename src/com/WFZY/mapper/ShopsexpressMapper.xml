@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.WFZY.mapper.ExpressMapper" >
-  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Express" >
-    <id column="expressId" property="expressid" jdbcType="INTEGER" />
-    <result column="expressName" property="expressname" jdbcType="VARCHAR" />
-    <result column="expressCode" property="expresscode" jdbcType="VARCHAR" />
-    <result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
+<mapper namespace="com.WFZY.mapper.ShopsexpressMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Shopsexpress" >
+    <id column="scoreId" property="scoreid" jdbcType="INTEGER" />
+    <result column="shopId" property="shopid" jdbcType="INTEGER" />
+    <result column="expressId" property="expressid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    expressId, expressName, expressCode, dataFlag
+    scoreId, shopId, expressId
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.ExpressExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.ShopsexpressExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from express
+    from shopsexpress
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,76 +84,67 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from express
-    where expressId = #{expressid,jdbcType=INTEGER}
+    from shopsexpress
+    where scoreId = #{scoreid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from express
-    where expressId = #{expressid,jdbcType=INTEGER}
+    delete from shopsexpress
+    where scoreId = #{scoreid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.WFZY.pojo.ExpressExample" >
-    delete from express
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.ShopsexpressExample" >
+    delete from shopsexpress
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.WFZY.pojo.Express" >
-    insert into express (expressId, expressName, expressCode, 
-      dataFlag)
-    values (#{expressid,jdbcType=INTEGER}, #{expressname,jdbcType=VARCHAR}, #{expresscode,jdbcType=VARCHAR}, 
-      #{dataflag,jdbcType=TINYINT})
+  <insert id="insert" parameterType="com.WFZY.pojo.Shopsexpress" >
+    insert into shopsexpress (scoreId, shopId, expressId
+      )
+    values (#{scoreid,jdbcType=INTEGER}, #{shopid,jdbcType=INTEGER}, #{expressid,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.WFZY.pojo.Express" >
-    insert into express
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Shopsexpress" >
+    insert into shopsexpress
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoreid != null" >
+        scoreId,
+      </if>
+      <if test="shopid != null" >
+        shopId,
+      </if>
       <if test="expressid != null" >
         expressId,
       </if>
-      <if test="expressname != null" >
-        expressName,
-      </if>
-      <if test="expresscode != null" >
-        expressCode,
-      </if>
-      <if test="dataflag != null" >
-        dataFlag,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoreid != null" >
+        #{scoreid,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
       <if test="expressid != null" >
         #{expressid,jdbcType=INTEGER},
       </if>
-      <if test="expressname != null" >
-        #{expressname,jdbcType=VARCHAR},
-      </if>
-      <if test="expresscode != null" >
-        #{expresscode,jdbcType=VARCHAR},
-      </if>
-      <if test="dataflag != null" >
-        #{dataflag,jdbcType=TINYINT},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.WFZY.pojo.ExpressExample" resultType="java.lang.Integer" >
-    select count(*) from express
+  <select id="countByExample" parameterType="com.WFZY.pojo.ShopsexpressExample" resultType="java.lang.Integer" >
+    select count(*) from shopsexpress
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update express
+    update shopsexpress
     <set >
+      <if test="record.scoreid != null" >
+        scoreId = #{record.scoreid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopid != null" >
+        shopId = #{record.shopid,jdbcType=INTEGER},
+      </if>
       <if test="record.expressid != null" >
         expressId = #{record.expressid,jdbcType=INTEGER},
-      </if>
-      <if test="record.expressname != null" >
-        expressName = #{record.expressname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.expresscode != null" >
-        expressCode = #{record.expresscode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dataflag != null" >
-        dataFlag = #{record.dataflag,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -162,35 +152,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update express
-    set expressId = #{record.expressid,jdbcType=INTEGER},
-      expressName = #{record.expressname,jdbcType=VARCHAR},
-      expressCode = #{record.expresscode,jdbcType=VARCHAR},
-      dataFlag = #{record.dataflag,jdbcType=TINYINT}
+    update shopsexpress
+    set scoreId = #{record.scoreid,jdbcType=INTEGER},
+      shopId = #{record.shopid,jdbcType=INTEGER},
+      expressId = #{record.expressid,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Express" >
-    update express
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Shopsexpress" >
+    update shopsexpress
     <set >
-      <if test="expressname != null" >
-        expressName = #{expressname,jdbcType=VARCHAR},
+      <if test="shopid != null" >
+        shopId = #{shopid,jdbcType=INTEGER},
       </if>
-      <if test="expresscode != null" >
-        expressCode = #{expresscode,jdbcType=VARCHAR},
-      </if>
-      <if test="dataflag != null" >
-        dataFlag = #{dataflag,jdbcType=TINYINT},
+      <if test="expressid != null" >
+        expressId = #{expressid,jdbcType=INTEGER},
       </if>
     </set>
-    where expressId = #{expressid,jdbcType=INTEGER}
+    where scoreId = #{scoreid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Express" >
-    update express
-    set expressName = #{expressname,jdbcType=VARCHAR},
-      expressCode = #{expresscode,jdbcType=VARCHAR},
-      dataFlag = #{dataflag,jdbcType=TINYINT}
-    where expressId = #{expressid,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Shopsexpress" >
+    update shopsexpress
+    set shopId = #{shopid,jdbcType=INTEGER},
+      expressId = #{expressid,jdbcType=INTEGER}
+    where scoreId = #{scoreid,jdbcType=INTEGER}
   </update>
 </mapper>

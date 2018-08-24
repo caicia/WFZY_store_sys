@@ -68,9 +68,6 @@
 					更新银行卡
 		</button>
 		
-		<button class="btn btn-primary radius" onclick="shopApplyAuccess()">
-					 验证
-		</button>
 
 		</c:forEach>
 		</c:forEach>
@@ -163,15 +160,14 @@
 			var bankStas = document.getElementById("bankStas").value;
 			var bankno = document.getElementById("bankno").value;
 	   		
-	   		if(bankName == "" || bankName == "none" || bankType == "****" || bankStas != "ok")
+	   		if(bankName == "" || bankName == "none" || bankType == "****" || bankType == "undefined"  || bankStas != "ok")
 	   		{
 	   			alert("请填写正确信息，无需重复插入银行卡");
 	   		}
 	   		else
 	   		{
-	   		alert(bankno);
-	   		alert(bankName);
 	   		var obj={
+	   			bankid : bankid,
 	   			bankno : bankno,
 				bankname : bankname,
 	   		};
@@ -194,7 +190,7 @@
 						alert("更新失败");
 					}
 				},
-				error : function(data) {alert("error")}
+				error : function(data) {alert("error")},
 			})
 			}
 	   }

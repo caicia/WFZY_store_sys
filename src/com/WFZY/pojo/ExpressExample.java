@@ -234,6 +234,76 @@ public class ExpressExample {
             return (Criteria) this;
         }
 
+        public Criteria andExpresscodeIsNull() {
+            addCriterion("expressCode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeIsNotNull() {
+            addCriterion("expressCode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeEqualTo(String value) {
+            addCriterion("expressCode =", value, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeNotEqualTo(String value) {
+            addCriterion("expressCode <>", value, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeGreaterThan(String value) {
+            addCriterion("expressCode >", value, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeGreaterThanOrEqualTo(String value) {
+            addCriterion("expressCode >=", value, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeLessThan(String value) {
+            addCriterion("expressCode <", value, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeLessThanOrEqualTo(String value) {
+            addCriterion("expressCode <=", value, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeLike(String value) {
+            addCriterion("expressCode like", value, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeNotLike(String value) {
+            addCriterion("expressCode not like", value, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeIn(List<String> values) {
+            addCriterion("expressCode in", values, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeNotIn(List<String> values) {
+            addCriterion("expressCode not in", values, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeBetween(String value1, String value2) {
+            addCriterion("expressCode between", value1, value2, "expresscode");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpresscodeNotBetween(String value1, String value2) {
+            addCriterion("expressCode not between", value1, value2, "expresscode");
+            return (Criteria) this;
+        }
+
         public Criteria andDataflagIsNull() {
             addCriterion("dataFlag is null");
             return (Criteria) this;

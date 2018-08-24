@@ -44,8 +44,8 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
-		<table schema="" tableName="users"></table>
-		<table schema="" tableName="activity"></table>
+		<!--<table schema="" tableName="users"></table>
+		 <table schema="" tableName="activity"></table>
 		<table schema="" tableName="carousel"></table>
 		<table schema="" tableName="userAddress"></table>
 		<table schema="" tableName="banks"></table>
@@ -61,7 +61,14 @@
 		<table schema="" tableName="orders"></table>
 		<table schema="" tableName="goodsComment"></table>
 		<table schema="" tableName="orderGoods"></table>
-		<table schema="" tableName="orderRefunds"></table>
+		<table schema="" tableName="orderRefunds"></table> 
+		<table schema="" tableName="admins"></table>
+		<table schema="" tableName="goodsapply"></table>
+		<table schema="" tableName="message"></table>-->
+
+		<table schema="" tableName="shopsexpress"></table>
+		<table schema="" tableName="limittimes"></table>
+		<table schema="" tableName="goodslimitacitivty"></table>
 
 		<!-- 有些表的字段需要指定java类型 <table schema="" tableName="user"> <columnOverride 
 			column="id" javaType="Long" /> </table> -->
