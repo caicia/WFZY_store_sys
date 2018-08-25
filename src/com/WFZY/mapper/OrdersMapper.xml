@@ -4,8 +4,15 @@
   <resultMap id="BaseResultMap" type="com.WFZY.pojo.Orders" >
     <id column="orderId" property="orderid" jdbcType="INTEGER" />
     <result column="orderNo" property="orderno" jdbcType="VARCHAR" />
-    <result column="shopId" property="shopid" jdbcType="INTEGER" />
     <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="shopId" property="shopid" jdbcType="INTEGER" />
+    <result column="shopName" property="shopname" jdbcType="VARCHAR" />
+    <result column="goodsId" property="goodsid" jdbcType="INTEGER" />
+    <result column="goodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="goodsCount" property="goodscount" jdbcType="INTEGER" />
+    <result column="goodsPrice" property="goodsprice" jdbcType="INTEGER" />
+    <result column="goodsRemarks" property="goodsremarks" jdbcType="VARCHAR" />
+    <result column="orderRemarks" property="orderremarks" jdbcType="VARCHAR" />
     <result column="orderStatus" property="orderstatus" jdbcType="TINYINT" />
     <result column="goodsMoney" property="goodsmoney" jdbcType="DECIMAL" />
     <result column="deliverType" property="delivertype" jdbcType="TINYINT" />
@@ -13,27 +20,21 @@
     <result column="totalMoney" property="totalmoney" jdbcType="DECIMAL" />
     <result column="realTotalMoney" property="realtotalmoney" jdbcType="DECIMAL" />
     <result column="payType" property="paytype" jdbcType="TINYINT" />
-    <result column="payFrom" property="payfrom" jdbcType="INTEGER" />
     <result column="isPay" property="ispay" jdbcType="TINYINT" />
-    <result column="userName" property="username" jdbcType="VARCHAR" />
-    <result column="userAddress" property="useraddress" jdbcType="VARCHAR" />
-    <result column="userPhone" property="userphone" jdbcType="VARCHAR" />
+    <result column="receivedName" property="receivedname" jdbcType="VARCHAR" />
+    <result column="receivedAddress" property="receivedaddress" jdbcType="VARCHAR" />
+    <result column="receivedPhone" property="receivedphone" jdbcType="VARCHAR" />
     <result column="isInvoice" property="isinvoice" jdbcType="TINYINT" />
-    <result column="orderRemarks" property="orderremarks" jdbcType="VARCHAR" />
-    <result column="orderSrc" property="ordersrc" jdbcType="TINYINT" />
     <result column="isRefund" property="isrefund" jdbcType="TINYINT" />
     <result column="isAppraise" property="isappraise" jdbcType="TINYINT" />
-    <result column="cancelReason" property="cancelreason" jdbcType="INTEGER" />
-    <result column="rejectReason" property="rejectreason" jdbcType="INTEGER" />
-    <result column="rejectOtherReason" property="rejectotherreason" jdbcType="VARCHAR" />
+    <result column="cancelReason" property="cancelreason" jdbcType="VARCHAR" />
+    <result column="rejectReason" property="rejectreason" jdbcType="VARCHAR" />
     <result column="isClosed" property="isclosed" jdbcType="TINYINT" />
-    <result column="orderunique" property="orderunique" jdbcType="VARCHAR" />
-    <result column="settlementId" property="settlementid" jdbcType="INTEGER" />
+    <result column="settlementId" property="settlementid" jdbcType="TINYINT" />
     <result column="receiveTime" property="receivetime" jdbcType="TIMESTAMP" />
     <result column="deliveryTime" property="deliverytime" jdbcType="TIMESTAMP" />
     <result column="expressNo" property="expressno" jdbcType="VARCHAR" />
     <result column="expressId" property="expressid" jdbcType="INTEGER" />
-    <result column="tradeNo" property="tradeno" jdbcType="VARCHAR" />
     <result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
     <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -96,11 +97,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    orderId, orderNo, shopId, userId, orderStatus, goodsMoney, deliverType, deliverMoney, 
-    totalMoney, realTotalMoney, payType, payFrom, isPay, userName, userAddress, userPhone, 
-    isInvoice, orderRemarks, orderSrc, isRefund, isAppraise, cancelReason, rejectReason, 
-    rejectOtherReason, isClosed, orderunique, settlementId, receiveTime, deliveryTime, 
-    expressNo, expressId, tradeNo, dataFlag, createTime
+    orderId, orderNo, userId, shopId, shopName, goodsId, goodsName, goodsCount, goodsPrice, 
+    goodsRemarks, orderRemarks, orderStatus, goodsMoney, deliverType, deliverMoney, totalMoney, 
+    realTotalMoney, payType, isPay, receivedName, receivedAddress, receivedPhone, isInvoice, 
+    isRefund, isAppraise, cancelReason, rejectReason, isClosed, settlementId, receiveTime, 
+    deliveryTime, expressNo, expressId, dataFlag, createTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.OrdersExample" >
     select
@@ -133,30 +134,30 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.WFZY.pojo.Orders" >
-    insert into orders (orderId, orderNo, shopId, 
-      userId, orderStatus, goodsMoney, 
-      deliverType, deliverMoney, totalMoney, 
-      realTotalMoney, payType, payFrom, 
-      isPay, userName, userAddress, 
-      userPhone, isInvoice, orderRemarks, 
-      orderSrc, isRefund, isAppraise, 
-      cancelReason, rejectReason, rejectOtherReason, 
-      isClosed, orderunique, settlementId, 
-      receiveTime, deliveryTime, expressNo, 
-      expressId, tradeNo, dataFlag, 
-      createTime)
-    values (#{orderid,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, #{shopid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER}, #{orderstatus,jdbcType=TINYINT}, #{goodsmoney,jdbcType=DECIMAL}, 
-      #{delivertype,jdbcType=TINYINT}, #{delivermoney,jdbcType=DECIMAL}, #{totalmoney,jdbcType=DECIMAL}, 
-      #{realtotalmoney,jdbcType=DECIMAL}, #{paytype,jdbcType=TINYINT}, #{payfrom,jdbcType=INTEGER}, 
-      #{ispay,jdbcType=TINYINT}, #{username,jdbcType=VARCHAR}, #{useraddress,jdbcType=VARCHAR}, 
-      #{userphone,jdbcType=VARCHAR}, #{isinvoice,jdbcType=TINYINT}, #{orderremarks,jdbcType=VARCHAR}, 
-      #{ordersrc,jdbcType=TINYINT}, #{isrefund,jdbcType=TINYINT}, #{isappraise,jdbcType=TINYINT}, 
-      #{cancelreason,jdbcType=INTEGER}, #{rejectreason,jdbcType=INTEGER}, #{rejectotherreason,jdbcType=VARCHAR}, 
-      #{isclosed,jdbcType=TINYINT}, #{orderunique,jdbcType=VARCHAR}, #{settlementid,jdbcType=INTEGER}, 
-      #{receivetime,jdbcType=TIMESTAMP}, #{deliverytime,jdbcType=TIMESTAMP}, #{expressno,jdbcType=VARCHAR}, 
-      #{expressid,jdbcType=INTEGER}, #{tradeno,jdbcType=VARCHAR}, #{dataflag,jdbcType=TINYINT}, 
-      #{createtime,jdbcType=TIMESTAMP})
+    insert into orders (orderId, orderNo, userId, 
+      shopId, shopName, goodsId, 
+      goodsName, goodsCount, goodsPrice, 
+      goodsRemarks, orderRemarks, orderStatus, 
+      goodsMoney, deliverType, deliverMoney, 
+      totalMoney, realTotalMoney, payType, 
+      isPay, receivedName, receivedAddress, 
+      receivedPhone, isInvoice, isRefund, 
+      isAppraise, cancelReason, rejectReason, 
+      isClosed, settlementId, receiveTime, 
+      deliveryTime, expressNo, expressId, 
+      dataFlag, createTime)
+    values (#{orderid,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{shopid,jdbcType=INTEGER}, #{shopname,jdbcType=VARCHAR}, #{goodsid,jdbcType=INTEGER}, 
+      #{goodsname,jdbcType=VARCHAR}, #{goodscount,jdbcType=INTEGER}, #{goodsprice,jdbcType=INTEGER}, 
+      #{goodsremarks,jdbcType=VARCHAR}, #{orderremarks,jdbcType=VARCHAR}, #{orderstatus,jdbcType=TINYINT}, 
+      #{goodsmoney,jdbcType=DECIMAL}, #{delivertype,jdbcType=TINYINT}, #{delivermoney,jdbcType=DECIMAL}, 
+      #{totalmoney,jdbcType=DECIMAL}, #{realtotalmoney,jdbcType=DECIMAL}, #{paytype,jdbcType=TINYINT}, 
+      #{ispay,jdbcType=TINYINT}, #{receivedname,jdbcType=VARCHAR}, #{receivedaddress,jdbcType=VARCHAR}, 
+      #{receivedphone,jdbcType=VARCHAR}, #{isinvoice,jdbcType=TINYINT}, #{isrefund,jdbcType=TINYINT}, 
+      #{isappraise,jdbcType=TINYINT}, #{cancelreason,jdbcType=VARCHAR}, #{rejectreason,jdbcType=VARCHAR}, 
+      #{isclosed,jdbcType=TINYINT}, #{settlementid,jdbcType=TINYINT}, #{receivetime,jdbcType=TIMESTAMP}, 
+      #{deliverytime,jdbcType=TIMESTAMP}, #{expressno,jdbcType=VARCHAR}, #{expressid,jdbcType=INTEGER}, 
+      #{dataflag,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.WFZY.pojo.Orders" >
     insert into orders
@@ -167,11 +168,32 @@
       <if test="orderno != null" >
         orderNo,
       </if>
+      <if test="userid != null" >
+        userId,
+      </if>
       <if test="shopid != null" >
         shopId,
       </if>
-      <if test="userid != null" >
-        userId,
+      <if test="shopname != null" >
+        shopName,
+      </if>
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="goodsname != null" >
+        goodsName,
+      </if>
+      <if test="goodscount != null" >
+        goodsCount,
+      </if>
+      <if test="goodsprice != null" >
+        goodsPrice,
+      </if>
+      <if test="goodsremarks != null" >
+        goodsRemarks,
+      </if>
+      <if test="orderremarks != null" >
+        orderRemarks,
       </if>
       <if test="orderstatus != null" >
         orderStatus,
@@ -194,29 +216,20 @@
       <if test="paytype != null" >
         payType,
       </if>
-      <if test="payfrom != null" >
-        payFrom,
-      </if>
       <if test="ispay != null" >
         isPay,
       </if>
-      <if test="username != null" >
-        userName,
+      <if test="receivedname != null" >
+        receivedName,
       </if>
-      <if test="useraddress != null" >
-        userAddress,
+      <if test="receivedaddress != null" >
+        receivedAddress,
       </if>
-      <if test="userphone != null" >
-        userPhone,
+      <if test="receivedphone != null" >
+        receivedPhone,
       </if>
       <if test="isinvoice != null" >
         isInvoice,
-      </if>
-      <if test="orderremarks != null" >
-        orderRemarks,
-      </if>
-      <if test="ordersrc != null" >
-        orderSrc,
       </if>
       <if test="isrefund != null" >
         isRefund,
@@ -230,14 +243,8 @@
       <if test="rejectreason != null" >
         rejectReason,
       </if>
-      <if test="rejectotherreason != null" >
-        rejectOtherReason,
-      </if>
       <if test="isclosed != null" >
         isClosed,
-      </if>
-      <if test="orderunique != null" >
-        orderunique,
       </if>
       <if test="settlementid != null" >
         settlementId,
@@ -254,9 +261,6 @@
       <if test="expressid != null" >
         expressId,
       </if>
-      <if test="tradeno != null" >
-        tradeNo,
-      </if>
       <if test="dataflag != null" >
         dataFlag,
       </if>
@@ -271,11 +275,32 @@
       <if test="orderno != null" >
         #{orderno,jdbcType=VARCHAR},
       </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
       <if test="shopid != null" >
         #{shopid,jdbcType=INTEGER},
       </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+      <if test="shopname != null" >
+        #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscount != null" >
+        #{goodscount,jdbcType=INTEGER},
+      </if>
+      <if test="goodsprice != null" >
+        #{goodsprice,jdbcType=INTEGER},
+      </if>
+      <if test="goodsremarks != null" >
+        #{goodsremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="orderremarks != null" >
+        #{orderremarks,jdbcType=VARCHAR},
       </if>
       <if test="orderstatus != null" >
         #{orderstatus,jdbcType=TINYINT},
@@ -298,29 +323,20 @@
       <if test="paytype != null" >
         #{paytype,jdbcType=TINYINT},
       </if>
-      <if test="payfrom != null" >
-        #{payfrom,jdbcType=INTEGER},
-      </if>
       <if test="ispay != null" >
         #{ispay,jdbcType=TINYINT},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="receivedname != null" >
+        #{receivedname,jdbcType=VARCHAR},
       </if>
-      <if test="useraddress != null" >
-        #{useraddress,jdbcType=VARCHAR},
+      <if test="receivedaddress != null" >
+        #{receivedaddress,jdbcType=VARCHAR},
       </if>
-      <if test="userphone != null" >
-        #{userphone,jdbcType=VARCHAR},
+      <if test="receivedphone != null" >
+        #{receivedphone,jdbcType=VARCHAR},
       </if>
       <if test="isinvoice != null" >
         #{isinvoice,jdbcType=TINYINT},
-      </if>
-      <if test="orderremarks != null" >
-        #{orderremarks,jdbcType=VARCHAR},
-      </if>
-      <if test="ordersrc != null" >
-        #{ordersrc,jdbcType=TINYINT},
       </if>
       <if test="isrefund != null" >
         #{isrefund,jdbcType=TINYINT},
@@ -329,22 +345,16 @@
         #{isappraise,jdbcType=TINYINT},
       </if>
       <if test="cancelreason != null" >
-        #{cancelreason,jdbcType=INTEGER},
+        #{cancelreason,jdbcType=VARCHAR},
       </if>
       <if test="rejectreason != null" >
-        #{rejectreason,jdbcType=INTEGER},
-      </if>
-      <if test="rejectotherreason != null" >
-        #{rejectotherreason,jdbcType=VARCHAR},
+        #{rejectreason,jdbcType=VARCHAR},
       </if>
       <if test="isclosed != null" >
         #{isclosed,jdbcType=TINYINT},
       </if>
-      <if test="orderunique != null" >
-        #{orderunique,jdbcType=VARCHAR},
-      </if>
       <if test="settlementid != null" >
-        #{settlementid,jdbcType=INTEGER},
+        #{settlementid,jdbcType=TINYINT},
       </if>
       <if test="receivetime != null" >
         #{receivetime,jdbcType=TIMESTAMP},
@@ -357,9 +367,6 @@
       </if>
       <if test="expressid != null" >
         #{expressid,jdbcType=INTEGER},
-      </if>
-      <if test="tradeno != null" >
-        #{tradeno,jdbcType=VARCHAR},
       </if>
       <if test="dataflag != null" >
         #{dataflag,jdbcType=TINYINT},
@@ -384,11 +391,32 @@
       <if test="record.orderno != null" >
         orderNo = #{record.orderno,jdbcType=VARCHAR},
       </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
       <if test="record.shopid != null" >
         shopId = #{record.shopid,jdbcType=INTEGER},
       </if>
-      <if test="record.userid != null" >
-        userId = #{record.userid,jdbcType=INTEGER},
+      <if test="record.shopname != null" >
+        shopName = #{record.shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsid != null" >
+        goodsId = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsname != null" >
+        goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodscount != null" >
+        goodsCount = #{record.goodscount,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsprice != null" >
+        goodsPrice = #{record.goodsprice,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsremarks != null" >
+        goodsRemarks = #{record.goodsremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderremarks != null" >
+        orderRemarks = #{record.orderremarks,jdbcType=VARCHAR},
       </if>
       <if test="record.orderstatus != null" >
         orderStatus = #{record.orderstatus,jdbcType=TINYINT},
@@ -411,29 +439,20 @@
       <if test="record.paytype != null" >
         payType = #{record.paytype,jdbcType=TINYINT},
       </if>
-      <if test="record.payfrom != null" >
-        payFrom = #{record.payfrom,jdbcType=INTEGER},
-      </if>
       <if test="record.ispay != null" >
         isPay = #{record.ispay,jdbcType=TINYINT},
       </if>
-      <if test="record.username != null" >
-        userName = #{record.username,jdbcType=VARCHAR},
+      <if test="record.receivedname != null" >
+        receivedName = #{record.receivedname,jdbcType=VARCHAR},
       </if>
-      <if test="record.useraddress != null" >
-        userAddress = #{record.useraddress,jdbcType=VARCHAR},
+      <if test="record.receivedaddress != null" >
+        receivedAddress = #{record.receivedaddress,jdbcType=VARCHAR},
       </if>
-      <if test="record.userphone != null" >
-        userPhone = #{record.userphone,jdbcType=VARCHAR},
+      <if test="record.receivedphone != null" >
+        receivedPhone = #{record.receivedphone,jdbcType=VARCHAR},
       </if>
       <if test="record.isinvoice != null" >
         isInvoice = #{record.isinvoice,jdbcType=TINYINT},
-      </if>
-      <if test="record.orderremarks != null" >
-        orderRemarks = #{record.orderremarks,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ordersrc != null" >
-        orderSrc = #{record.ordersrc,jdbcType=TINYINT},
       </if>
       <if test="record.isrefund != null" >
         isRefund = #{record.isrefund,jdbcType=TINYINT},
@@ -442,22 +461,16 @@
         isAppraise = #{record.isappraise,jdbcType=TINYINT},
       </if>
       <if test="record.cancelreason != null" >
-        cancelReason = #{record.cancelreason,jdbcType=INTEGER},
+        cancelReason = #{record.cancelreason,jdbcType=VARCHAR},
       </if>
       <if test="record.rejectreason != null" >
-        rejectReason = #{record.rejectreason,jdbcType=INTEGER},
-      </if>
-      <if test="record.rejectotherreason != null" >
-        rejectOtherReason = #{record.rejectotherreason,jdbcType=VARCHAR},
+        rejectReason = #{record.rejectreason,jdbcType=VARCHAR},
       </if>
       <if test="record.isclosed != null" >
         isClosed = #{record.isclosed,jdbcType=TINYINT},
       </if>
-      <if test="record.orderunique != null" >
-        orderunique = #{record.orderunique,jdbcType=VARCHAR},
-      </if>
       <if test="record.settlementid != null" >
-        settlementId = #{record.settlementid,jdbcType=INTEGER},
+        settlementId = #{record.settlementid,jdbcType=TINYINT},
       </if>
       <if test="record.receivetime != null" >
         receiveTime = #{record.receivetime,jdbcType=TIMESTAMP},
@@ -470,9 +483,6 @@
       </if>
       <if test="record.expressid != null" >
         expressId = #{record.expressid,jdbcType=INTEGER},
-      </if>
-      <if test="record.tradeno != null" >
-        tradeNo = #{record.tradeno,jdbcType=VARCHAR},
       </if>
       <if test="record.dataflag != null" >
         dataFlag = #{record.dataflag,jdbcType=TINYINT},
@@ -489,8 +499,15 @@
     update orders
     set orderId = #{record.orderid,jdbcType=INTEGER},
       orderNo = #{record.orderno,jdbcType=VARCHAR},
-      shopId = #{record.shopid,jdbcType=INTEGER},
       userId = #{record.userid,jdbcType=INTEGER},
+      shopId = #{record.shopid,jdbcType=INTEGER},
+      shopName = #{record.shopname,jdbcType=VARCHAR},
+      goodsId = #{record.goodsid,jdbcType=INTEGER},
+      goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      goodsCount = #{record.goodscount,jdbcType=INTEGER},
+      goodsPrice = #{record.goodsprice,jdbcType=INTEGER},
+      goodsRemarks = #{record.goodsremarks,jdbcType=VARCHAR},
+      orderRemarks = #{record.orderremarks,jdbcType=VARCHAR},
       orderStatus = #{record.orderstatus,jdbcType=TINYINT},
       goodsMoney = #{record.goodsmoney,jdbcType=DECIMAL},
       deliverType = #{record.delivertype,jdbcType=TINYINT},
@@ -498,27 +515,21 @@
       totalMoney = #{record.totalmoney,jdbcType=DECIMAL},
       realTotalMoney = #{record.realtotalmoney,jdbcType=DECIMAL},
       payType = #{record.paytype,jdbcType=TINYINT},
-      payFrom = #{record.payfrom,jdbcType=INTEGER},
       isPay = #{record.ispay,jdbcType=TINYINT},
-      userName = #{record.username,jdbcType=VARCHAR},
-      userAddress = #{record.useraddress,jdbcType=VARCHAR},
-      userPhone = #{record.userphone,jdbcType=VARCHAR},
+      receivedName = #{record.receivedname,jdbcType=VARCHAR},
+      receivedAddress = #{record.receivedaddress,jdbcType=VARCHAR},
+      receivedPhone = #{record.receivedphone,jdbcType=VARCHAR},
       isInvoice = #{record.isinvoice,jdbcType=TINYINT},
-      orderRemarks = #{record.orderremarks,jdbcType=VARCHAR},
-      orderSrc = #{record.ordersrc,jdbcType=TINYINT},
       isRefund = #{record.isrefund,jdbcType=TINYINT},
       isAppraise = #{record.isappraise,jdbcType=TINYINT},
-      cancelReason = #{record.cancelreason,jdbcType=INTEGER},
-      rejectReason = #{record.rejectreason,jdbcType=INTEGER},
-      rejectOtherReason = #{record.rejectotherreason,jdbcType=VARCHAR},
+      cancelReason = #{record.cancelreason,jdbcType=VARCHAR},
+      rejectReason = #{record.rejectreason,jdbcType=VARCHAR},
       isClosed = #{record.isclosed,jdbcType=TINYINT},
-      orderunique = #{record.orderunique,jdbcType=VARCHAR},
-      settlementId = #{record.settlementid,jdbcType=INTEGER},
+      settlementId = #{record.settlementid,jdbcType=TINYINT},
       receiveTime = #{record.receivetime,jdbcType=TIMESTAMP},
       deliveryTime = #{record.deliverytime,jdbcType=TIMESTAMP},
       expressNo = #{record.expressno,jdbcType=VARCHAR},
       expressId = #{record.expressid,jdbcType=INTEGER},
-      tradeNo = #{record.tradeno,jdbcType=VARCHAR},
       dataFlag = #{record.dataflag,jdbcType=TINYINT},
       createTime = #{record.createtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -531,11 +542,32 @@
       <if test="orderno != null" >
         orderNo = #{orderno,jdbcType=VARCHAR},
       </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
       <if test="shopid != null" >
         shopId = #{shopid,jdbcType=INTEGER},
       </if>
-      <if test="userid != null" >
-        userId = #{userid,jdbcType=INTEGER},
+      <if test="shopname != null" >
+        shopName = #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null" >
+        goodsId = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        goodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscount != null" >
+        goodsCount = #{goodscount,jdbcType=INTEGER},
+      </if>
+      <if test="goodsprice != null" >
+        goodsPrice = #{goodsprice,jdbcType=INTEGER},
+      </if>
+      <if test="goodsremarks != null" >
+        goodsRemarks = #{goodsremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="orderremarks != null" >
+        orderRemarks = #{orderremarks,jdbcType=VARCHAR},
       </if>
       <if test="orderstatus != null" >
         orderStatus = #{orderstatus,jdbcType=TINYINT},
@@ -558,29 +590,20 @@
       <if test="paytype != null" >
         payType = #{paytype,jdbcType=TINYINT},
       </if>
-      <if test="payfrom != null" >
-        payFrom = #{payfrom,jdbcType=INTEGER},
-      </if>
       <if test="ispay != null" >
         isPay = #{ispay,jdbcType=TINYINT},
       </if>
-      <if test="username != null" >
-        userName = #{username,jdbcType=VARCHAR},
+      <if test="receivedname != null" >
+        receivedName = #{receivedname,jdbcType=VARCHAR},
       </if>
-      <if test="useraddress != null" >
-        userAddress = #{useraddress,jdbcType=VARCHAR},
+      <if test="receivedaddress != null" >
+        receivedAddress = #{receivedaddress,jdbcType=VARCHAR},
       </if>
-      <if test="userphone != null" >
-        userPhone = #{userphone,jdbcType=VARCHAR},
+      <if test="receivedphone != null" >
+        receivedPhone = #{receivedphone,jdbcType=VARCHAR},
       </if>
       <if test="isinvoice != null" >
         isInvoice = #{isinvoice,jdbcType=TINYINT},
-      </if>
-      <if test="orderremarks != null" >
-        orderRemarks = #{orderremarks,jdbcType=VARCHAR},
-      </if>
-      <if test="ordersrc != null" >
-        orderSrc = #{ordersrc,jdbcType=TINYINT},
       </if>
       <if test="isrefund != null" >
         isRefund = #{isrefund,jdbcType=TINYINT},
@@ -589,22 +612,16 @@
         isAppraise = #{isappraise,jdbcType=TINYINT},
       </if>
       <if test="cancelreason != null" >
-        cancelReason = #{cancelreason,jdbcType=INTEGER},
+        cancelReason = #{cancelreason,jdbcType=VARCHAR},
       </if>
       <if test="rejectreason != null" >
-        rejectReason = #{rejectreason,jdbcType=INTEGER},
-      </if>
-      <if test="rejectotherreason != null" >
-        rejectOtherReason = #{rejectotherreason,jdbcType=VARCHAR},
+        rejectReason = #{rejectreason,jdbcType=VARCHAR},
       </if>
       <if test="isclosed != null" >
         isClosed = #{isclosed,jdbcType=TINYINT},
       </if>
-      <if test="orderunique != null" >
-        orderunique = #{orderunique,jdbcType=VARCHAR},
-      </if>
       <if test="settlementid != null" >
-        settlementId = #{settlementid,jdbcType=INTEGER},
+        settlementId = #{settlementid,jdbcType=TINYINT},
       </if>
       <if test="receivetime != null" >
         receiveTime = #{receivetime,jdbcType=TIMESTAMP},
@@ -618,9 +635,6 @@
       <if test="expressid != null" >
         expressId = #{expressid,jdbcType=INTEGER},
       </if>
-      <if test="tradeno != null" >
-        tradeNo = #{tradeno,jdbcType=VARCHAR},
-      </if>
       <if test="dataflag != null" >
         dataFlag = #{dataflag,jdbcType=TINYINT},
       </if>
@@ -633,8 +647,15 @@
   <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Orders" >
     update orders
     set orderNo = #{orderno,jdbcType=VARCHAR},
-      shopId = #{shopid,jdbcType=INTEGER},
       userId = #{userid,jdbcType=INTEGER},
+      shopId = #{shopid,jdbcType=INTEGER},
+      shopName = #{shopname,jdbcType=VARCHAR},
+      goodsId = #{goodsid,jdbcType=INTEGER},
+      goodsName = #{goodsname,jdbcType=VARCHAR},
+      goodsCount = #{goodscount,jdbcType=INTEGER},
+      goodsPrice = #{goodsprice,jdbcType=INTEGER},
+      goodsRemarks = #{goodsremarks,jdbcType=VARCHAR},
+      orderRemarks = #{orderremarks,jdbcType=VARCHAR},
       orderStatus = #{orderstatus,jdbcType=TINYINT},
       goodsMoney = #{goodsmoney,jdbcType=DECIMAL},
       deliverType = #{delivertype,jdbcType=TINYINT},
@@ -642,27 +663,21 @@
       totalMoney = #{totalmoney,jdbcType=DECIMAL},
       realTotalMoney = #{realtotalmoney,jdbcType=DECIMAL},
       payType = #{paytype,jdbcType=TINYINT},
-      payFrom = #{payfrom,jdbcType=INTEGER},
       isPay = #{ispay,jdbcType=TINYINT},
-      userName = #{username,jdbcType=VARCHAR},
-      userAddress = #{useraddress,jdbcType=VARCHAR},
-      userPhone = #{userphone,jdbcType=VARCHAR},
+      receivedName = #{receivedname,jdbcType=VARCHAR},
+      receivedAddress = #{receivedaddress,jdbcType=VARCHAR},
+      receivedPhone = #{receivedphone,jdbcType=VARCHAR},
       isInvoice = #{isinvoice,jdbcType=TINYINT},
-      orderRemarks = #{orderremarks,jdbcType=VARCHAR},
-      orderSrc = #{ordersrc,jdbcType=TINYINT},
       isRefund = #{isrefund,jdbcType=TINYINT},
       isAppraise = #{isappraise,jdbcType=TINYINT},
-      cancelReason = #{cancelreason,jdbcType=INTEGER},
-      rejectReason = #{rejectreason,jdbcType=INTEGER},
-      rejectOtherReason = #{rejectotherreason,jdbcType=VARCHAR},
+      cancelReason = #{cancelreason,jdbcType=VARCHAR},
+      rejectReason = #{rejectreason,jdbcType=VARCHAR},
       isClosed = #{isclosed,jdbcType=TINYINT},
-      orderunique = #{orderunique,jdbcType=VARCHAR},
-      settlementId = #{settlementid,jdbcType=INTEGER},
+      settlementId = #{settlementid,jdbcType=TINYINT},
       receiveTime = #{receivetime,jdbcType=TIMESTAMP},
       deliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
       expressNo = #{expressno,jdbcType=VARCHAR},
       expressId = #{expressid,jdbcType=INTEGER},
-      tradeNo = #{tradeno,jdbcType=VARCHAR},
       dataFlag = #{dataflag,jdbcType=TINYINT},
       createTime = #{createtime,jdbcType=TIMESTAMP}
     where orderId = #{orderid,jdbcType=INTEGER}

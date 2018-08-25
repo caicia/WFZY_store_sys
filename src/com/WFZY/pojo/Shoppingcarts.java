@@ -11,6 +11,10 @@ public class Shoppingcarts {
 
     private Integer cartnum;
 
+    private String goodsremark;
+
+    private Integer shopid;
+
     public Integer getShoppingcarts() {
         return shoppingcarts;
     }
@@ -49,5 +53,21 @@ public class Shoppingcarts {
 
     public void setCartnum(Integer cartnum) {
         this.cartnum = cartnum;
+    }
+
+    public String getGoodsremark() {
+        return goodsremark;
+    }
+
+    public void setGoodsremark(String goodsremark) {
+        this.goodsremark = goodsremark == null ? null : goodsremark.trim();
+    }
+
+    public Integer getShopid() {
+        return shopid;
+    }
+
+    public void setShopid(Integer shopid) {
+        this.shopid = shopid;
     }
 }

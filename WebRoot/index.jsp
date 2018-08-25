@@ -307,7 +307,7 @@
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "",
+			"accessPath" : "${pageContext.request.contextPath }/shop/showOrderList.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 101,
@@ -328,7 +328,7 @@
 			"resourceDesc" : "",
 			"resourceGrade" : 101,
 			"resourceID" : 1012,
-			"resourceName" : "等待中的订单",
+			"resourceName" : "发货中的订单",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
@@ -341,20 +341,7 @@
 			"resourceDesc" : "",
 			"resourceGrade" : 101,
 			"resourceID" : 1013,
-			"resourceName" : "已发货的订单",
-			"resourceOrder" : 0,
-			"resourceType" : ""
-		},
-		{
-			"accessPath" : "",
-			"checked" : false,
-			"delFlag" : 0,
-			"parentID" : 10,
-			"resourceCode" : "",
-			"resourceDesc" : "",
-			"resourceGrade" : 10,
-			"resourceID" : 102,
-			"resourceName" : "服务商",
+			"resourceName" : "已收货的订单",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},

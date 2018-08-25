@@ -8,9 +8,23 @@ public class Orders {
 
     private String orderno;
 
+    private Integer userid;
+
     private Integer shopid;
 
-    private Integer userid;
+    private String shopname;
+
+    private Integer goodsid;
+
+    private String goodsname;
+
+    private Integer goodscount;
+
+    private Integer goodsprice;
+
+    private String goodsremarks;
+
+    private String orderremarks;
 
     private Byte orderstatus;
 
@@ -26,37 +40,27 @@ public class Orders {
 
     private Byte paytype;
 
-    private Integer payfrom;
-
     private Byte ispay;
 
-    private String username;
+    private String receivedname;
 
-    private String useraddress;
+    private String receivedaddress;
 
-    private String userphone;
+    private String receivedphone;
 
     private Byte isinvoice;
-
-    private String orderremarks;
-
-    private Byte ordersrc;
 
     private Byte isrefund;
 
     private Byte isappraise;
 
-    private Integer cancelreason;
+    private String cancelreason;
 
-    private Integer rejectreason;
-
-    private String rejectotherreason;
+    private String rejectreason;
 
     private Byte isclosed;
 
-    private String orderunique;
-
-    private Integer settlementid;
+    private Byte settlementid;
 
     private Date receivetime;
 
@@ -65,8 +69,6 @@ public class Orders {
     private String expressno;
 
     private Integer expressid;
-
-    private String tradeno;
 
     private Byte dataflag;
 
@@ -88,6 +90,14 @@ public class Orders {
         this.orderno = orderno == null ? null : orderno.trim();
     }
 
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
     public Integer getShopid() {
         return shopid;
     }
@@ -96,12 +106,60 @@ public class Orders {
         this.shopid = shopid;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public String getShopname() {
+        return shopname;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setShopname(String shopname) {
+        this.shopname = shopname == null ? null : shopname.trim();
+    }
+
+    public Integer getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(Integer goodsid) {
+        this.goodsid = goodsid;
+    }
+
+    public String getGoodsname() {
+        return goodsname;
+    }
+
+    public void setGoodsname(String goodsname) {
+        this.goodsname = goodsname == null ? null : goodsname.trim();
+    }
+
+    public Integer getGoodscount() {
+        return goodscount;
+    }
+
+    public void setGoodscount(Integer goodscount) {
+        this.goodscount = goodscount;
+    }
+
+    public Integer getGoodsprice() {
+        return goodsprice;
+    }
+
+    public void setGoodsprice(Integer goodsprice) {
+        this.goodsprice = goodsprice;
+    }
+
+    public String getGoodsremarks() {
+        return goodsremarks;
+    }
+
+    public void setGoodsremarks(String goodsremarks) {
+        this.goodsremarks = goodsremarks == null ? null : goodsremarks.trim();
+    }
+
+    public String getOrderremarks() {
+        return orderremarks;
+    }
+
+    public void setOrderremarks(String orderremarks) {
+        this.orderremarks = orderremarks == null ? null : orderremarks.trim();
     }
 
     public Byte getOrderstatus() {
@@ -160,14 +218,6 @@ public class Orders {
         this.paytype = paytype;
     }
 
-    public Integer getPayfrom() {
-        return payfrom;
-    }
-
-    public void setPayfrom(Integer payfrom) {
-        this.payfrom = payfrom;
-    }
-
     public Byte getIspay() {
         return ispay;
     }
@@ -176,28 +226,28 @@ public class Orders {
         this.ispay = ispay;
     }
 
-    public String getUsername() {
-        return username;
+    public String getReceivedname() {
+        return receivedname;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setReceivedname(String receivedname) {
+        this.receivedname = receivedname == null ? null : receivedname.trim();
     }
 
-    public String getUseraddress() {
-        return useraddress;
+    public String getReceivedaddress() {
+        return receivedaddress;
     }
 
-    public void setUseraddress(String useraddress) {
-        this.useraddress = useraddress == null ? null : useraddress.trim();
+    public void setReceivedaddress(String receivedaddress) {
+        this.receivedaddress = receivedaddress == null ? null : receivedaddress.trim();
     }
 
-    public String getUserphone() {
-        return userphone;
+    public String getReceivedphone() {
+        return receivedphone;
     }
 
-    public void setUserphone(String userphone) {
-        this.userphone = userphone == null ? null : userphone.trim();
+    public void setReceivedphone(String receivedphone) {
+        this.receivedphone = receivedphone == null ? null : receivedphone.trim();
     }
 
     public Byte getIsinvoice() {
@@ -206,22 +256,6 @@ public class Orders {
 
     public void setIsinvoice(Byte isinvoice) {
         this.isinvoice = isinvoice;
-    }
-
-    public String getOrderremarks() {
-        return orderremarks;
-    }
-
-    public void setOrderremarks(String orderremarks) {
-        this.orderremarks = orderremarks == null ? null : orderremarks.trim();
-    }
-
-    public Byte getOrdersrc() {
-        return ordersrc;
-    }
-
-    public void setOrdersrc(Byte ordersrc) {
-        this.ordersrc = ordersrc;
     }
 
     public Byte getIsrefund() {
@@ -240,28 +274,20 @@ public class Orders {
         this.isappraise = isappraise;
     }
 
-    public Integer getCancelreason() {
+    public String getCancelreason() {
         return cancelreason;
     }
 
-    public void setCancelreason(Integer cancelreason) {
-        this.cancelreason = cancelreason;
+    public void setCancelreason(String cancelreason) {
+        this.cancelreason = cancelreason == null ? null : cancelreason.trim();
     }
 
-    public Integer getRejectreason() {
+    public String getRejectreason() {
         return rejectreason;
     }
 
-    public void setRejectreason(Integer rejectreason) {
-        this.rejectreason = rejectreason;
-    }
-
-    public String getRejectotherreason() {
-        return rejectotherreason;
-    }
-
-    public void setRejectotherreason(String rejectotherreason) {
-        this.rejectotherreason = rejectotherreason == null ? null : rejectotherreason.trim();
+    public void setRejectreason(String rejectreason) {
+        this.rejectreason = rejectreason == null ? null : rejectreason.trim();
     }
 
     public Byte getIsclosed() {
@@ -272,19 +298,11 @@ public class Orders {
         this.isclosed = isclosed;
     }
 
-    public String getOrderunique() {
-        return orderunique;
-    }
-
-    public void setOrderunique(String orderunique) {
-        this.orderunique = orderunique == null ? null : orderunique.trim();
-    }
-
-    public Integer getSettlementid() {
+    public Byte getSettlementid() {
         return settlementid;
     }
 
-    public void setSettlementid(Integer settlementid) {
+    public void setSettlementid(Byte settlementid) {
         this.settlementid = settlementid;
     }
 
@@ -318,14 +336,6 @@ public class Orders {
 
     public void setExpressid(Integer expressid) {
         this.expressid = expressid;
-    }
-
-    public String getTradeno() {
-        return tradeno;
-    }
-
-    public void setTradeno(String tradeno) {
-        this.tradeno = tradeno == null ? null : tradeno.trim();
     }
 
     public Byte getDataflag() {
