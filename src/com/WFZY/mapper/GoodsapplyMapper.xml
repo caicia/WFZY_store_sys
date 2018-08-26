@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.WFZY.mapper.GoodsapplyMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Goodsapply" >
+    <id column="goodsApplyId" property="goodsapplyid" jdbcType="INTEGER" />
+    <result column="goodsType" property="goodstype" jdbcType="TINYINT" />
+    <result column="goodsId" property="goodsid" jdbcType="INTEGER" />
+    <result column="shopId" property="shopid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="storkNum" property="storknum" jdbcType="INTEGER" />
+    <result column="ishandle" property="ishandle" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.WFZY.pojo.Goodsapply" extends="BaseResultMap" >
+    <result column="applyText" property="applytext" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goodsApplyId, goodsType, goodsId, shopId, createTime, startTime, endTime, storkNum, 
+    ishandle
+  </sql>
+  <sql id="Blob_Column_List" >
+    applyText
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.WFZY.pojo.GoodsapplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goodsapply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.GoodsapplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goodsapply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goodsapply
+    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goodsapply
+    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.GoodsapplyExample" >
+    delete from goodsapply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.WFZY.pojo.Goodsapply" >
+    insert into goodsapply (goodsApplyId, goodsType, goodsId, 
+      shopId, createTime, startTime, 
+      endTime, storkNum, ishandle, 
+      applyText)
+    values (#{goodsapplyid,jdbcType=INTEGER}, #{goodstype,jdbcType=TINYINT}, #{goodsid,jdbcType=INTEGER}, 
+      #{shopid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{storknum,jdbcType=INTEGER}, #{ishandle,jdbcType=TINYINT}, 
+      #{applytext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Goodsapply" >
+    insert into goodsapply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsapplyid != null" >
+        goodsApplyId,
+      </if>
+      <if test="goodstype != null" >
+        goodsType,
+      </if>
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="shopid != null" >
+        shopId,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="storknum != null" >
+        storkNum,
+      </if>
+      <if test="ishandle != null" >
+        ishandle,
+      </if>
+      <if test="applytext != null" >
+        applyText,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsapplyid != null" >
+        #{goodsapplyid,jdbcType=INTEGER},
+      </if>
+      <if test="goodstype != null" >
+        #{goodstype,jdbcType=TINYINT},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storknum != null" >
+        #{storknum,jdbcType=INTEGER},
+      </if>
+      <if test="ishandle != null" >
+        #{ishandle,jdbcType=TINYINT},
+      </if>
+      <if test="applytext != null" >
+        #{applytext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.WFZY.pojo.GoodsapplyExample" resultType="java.lang.Integer" >
+    select count(*) from goodsapply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update goodsapply
+    <set >
+      <if test="record.goodsapplyid != null" >
+        goodsApplyId = #{record.goodsapplyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodstype != null" >
+        goodsType = #{record.goodstype,jdbcType=TINYINT},
+      </if>
+      <if test="record.goodsid != null" >
+        goodsId = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopid != null" >
+        shopId = #{record.shopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storknum != null" >
+        storkNum = #{record.storknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.ishandle != null" >
+        ishandle = #{record.ishandle,jdbcType=TINYINT},
+      </if>
+      <if test="record.applytext != null" >
+        applyText = #{record.applytext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update goodsapply
+    set goodsApplyId = #{record.goodsapplyid,jdbcType=INTEGER},
+      goodsType = #{record.goodstype,jdbcType=TINYINT},
+      goodsId = #{record.goodsid,jdbcType=INTEGER},
+      shopId = #{record.shopid,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      storkNum = #{record.storknum,jdbcType=INTEGER},
+      ishandle = #{record.ishandle,jdbcType=TINYINT},
+      applyText = #{record.applytext,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update goodsapply
+    set goodsApplyId = #{record.goodsapplyid,jdbcType=INTEGER},
+      goodsType = #{record.goodstype,jdbcType=TINYINT},
+      goodsId = #{record.goodsid,jdbcType=INTEGER},
+      shopId = #{record.shopid,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      storkNum = #{record.storknum,jdbcType=INTEGER},
+      ishandle = #{record.ishandle,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Goodsapply" >
+    update goodsapply
+    <set >
+      <if test="goodstype != null" >
+        goodsType = #{goodstype,jdbcType=TINYINT},
+      </if>
+      <if test="goodsid != null" >
+        goodsId = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null" >
+        shopId = #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storknum != null" >
+        storkNum = #{storknum,jdbcType=INTEGER},
+      </if>
+      <if test="ishandle != null" >
+        ishandle = #{ishandle,jdbcType=TINYINT},
+      </if>
+      <if test="applytext != null" >
+        applyText = #{applytext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.WFZY.pojo.Goodsapply" >
+    update goodsapply
+    set goodsType = #{goodstype,jdbcType=TINYINT},
+      goodsId = #{goodsid,jdbcType=INTEGER},
+      shopId = #{shopid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      storkNum = #{storknum,jdbcType=INTEGER},
+      ishandle = #{ishandle,jdbcType=TINYINT},
+      applyText = #{applytext,jdbcType=LONGVARCHAR}
+    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Goodsapply" >
+    update goodsapply
+    set goodsType = #{goodstype,jdbcType=TINYINT},
+      goodsId = #{goodsid,jdbcType=INTEGER},
+      shopId = #{shopid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      storkNum = #{storknum,jdbcType=INTEGER},
+      ishandle = #{ishandle,jdbcType=TINYINT}
+    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+  </update>
+</mapper>

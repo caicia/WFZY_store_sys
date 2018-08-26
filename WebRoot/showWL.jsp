@@ -1,35 +1,60 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'showWL.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-    <button class="btn btn-primary radius" onclick="shopApplyAuccess()" style="float:left;margin-left: 30%;width: 10%">
-					更改信息
-		</button>
-		
-		<!--_footer 作为公共模版分离出去-->
-	<jsp:include page="_footer.jsp"></jsp:include>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery/jquery-1.7.1.js"></script>
+<link href="${pageContext.request.contextPath }/style/authority/basic_layout.css" rel="stylesheet" type="text/css">
+<!--_meta 作为公共模版分离出去-->
+<jsp:include page="/_meta.jsp"></jsp:include>
+<!--/meta 作为公共模版分离出去-->
+<link href="${pageContext.request.contextPath }/style/authority/common_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/authority/commonAll.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/style/authority/jquery.fancybox-1.3.4.css" media="screen"></link>
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/artDialog/artDialog.js?skin=default"></script>
+<title>信息管理系统</title>
+
+<style>
+	.alt td{ background:black !important;}
+</style>
+</head>
+<body>
+	
+			<div class="ui_content">
+				<div class="ui_tb">
+					<table class="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
+						<tr>
+							<th>物流公司</th>
+							<th>订单编号</th>
+							<th>时间</th>
+							<th>物流信息</th>
+						</tr>
+							<c:forEach begin="0" end="${length-1}" var="i">
+							<tr>
+								<td>${res.getJSONObject("showapi_res_body").getString("expTextName")}</td>
+								<td>${res.getJSONObject("showapi_res_body").getString("mailNo")}</td>
+								<td>${detailsRes.getJSONObject(i).getString("time")}</td>
+								<td>${detailsRes.getJSONObject(i).getString("context")}</td>
+							</tr>
+							</c:forEach>
+					</table>
+				</div>
+				</div>
+				
+					<!--_footer 作为公共模版分离出去-->
+	<jsp:include page="/_footer.jsp"></jsp:include>
 	<!--/_footer /作为公共模版分离出去-->
 
 	<!--请在下方写此页面业务相关的脚本-->
@@ -57,66 +82,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath }/lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
-    <script type="text/javascript">
-    function formatterDateTime() {
-  var date=new Date()
-  var month=date.getMonth() + 1
-        var datetime = date.getFullYear()
-                + ""// "年"
-                + (month >= 10 ? month : "0"+ month)
-                + ""// "月"
-                + (date.getDate() < 10 ? "0" + date.getDate() : date
-                        .getDate())
-                + ""
-                + (date.getHours() < 10 ? "0" + date.getHours() : date
-                        .getHours())
-                + ""
-                + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date
-                        .getMinutes())
-                + ""
-                + (date.getSeconds() < 10 ? "0" + date.getSeconds() : date
-                        .getSeconds());
-        return datetime;
-    }
-    
-    
-	   function shopApplyAuccess()
-	   {
-	   		alert("123")
-			$.ajax({
-    	type: 'post',
-    	url: 'http://route.showapi.com/64-19',
-    	dataType: 'json',
-   		 data: {
-        "showapi_timestamp": formatterDateTime(),
-        "showapi_appid": '73182', //这里需要改成自己的appid
-        "showapi_sign": '8124bc932b74449eaba24a70a9d1965c',  //这里需要改成自己的应用的密钥secret
-        "com":"shentong",
-        "nu":"7700438906817"
-
-    	},
-
-    	error: function(XmlHttpRequest, textStatus, errorThrown) {
-        alert("操作失败!");
-    	},
-    	success: function(result) {
-        console.log(result); //console变量在ie低版本下不能用
-        alert(result.showapi_res_body.expTextName);
-        alert(result.showapi_res_body.mailNo);
-        var data = result.showapi_res_body.data; 
-        for(var i in data)
-        {	
-        	alert(data[i].context);
-        	alert(data[i].time);
-        }
-    	}
-		});
-		}
-	</script>
-	
-	
-
-
-      
-  </body>
+</body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page isELIgnored="false"%>
 <%
 	String path = request.getContextPath();
@@ -39,45 +40,45 @@
 							<th>订单编号</th>
 							<th>购买用户</th>
 							<th>产品名称</th>
-							<th>购买数量</th>
-							<th>购买价格</th>
-							<th>产品备注</th>
 							<th>订单状态</th>
-							<th>订单备注</th>
-							<th>商品总金额</th>
 							<th>收货方式</th>
-							<th>运费</th>
-							<th>订单总金额</th>
-							<th>支付方式</th>
 							<th>是否支付</th>
-							<th>收货人名字</th>
-							<th>收货人手机</th>
-							<th>收货人地址</th>
-							<th>是否需要发票</th>
+							<th>订单详情</th>
 							<th>下单时间</th>
+							<th>发货</th>
 						</tr>
-							<c:forEach items="${express}" var="i">
+							<c:forEach items="${order}" var="i">
 							<tr>
-								
-								<td>${shopList.get(0).getShopname()}</td>
-								<td>${i.expressname}</td>
-								<td>${i.expresscode}</td>
-								<c:if test="${i.dataflag==2}"><td>支持</td></c:if>
-								<c:if test="${i.dataflag!=2}"><td>不支持</td></c:if>
-								<td>
-								<c:if test="${i.dataflag==2}">
-								<button onclick="del(${i.dataflag},${shopList.get(0).getShopid()},${i.expressid})">
-										不支持
-								</button>
-								</c:if>
-								<c:if test="${i.dataflag!=2}">
-								<button onclick="insert(${i.dataflag},${shopList.get(0).getShopid()},${i.expressid})">
-										支持
-								</button>
-									
-								</c:if>
+							
+								<td>${i.orderno }</td>
+								<td>${i.username }</td>
+								<td>${i.goodsname }</td>
+								<td><c:if test='${i.orderstatus==-2}'>待发货</c:if>
+									<c:if test='${i.orderstatus==1}'>配送中</c:if>
+									<c:if test='${i.orderstatus==2}'>用户确认收货</c:if>
+									<c:if test='${i.orderstatus==-3}'>用户拒收</c:if>
+									<c:if test='${i.orderstatus==-1}'>用户取消</c:if></td>
+								<td><c:if test="${i.delivertype==0 }">自提</c:if>
+									<c:if test="${i.delivertype==1 }">快递</c:if>
 								</td>
+								<td>
+								<c:if test="${i.ispay==0 }">未支付</c:if>
+									<c:if test="${i.ispay==1 }">已支付</c:if>
+								</td>
+								<td><button class="btn btn-primary radius" onclick="layerOut('订单详情','${pageContext.request.contextPath }/shop/showDetailsPage.action?orderid=${i.orderid}')">
+										订单详情
+								</button></td>
+								<td><fmt:formatDate value="${i.createtime}" pattern="yyyy-MM-dd　HH:mm:ss"/> </td>
+								<td>
+								<c:if test="${i.delivertype==0 }"><button class="btn btn-primary radius" onclick="layerOut('自提','${pageContext.request.contextPath }/orderDeliveryPage.jsp')">
+										自提
+								</button></c:if>
+								<c:if test="${i.delivertype==1 }"><button class="btn btn-primary radius" onclick="layerOut('发货','${pageContext.request.contextPath }/shop/showOrderWLList.action?orderid=${i.orderid}')">
 								
+										发货
+								</button></c:if>
+								</td>
+							
 							</tr>
 							</c:forEach>
 					</table>
@@ -116,70 +117,27 @@
 
 <script type="text/javascript">
 	
-	/** 删除 **/
-	function del(dataflag,shopid,expressid){
-		// 非空判断
-
-		var obj={
-	   			shopid : shopid,
-	   			expressid : expressid,
-	   		};
-	   		obj = JSON.stringify(obj);
-	   		$.ajax({
-				url : '${pageContext.request.contextPath }/delShopsExpress.action',
-				contentType : 'application/json;charset=utf-8',
-			   	type : "POST",
-				data : obj,
-				dataType : "json",
-				async : false,
-				success : function(data) {
-					
-					if(data.flag == 1)
-					{
-						alert("更新成功");
-						window.location.reload();
-					}
-					else
-					{
-						alert("更新失败");
-						window.location.reload();
-					}
-				},
-				error : function(data) {alert("error")},
-			})
-		}
-	
-	/** 插入 **/
-	function insert(dataflag,shopid,expressid){
-		// 非空判断
-		var obj={
-	   			shopid : shopid,
-	   			expressid : expressid,
-	   		};
-	   		obj = JSON.stringify(obj);
-	   		$.ajax({
-				url : '${pageContext.request.contextPath }/insertShopsExpress.action',
-				contentType : 'application/json;charset=utf-8',
-			   	type : "POST",
-				data : obj,
-				dataType : "json",
-				async : false,
-				success : function(data) {
-					
-					if(data.flag == 1)
-					{
-						alert("更新成功");
-						window.location.reload();
-					}
-					else
-					{
-						alert("更新失败");
-						window.location.reload();
-					}
-				},
-				error : function(data) {alert("error")},
-			})
-		}
+function layerOut(title,url)
+{
+	if(title == "自提")
+	{
+		alert("该商品为自提，不需要发货");
+	}
+            //layer.msg('这是最常用的吧');
+    else
+    {  
+       layer.open({
+                type: 2,
+                title: title,
+                fix: false,
+                maxmin: true,
+                shadeClose: true,
+                area: ['1100px', '600px'],
+                content: url,
+       });
+    }
+}
 </script>
+
 </body>
 </html>

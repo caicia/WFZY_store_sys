@@ -58,6 +58,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-webmvc-5.0.8.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ueditor-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/showapi_sdk.jar"/>
 	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.jstl_1.2.2">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="WEB-INF/lib"/>

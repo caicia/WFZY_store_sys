@@ -307,7 +307,7 @@
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "${pageContext.request.contextPath }/shop/showOrderList.action",
+			"accessPath" : "${pageContext.request.contextPath }/shop/showNotExpressOrderList.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 101,
@@ -320,7 +320,7 @@
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "",
+			"accessPath" : "${pageContext.request.contextPath }/shop/showExpressingOrderList.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 101,
@@ -333,7 +333,7 @@
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "",
+			"accessPath" : "${pageContext.request.contextPath }/shop/showExpressedOrderList.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 101,
@@ -345,20 +345,6 @@
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
-		{
-			"accessPath" : "${pageContext.request.contextPath }/shop/showWL.action",
-			"checked" : false,
-			"delFlag" : 0,
-			"parentID" : 10,
-			"resourceCode" : "",
-			"resourceDesc" : "",
-			"resourceGrade" : 10,
-			"resourceID" : 103,
-			"resourceName" : "物流跟踪信息",
-			"resourceOrder" : 0,
-			"resourceType" : ""
-		},
-		
 		{
 			"accessPath" : "",
 			"checked" : false,
@@ -489,8 +475,8 @@
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
-		{
-			"accessPath" : "",
+		 {
+			"accessPath" : "${pageContext.request.contextPath }/shop/showMarketList.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 13,
@@ -498,7 +484,7 @@
 			"resourceDesc" : "",
 			"resourceGrade" : 13,
 			"resourceID" : 131,
-			"resourceName" : "限时购",
+			"resourceName" : "活动申请",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
@@ -511,33 +497,7 @@
 			"resourceDesc" : "",
 			"resourceGrade" : 13,
 			"resourceID" : 132,
-			"resourceName" : "福利社",
-			"resourceOrder" : 0,
-			"resourceType" : ""
-		},
-		{
-			"accessPath" : "",
-			"checked" : false,
-			"delFlag" : 0,
-			"parentID" : 13,
-			"resourceCode" : "",
-			"resourceDesc" : "",
-			"resourceGrade" : 13,
-			"resourceID" : 133,
-			"resourceName" : "期订",
-			"resourceOrder" : 0,
-			"resourceType" : ""
-		},
-		{
-			"accessPath" : "",
-			"checked" : false,
-			"delFlag" : 0,
-			"parentID" : 13,
-			"resourceCode" : "",
-			"resourceDesc" : "",
-			"resourceGrade" : 13,
-			"resourceID" : 134,
-			"resourceName" : "企业订购",
+			"resourceName" : "我已经申请的活动",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},

@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+<head>
 <!--_meta 作为公共模版分离出去-->
 <jsp:include page="/_meta.jsp"></jsp:include>
 <!--/meta 作为公共模版分离出去-->

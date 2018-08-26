@@ -74,6 +74,8 @@ public class Orders {
 
     private Date createtime;
 
+	private String username;
+
     public Integer getOrderid() {
         return orderid;
     }
@@ -353,4 +355,13 @@ public class Orders {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
+	public void setusername(String userName) {
+		// TODO Auto-generated method stub
+		this.username = userName == null ? null : userName.trim();
+	}
+	public String getusername() {
+		// TODO Auto-generated method stub
+		return username;
+	}
 }
