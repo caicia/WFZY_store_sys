@@ -17,6 +17,7 @@
 </head>
 <body>
 	<div class="page-container">
+	
 	<c:forEach items="${shopList}" var="i">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2"><span

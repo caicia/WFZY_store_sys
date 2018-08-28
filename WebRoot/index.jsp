@@ -489,7 +489,7 @@
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "",
+			"accessPath" : "${pageContext.request.contextPath }/shop/showMarketShowList.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 13,

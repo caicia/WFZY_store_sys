@@ -37,26 +37,41 @@
 				<div class="ui_tb">
 					<table class="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
 						<tr>
-							<th>物流公司</th>
-							<th>订单编号</th>
-							<th>时间</th>
-							<th>物流信息</th>
+							<th>申请的店铺名称</th>
+							<th>申请的类型：</th>
+							<th>申请的商品：</th>
+							<th>开始时间段：</th>
+							<th>申请数量：</th>
+							<th>审核状态：</th>
+							<th>操作：</th>
 						</tr>
-							
-							<c:forEach begin="0" end="${length-1}" var="i">
+							<c:forEach items="${goodsapply}" var="i">
 							<tr>
-								<td>${res.getJSONObject("showapi_res_body").getString("expTextName")}</td>
-								<td>${res.getJSONObject("showapi_res_body").getString("mailNo")}</td>
-								<td>${detailsRes.getJSONObject(i).getString("time")}</td>
-								<td>${detailsRes.getJSONObject(i).getString("context")}</td>
+								<td>${shops}</td>
+								<td>
+								<c:if test="${i.goodstype==1}">限时购</c:if>
+								<c:if test="${i.goodstype==2}">福利社</c:if>
+								<c:if test="${i.goodstype==3}">企业订购</c:if>
+								<c:if test="${i.goodstype==4}">期订</c:if>
+								</td>
+								<td>${i.getgoodsName()}</td>
+								<td>
+								<c:if test="${i.goodstype==1}"><fmt:formatDate value="${i.starttime}" pattern="yyyy-MM-dd　HH:mm:ss"/></c:if>
+								<c:if test="${i.goodstype!=1}">不限时间</c:if>
+								</td>
+								<td><c:if test="${i.goodstype==1}">${i.storknum}</c:if>
+								<c:if test="${i.goodstype!=1}">不限量</c:if>
+								</td>
+								<td>
+								<c:if test="${i.ishandle==1}"><font color="blue">审核通过</font></c:if>
+								<c:if test="${i.ishandle==-1}"><font color="red">审核不通过</font></c:if>
+								<c:if test="${i.ishandle==0}"><font color="black">尚未审核</font></c:if>
+								</td>
+								<td>
+								<button class="btn btn-primary radius" onclick="layerOut('${i.ishandle}','')">取消活动</button>
+								</td>
 							</tr>
 							</c:forEach>
-							<tr>
-								<td>${expressname}</td>
-								<td>${expressno}</td>
-								<td><fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td>卖家已发货</td>
-							</tr>
 					</table>
 				</div>
 				</div>
@@ -90,5 +105,28 @@
 		src="${pageContext.request.contextPath }/lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+
+<script type="text/javascript">
+function layerOut(title,url)
+{
+	if(title != 1)
+	{
+		alert("审核尚未通过请勿进行此操作");
+	}
+            //layer.msg('这是最常用的吧');
+    else
+    {  
+       layer.open({
+                type: 2,
+                title: title,
+                fix: false,
+                maxmin: true,
+                shadeClose: true,
+                area: ['1100px', '600px'],
+                content: url,
+       });
+    }
+}
+</script>
 </body>
 </html>

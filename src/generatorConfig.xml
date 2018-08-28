@@ -66,7 +66,7 @@
 		<table schema="" tableName="message"></table>
 		<table schema="" tableName="shopsexpress"></table>
 		<table schema="" tableName="limittimes"></table>-->
-		<table schema="" tableName="goodstime"></table>
+		<table schema="" tableName="orders"></table>
 		<!-- 有些表的字段需要指定java类型 <table schema="" tableName="user"> <columnOverride 
 			column="id" javaType="Long" /> </table> -->
 	</context>

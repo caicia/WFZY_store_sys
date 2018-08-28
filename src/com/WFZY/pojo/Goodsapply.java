@@ -22,6 +22,8 @@ public class Goodsapply {
     private Byte ishandle;
 
     private String applytext;
+    
+    private String goodsname;
 
     public Integer getGoodsapplyid() {
         return goodsapplyid;
@@ -102,4 +104,13 @@ public class Goodsapply {
     public void setApplytext(String applytext) {
         this.applytext = applytext == null ? null : applytext.trim();
     }
+    
+    public String getgoodsName(){
+    	return goodsname;
+    }
+
+	public void setgoodsName(String goodsname) {
+		// TODO Auto-generated method stub
+		this.goodsname = goodsname == null ? null : goodsname.trim();
+	}
 }

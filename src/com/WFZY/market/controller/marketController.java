@@ -17,6 +17,7 @@ import com.WFZY.order.service.orderService;
 import com.WFZY.pojo.GoodsExample;
 import com.WFZY.pojo.GoodsWithBLOBs;
 import com.WFZY.pojo.Goodsapply;
+import com.WFZY.pojo.GoodsapplyExample;
 import com.WFZY.pojo.Goodstime;
 import com.WFZY.pojo.GoodstimeExample;
 import com.WFZY.pojo.Orders;
@@ -73,8 +74,62 @@ public class marketController {
 	@RequestMapping("/insertGoodsApply.action")
 	@ResponseBody
 	public String insertGoodsApply(@RequestBody Goodsapply goodsapply) {
-
-		int flag = marketService.insertMarket(goodsapply);
+		
+		List<Goodsapply> i = null;
+		System.out.println(goodsapply.getGoodstype());
+		System.out.println(goodsapply.getGoodsid());
+		if(goodsapply.getGoodstype() == 1)
+		{
+			GoodsapplyExample goodsapplyExample = new GoodsapplyExample();
+			GoodsapplyExample.Criteria goodsapplyCriteria = goodsapplyExample.createCriteria();
+			goodsapplyCriteria.andStarttimeEqualTo(goodsapply.getStarttime());
+			goodsapplyCriteria.andGoodsidEqualTo(goodsapply.getGoodsid());
+			i = marketService.selectMarket(goodsapplyExample);
+		}
+		else if(goodsapply.getGoodstype() != 1)
+		{
+			GoodsapplyExample goodsapplyExample = new GoodsapplyExample();
+			GoodsapplyExample.Criteria goodsapplyCriteria = goodsapplyExample.createCriteria();
+			goodsapplyCriteria.andGoodsidEqualTo(goodsapply.getGoodsid());
+			i = marketService.selectMarket(goodsapplyExample);
+		}
+		int flag=0;
+		if(i.isEmpty())
+		{
+			flag = marketService.insertMarket(goodsapply);
+		}
+		else
+		{
+			flag=-1;
+		}
 		return "{\"flag\":" + flag + "}";
+	}
+	
+	@RequestMapping("/shop/showMarketShowList.action")
+	public ModelAndView showMarketShowList(HttpServletRequest request) throws ParseException
+	{
+		List<Shops> shopList = shopList(request);
+		
+		
+		GoodsapplyExample goodsapplyExample = new GoodsapplyExample();
+		GoodsapplyExample.Criteria goodsapplyCriteria = goodsapplyExample.createCriteria();
+		goodsapplyCriteria.andShopidEqualTo(shopList.get(0).getShopid());
+		List<Goodsapply>  i = marketService.selectMarket(goodsapplyExample);
+		
+		for(int j=0;j<i.size();j++)
+		{
+		GoodsExample example = new GoodsExample();
+		GoodsExample.Criteria goodsCriteria = example.createCriteria();
+		goodsCriteria.andGoodsidEqualTo(i.get(j).getGoodsid());
+		List<GoodsWithBLOBs> goods = marketService.selectGoods(example);
+		i.get(j).setgoodsName(goods.get(0).getGoodsname());
+		
+		
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("shops", shopList.get(0).getShopname());
+		modelAndView.addObject("goodsapply", i);
+		modelAndView.setViewName("/marketShowPage");
+		return modelAndView;
 	}
 }

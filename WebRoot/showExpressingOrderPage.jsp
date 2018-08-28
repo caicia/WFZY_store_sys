@@ -39,7 +39,6 @@
 						<tr>
 							<th>订单编号</th>
 							<th>购买用户</th>
-							<th>产品名称</th>
 							<th>订单状态</th>
 							<th>收货方式</th>
 							<th>是否支付</th>
@@ -52,7 +51,6 @@
 							
 								<td>${i.orderno }</td>
 								<td>${i.username }</td>
-								<td>${i.goodsname }</td>
 								<td><c:if test='${i.orderstatus==-2}'>待发货</c:if>
 									<c:if test='${i.orderstatus==1}'>配送中</c:if>
 									<c:if test='${i.orderstatus==2}'>用户确认收货</c:if>
@@ -65,14 +63,14 @@
 								<c:if test="${i.ispay==0 }">未支付</c:if>
 									<c:if test="${i.ispay==1 }">已支付</c:if>
 								</td>
-								<td><button class="btn btn-primary radius" onclick="layerOut('订单详情','${pageContext.request.contextPath }/shop/showDetailsPage.action')">
+								<td><button class="btn btn-primary radius" onclick="layerOut('订单详情','${pageContext.request.contextPath }/shop/showDetailsPage.action?orderid=${i.orderno}')">
 										订单详情
 								</button></td>
 								<td>
 								<fmt:formatDate value="${i.deliverytime}" pattern="yyyy-MM-dd　HH:mm:ss"/>  
 								</td>
 								<td>
-								<button class="btn btn-primary radius" onclick="layerOut('物流追踪','${pageContext.request.contextPath }/shop/showWLList.action?nu=${i.expressno}&com=${i.expressid}')">
+								<button class="btn btn-primary radius" onclick="layerOut('物流追踪','${pageContext.request.contextPath }/shop/showWLList.action?nu=${i.expressno}&com=${i.expressid}&time=${i.deliverytime }')">
 										物流追踪
 								</button>
 								</td>

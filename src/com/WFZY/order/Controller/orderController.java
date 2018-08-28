@@ -1,7 +1,10 @@
 package com.WFZY.order.Controller;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -60,7 +63,6 @@ public class orderController {
 	public ModelAndView showOrderList(HttpServletRequest request) throws ParseException
 	{
 		List<Shops> shopList = shopList(request);
-		
 		OrdersExample ordersExample = new OrdersExample();
 		OrdersExample.Criteria orderCriteria = ordersExample.createCriteria();
 		orderCriteria.andShopidEqualTo(shopList.get(0).getShopid());
@@ -71,6 +73,15 @@ public class orderController {
 		{
 			String userName = userList(order.get(i).getUserid());
 			order.get(i).setusername(userName);
+			for(int j=0;j<order.size() && j!=i;j++)
+			{
+				if(order.get(i).getOrderno().equals(order.get(j).getOrderno()))
+				{
+					System.out.println(order.get(i).getOrderno()+"=="+order.get(j).getOrderno());
+					order.remove(j);
+				}
+				
+			}
 		}
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("order", order);
@@ -95,6 +106,15 @@ public class orderController {
 		{
 			String userName = userList(order.get(i).getUserid());
 			order.get(i).setusername(userName);
+			for(int j=0;j<order.size() && j!=i;j++)
+			{
+				if(order.get(i).getOrderno().equals(order.get(j).getOrderno()))
+				{
+					System.out.println(order.get(i).getOrderno()+"=="+order.get(j).getOrderno());
+					order.remove(j);
+				}
+				
+			}
 		}
 		
 		
@@ -120,6 +140,15 @@ public class orderController {
 		{
 			String userName = userList(order.get(i).getUserid());
 			order.get(i).setusername(userName);
+			for(int j=0;j<order.size() && j!=i;j++)
+			{
+				if(order.get(i).getOrderno().equals(order.get(j).getOrderno()))
+				{
+					System.out.println(order.get(i).getOrderno()+"=="+order.get(j).getOrderno());
+					order.remove(j);
+				}
+				
+			}
 		}
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -131,12 +160,34 @@ public class orderController {
 	@RequestMapping("/shop/showOrderWLList.action")
 	public ModelAndView showOrderWLList(HttpServletRequest request)
 	{
-		int orderid = Integer.valueOf(request.getParameter("orderid"));
+		String orderid = request.getParameter("orderid");
 		System.out.println(orderid);
 		OrdersExample ordersExample = new OrdersExample();
 		OrdersExample.Criteria orderCriteria = ordersExample.createCriteria();
-		orderCriteria.andOrderidEqualTo(orderid);
+		orderCriteria.andOrdernoEqualTo(orderid);
 		List<Orders> order = orderService.selectOrder(ordersExample);
+		List<String> goodsname = new ArrayList<String>();
+		List<String> goodscount = new ArrayList<String>();
+		List<String> goodsprice = new ArrayList<String>();
+		List<String> goodsremarks = new ArrayList<String>();
+		
+		BigDecimal totalmoney = new BigDecimal(0);
+		for(int i=0;i<order.size();i++)
+		{
+			
+			goodsname.add(order.get(i).getGoodsname());
+			goodscount.add(String.valueOf(order.get(i).getGoodscount()));
+			goodsprice.add(String.valueOf(order.get(i).getGoodsprice()));
+			goodsremarks.add(String.valueOf(order.get(i).getGoodsremarks()));
+			totalmoney = totalmoney.add(order.get(i).getGoodsmoney());
+			if(i!=0)
+			{
+				order.remove(i);
+			}
+		}
+		order.get(0).setGoodsmoney(totalmoney);
+		order.get(0).setTotalmoney(totalmoney);
+		order.get(0).setRealtotalmoney(totalmoney);
 		
 		System.out.println(order.get(0).getOrderno());
 		
@@ -150,6 +201,11 @@ public class orderController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("order", order);
+		modelAndView.addObject("goodsname", goodsname);
+		modelAndView.addObject("goodscount", goodscount);
+		modelAndView.addObject("goodsprice", goodsprice);
+		modelAndView.addObject("goodsremarks", goodsremarks);
+		modelAndView.addObject("count", goodscount.size());
 		modelAndView.addObject("expressName" , express.get(0).getExpressname());
 		modelAndView.setViewName("/orderDeliveryPage");
 		return modelAndView;
@@ -158,9 +214,18 @@ public class orderController {
 	@RequestMapping("/insertOrderExpress.action")
 	@ResponseBody
 	public String insertOrderExpress(@RequestBody Orders orders) {
-
+		
+		OrdersExample example = new OrdersExample();
+		OrdersExample.Criteria orderCriteria = example.createCriteria();
+		orderCriteria.andOrdernoEqualTo(orders.getOrderno());
+		List<Orders> order = orderService.selectOrder(example);
+		int flag = 0;
 		orders.setOrderstatus((byte)1);
-		int flag = orderService.updataExpress(orders);
+		for(int i=0;i<order.size();i++)
+		{
+			orders.setOrderid(order.get(i).getOrderid());
+			flag = orderService.updataExpress(orders);
+		}
 		return "{\"flag\":" + flag + "}";
 	}
 	
@@ -169,6 +234,7 @@ public class orderController {
 	{
 		String com = request.getParameter("com");
 		String no = request.getParameter("nu");
+		String time = request.getParameter("time");
 		System.out.println(com);
 		ExpressExample expressExample = new ExpressExample();
 		ExpressExample.Criteria expressCriteria =  expressExample.createCriteria();
@@ -190,6 +256,10 @@ public class orderController {
 		modelAndView.addObject("res", jsonarray);
 		modelAndView.addObject("detailsRes",detailsRes);
 		modelAndView.addObject("length", detailsRes.length());
+		modelAndView.addObject("time", new Date(time));
+		modelAndView.addObject("expressno",no);
+		modelAndView.addObject("expressname",express.get(0).getExpressname());
+		
 		modelAndView.setViewName("/showWL");
 		return modelAndView;
 	}
@@ -197,12 +267,34 @@ public class orderController {
 	@RequestMapping("/shop/showDetailsPage.action")
 	public ModelAndView showDetailsPage(HttpServletRequest request)
 	{
-		int orderid = Integer.valueOf(request.getParameter("orderid"));
+		String orderid = request.getParameter("orderid");
 		System.out.println(orderid);
 		OrdersExample ordersExample = new OrdersExample();
 		OrdersExample.Criteria orderCriteria = ordersExample.createCriteria();
-		orderCriteria.andOrderidEqualTo(orderid);
+		orderCriteria.andOrdernoEqualTo(orderid);
 		List<Orders> order = orderService.selectOrder(ordersExample);
+		List<String> goodsname = new ArrayList<String>();
+		List<String> goodscount = new ArrayList<String>();
+		List<String> goodsprice = new ArrayList<String>();
+		List<String> goodsremarks = new ArrayList<String>();
+		
+		BigDecimal totalmoney = new BigDecimal(0);
+		for(int i=0;i<order.size();i++)
+		{
+			
+			goodsname.add(order.get(i).getGoodsname());
+			goodscount.add(String.valueOf(order.get(i).getGoodscount()));
+			goodsprice.add(String.valueOf(order.get(i).getGoodsprice()));
+			goodsremarks.add(String.valueOf(order.get(i).getGoodsremarks()));
+			totalmoney = totalmoney.add(order.get(i).getGoodsmoney());
+			if(i!=0)
+			{
+				order.remove(i);
+			}
+		}
+		order.get(0).setGoodsmoney(totalmoney);
+		order.get(0).setTotalmoney(totalmoney);
+		order.get(0).setRealtotalmoney(totalmoney);
 		
 		System.out.println(order.get(0).getOrderno());
 		
@@ -216,6 +308,11 @@ public class orderController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("order", order);
+		modelAndView.addObject("goodsname", goodsname);
+		modelAndView.addObject("goodscount", goodscount);
+		modelAndView.addObject("goodsprice", goodsprice);
+		modelAndView.addObject("goodsremarks", goodsremarks);
+		modelAndView.addObject("count", goodscount.size());
 		modelAndView.addObject("expressName" , express.get(0).getExpressname());
 		modelAndView.setViewName("/orderDetailsPage");
 		return modelAndView;

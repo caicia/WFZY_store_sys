@@ -10,7 +10,7 @@
     <result column="goodsId" property="goodsid" jdbcType="INTEGER" />
     <result column="goodsName" property="goodsname" jdbcType="VARCHAR" />
     <result column="goodsCount" property="goodscount" jdbcType="INTEGER" />
-    <result column="goodsPrice" property="goodsprice" jdbcType="INTEGER" />
+    <result column="goodsPrice" property="goodsprice" jdbcType="DECIMAL" />
     <result column="goodsRemarks" property="goodsremarks" jdbcType="VARCHAR" />
     <result column="orderRemarks" property="orderremarks" jdbcType="VARCHAR" />
     <result column="orderStatus" property="orderstatus" jdbcType="TINYINT" />
@@ -148,7 +148,7 @@
       dataFlag, createTime)
     values (#{orderid,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
       #{shopid,jdbcType=INTEGER}, #{shopname,jdbcType=VARCHAR}, #{goodsid,jdbcType=INTEGER}, 
-      #{goodsname,jdbcType=VARCHAR}, #{goodscount,jdbcType=INTEGER}, #{goodsprice,jdbcType=INTEGER}, 
+      #{goodsname,jdbcType=VARCHAR}, #{goodscount,jdbcType=INTEGER}, #{goodsprice,jdbcType=DECIMAL}, 
       #{goodsremarks,jdbcType=VARCHAR}, #{orderremarks,jdbcType=VARCHAR}, #{orderstatus,jdbcType=TINYINT}, 
       #{goodsmoney,jdbcType=DECIMAL}, #{delivertype,jdbcType=TINYINT}, #{delivermoney,jdbcType=DECIMAL}, 
       #{totalmoney,jdbcType=DECIMAL}, #{realtotalmoney,jdbcType=DECIMAL}, #{paytype,jdbcType=TINYINT}, 
@@ -294,7 +294,7 @@
         #{goodscount,jdbcType=INTEGER},
       </if>
       <if test="goodsprice != null" >
-        #{goodsprice,jdbcType=INTEGER},
+        #{goodsprice,jdbcType=DECIMAL},
       </if>
       <if test="goodsremarks != null" >
         #{goodsremarks,jdbcType=VARCHAR},
@@ -410,7 +410,7 @@
         goodsCount = #{record.goodscount,jdbcType=INTEGER},
       </if>
       <if test="record.goodsprice != null" >
-        goodsPrice = #{record.goodsprice,jdbcType=INTEGER},
+        goodsPrice = #{record.goodsprice,jdbcType=DECIMAL},
       </if>
       <if test="record.goodsremarks != null" >
         goodsRemarks = #{record.goodsremarks,jdbcType=VARCHAR},
@@ -505,7 +505,7 @@
       goodsId = #{record.goodsid,jdbcType=INTEGER},
       goodsName = #{record.goodsname,jdbcType=VARCHAR},
       goodsCount = #{record.goodscount,jdbcType=INTEGER},
-      goodsPrice = #{record.goodsprice,jdbcType=INTEGER},
+      goodsPrice = #{record.goodsprice,jdbcType=DECIMAL},
       goodsRemarks = #{record.goodsremarks,jdbcType=VARCHAR},
       orderRemarks = #{record.orderremarks,jdbcType=VARCHAR},
       orderStatus = #{record.orderstatus,jdbcType=TINYINT},
@@ -561,7 +561,7 @@
         goodsCount = #{goodscount,jdbcType=INTEGER},
       </if>
       <if test="goodsprice != null" >
-        goodsPrice = #{goodsprice,jdbcType=INTEGER},
+        goodsPrice = #{goodsprice,jdbcType=DECIMAL},
       </if>
       <if test="goodsremarks != null" >
         goodsRemarks = #{goodsremarks,jdbcType=VARCHAR},
@@ -653,7 +653,7 @@
       goodsId = #{goodsid,jdbcType=INTEGER},
       goodsName = #{goodsname,jdbcType=VARCHAR},
       goodsCount = #{goodscount,jdbcType=INTEGER},
-      goodsPrice = #{goodsprice,jdbcType=INTEGER},
+      goodsPrice = #{goodsprice,jdbcType=DECIMAL},
       goodsRemarks = #{goodsremarks,jdbcType=VARCHAR},
       orderRemarks = #{orderremarks,jdbcType=VARCHAR},
       orderStatus = #{orderstatus,jdbcType=TINYINT},

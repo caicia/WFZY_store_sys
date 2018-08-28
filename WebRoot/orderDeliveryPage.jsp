@@ -11,14 +11,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>信息管理系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery/jquery-1.7.1.js"></script>
+<link href="${pageContext.request.contextPath }/style/authority/basic_layout.css" rel="stylesheet" type="text/css">
 <!--_meta 作为公共模版分离出去-->
 <jsp:include page="/_meta.jsp"></jsp:include>
 <!--/meta 作为公共模版分离出去-->
+<link href="${pageContext.request.contextPath }/style/authority/common_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/authority/commonAll.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/style/authority/jquery.fancybox-1.3.4.css" media="screen"></link>
+<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/artDialog/artDialog.js?skin=default"></script>
+<title>信息管理系统</title>
 
-<link
-	href="${pageContext.request.contextPath }/lib/webuploader/0.1.5/webuploader.css"
-	rel="stylesheet" type="text/css" />
+<style>
+	.alt td{ background:black !important;}
+</style>
 </head>
 <body>
 	<div class="page-container">
@@ -28,39 +37,31 @@
 					class="c-red">*</span>订单编号：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" placeholder=""
-						placeholder="订单编号" id="orderid" name="orderid"   value="${i.orderno}" readonly="readonly" >
+						placeholder="订单编号" id="orderno" name="orderno"   value="${i.orderno}" readonly="readonly" >
 				</div>
 			</div>
 			<br>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>产品名称：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" placeholder=""
-						placeholder="产品名称" id="goodsName" name="goodsName"   value="${i.goodsname}" readonly="readonly" >
+			<div class="ui_content">
+				<div class="ui_tb">
+					<table class="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
+						<tr>
+							<th>商品名称</th>
+							<th>商品规格：</th>
+							<th>商品价格：</th>
+							<th>购买数量：</th>
+						</tr>
+							<c:forEach begin="0" end="${count-1}" var="step" step="1">
+							<tr>
+								<td>${goodsname.get(step)}</td>
+								<td>${goodsremarks.get(step)}</td>
+								<td>${goodsprice.get(step)}</td>
+								<td>${goodscount.get(step)}</td>
+							</tr>
+							</c:forEach>
+					</table>
 				</div>
-			</div>
-			<br>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>购买的产品数量：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" placeholder=""
-						placeholder="购买的产品数量" id="goodsNum" name="goodsNum"   value="${i.goodscount}" readonly="readonly" >
 				</div>
-			</div>
-			<br>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>产品备注：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" placeholder=""
-						placeholder="产品备注" id="goodsNote" name="goodsNote"   value="${i.goodsremarks}" readonly="readonly" >
-				</div>
-
-			</div>
-			
-			<br>
+				<br>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2"><span
 					class="c-red">*</span>订单备注：</label>
@@ -203,6 +204,7 @@
 		{
 			var ExpressNumber = document.getElementById("ExpressNumber").value;
 			var datemin = document.getElementById("datemin").value;
+			var orderno = document.getElementById("orderno").value;
 			if(ExpressNumber == "" || datemin == "")
 			{
 				alert("请完善快递信息");
@@ -211,6 +213,7 @@
 			{
 				var obj={
 					orderid : orderid,
+					orderno : orderno,
 	   				expressno : ExpressNumber,
 	   				deliverytime : StrToGMT(datemin),
 	   			};
@@ -226,11 +229,16 @@
 					if(data.flag == 1)
 					{
 						alert("更新成功");
-						window.location.reload();
+						window.parent.location.reload();
+						var index = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(index);
 					}
 					else
 					{
 						alert("更新失败");
+						window.parent.location.reload();
+						var index = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(index);
 					}
 				},
 				error : function(data) {alert("error")},

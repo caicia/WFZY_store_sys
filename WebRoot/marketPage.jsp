@@ -51,14 +51,14 @@
 				<div class="formControls col-xs-8 col-sm-9">
 					<select name="applyGoods" id="applyGoods">
 					<c:forEach items="${goods}" var="k">
-					<option value="${k.goodsid}" title="${k.goodsstock}" id="goodst">${k.goodsname}   库存量:${k.goodsstock}
+					<option value="${k.goodsid}" title="${k.goodsstock}">${k.goodsname}   库存量:${k.goodsstock}
 					</option>
 					</c:forEach>
 					</select>
 				</div>
 			</div>
 			<br>
-			<div class="row cl">
+			<div class="row cl" id="showTime">
 				<label class="form-label col-xs-4 col-sm-2"><span
 					class="c-red">*</span>开始时间段：</label>
 				<div class="formControls col-xs-8 col-sm-9">
@@ -75,16 +75,16 @@
 						</select>
 				</div>
 			</div>
-			<br>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
+			<br id="br">
+			<div class="row cl" id="showNum">
+				<label class="form-label col-xs-4 col-sm-2" ><span
 					class="c-red">*</span>申请数量：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" name="applyNum" id="applyNum" placeholder="" value=""
 						class="input-text" >
 				</div>
 			</div>
-			<br>
+			<br id="br">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2"><span
 					class="c-red">*</span>申请理由：</label>
@@ -143,13 +143,15 @@
        			var limitTime = document.getElementById("limitTime");
        			if(applyType == 1)
        			{
-       				limitTime.value="1小时";
-       				limitTime.readOnly=true;
+       				$('#showTime').show();
+       				$('#showNum').show();
+       				$('#br').show();
        			}
 				else
 				{
-					limitTime.value="";
-					limitTime.readOnly=false;
+					$('#showTime').hide();
+					$('#showNum').hide();
+					$('#br').hide();
 				}
 			});
 	
@@ -169,11 +171,17 @@
 			
 			var shopName = document.getElementById("shopName").value;
 			var applyType = document.getElementById("applyType").value;
-			var applyGoods = document.getElementById("goodst").value;
-			var goodsstock = parseInt(document.getElementById("goodst").title);
+			var applyGoods = document.getElementById("applyGoods").value;
+			var goodsstock = parseInt(document.getElementById("applyGoods").title);
 			var datemin = document.getElementById("datemin").value;
 			var applyNum = parseInt(document.getElementById("applyNum").value);
 			var applyReason = document.getElementById("applyReason").value;
+			
+			if(applyType != 1)
+			{
+				datemin = "limitApply";
+				applyNum = "umlimit"
+			}
 			
 			if(applyReason == "" || datemin == "" || applyNum == "")
 			{
@@ -190,7 +198,9 @@
 				var d = dateToGMT(dateTime);
 				var hmstime=d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
 				var totaltime = datemin+' '+hmstime;
-				var obj={
+				if(applyType == 1)
+				{
+					var obj={
 					goodstype : applyType,
 					goodsid : applyGoods,
 					shopid : shopName,
@@ -200,7 +210,22 @@
 					storknum : applyNum,
 					ishandle : '0',
 	   				applytext : applyReason,
-	   			};
+	   				};
+				}
+				else
+				{
+					var obj={
+					goodstype : applyType,
+					goodsid : applyGoods,
+					shopid : shopName,
+					createtime : new Date(),
+					starttime : null,
+					endtime : "",
+					storknum : null,
+					ishandle : '0',
+	   				applytext : applyReason,
+	   				};
+				}
 	   		obj = JSON.stringify(obj);
 	   		$.ajax({
 				url : '${pageContext.request.contextPath }/insertGoodsApply.action',
@@ -215,6 +240,10 @@
 					{
 						alert("提交申请成功");
 						window.location.reload();
+					}
+					else if(data.flag == -1)
+					{
+						alert("该商品已经申请过此类活动");
 					}
 					else
 					{

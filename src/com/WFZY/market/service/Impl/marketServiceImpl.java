@@ -19,6 +19,7 @@ import com.WFZY.pojo.Banks;
 import com.WFZY.pojo.GoodsExample;
 import com.WFZY.pojo.GoodsWithBLOBs;
 import com.WFZY.pojo.Goodsapply;
+import com.WFZY.pojo.GoodsapplyExample;
 import com.WFZY.pojo.Goodstime;
 import com.WFZY.pojo.GoodstimeExample;
 import com.WFZY.pojo.Orders;
@@ -60,6 +61,15 @@ public class marketServiceImpl implements marketService{
 	public int insertMarket(Goodsapply record) {
 		// TODO Auto-generated method stub
 		return goodsapplyMapper.insertSelective(record);
+		
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public List<Goodsapply> selectMarket(GoodsapplyExample example) {
+		// TODO Auto-generated method stub
+		return goodsapplyMapper.selectByExampleWithBLOBs(example);
 		
 	}
 

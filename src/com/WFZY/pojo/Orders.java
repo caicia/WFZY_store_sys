@@ -20,7 +20,7 @@ public class Orders {
 
     private Integer goodscount;
 
-    private Integer goodsprice;
+    private BigDecimal goodsprice;
 
     private String goodsremarks;
 
@@ -73,9 +73,9 @@ public class Orders {
     private Byte dataflag;
 
     private Date createtime;
-
-	private String username;
-
+    
+    private String username;
+    
     public Integer getOrderid() {
         return orderid;
     }
@@ -140,11 +140,11 @@ public class Orders {
         this.goodscount = goodscount;
     }
 
-    public Integer getGoodsprice() {
+    public BigDecimal getGoodsprice() {
         return goodsprice;
     }
 
-    public void setGoodsprice(Integer goodsprice) {
+    public void setGoodsprice(BigDecimal goodsprice) {
         this.goodsprice = goodsprice;
     }
 
@@ -355,8 +355,8 @@ public class Orders {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
-
-	public void setusername(String userName) {
+    
+    public void setusername(String userName) {
 		// TODO Auto-generated method stub
 		this.username = userName == null ? null : userName.trim();
 	}
