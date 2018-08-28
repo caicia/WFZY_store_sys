@@ -44,7 +44,6 @@
 							<th>开始时间段：</th>
 							<th>申请数量：</th>
 							<th>审核状态：</th>
-							<th>操作：</th>
 						</tr>
 							<c:forEach items="${goodsapply}" var="i">
 							<tr>
@@ -65,13 +64,7 @@
 								<c:if test="${i.goodstype!=1}">不限量</c:if>
 								</td>
 								<td>
-								<c:if test="${i.ishandle==1}"><font color="blue">审核通过</font></c:if>
-								<c:if test="${i.ishandle==-1}"><font color="red">审核不通过</font></c:if>
-								<c:if test="${i.ishandle==-2}"><font color="red">活动被取消 </font></c:if>
-								<c:if test="${i.ishandle==0}"><font color="black">尚未审核</font></c:if>
-								</td>
-								<td>
-								<button class="btn btn-primary radius" onclick="layerOut('${i.ishandle}','${i.goodsid}','${i.starttime}',${i.goodstype},${i.goodstype})">取消活动</button>
+								<c:if test="${i.ishandle==-1}"><font color="red">活动被取消 </font></c:if>
 								</td>
 							</tr>
 							</c:forEach>
@@ -109,96 +102,5 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 
-<script type="text/javascript">
-	function StrToGMT(time){
-    			let GMT = new Date(time)
-    			return GMT
-			};
-	
-	function dateToGMT(strDate){
-   				 var dateStr=strDate.split(" ");  
-   				 var strGMT = dateStr[0]+" "+dateStr[1]+" "+dateStr[2]+" "+dateStr[5]+" "+dateStr[3]+" GMT+0800";  
-   				 var date = new Date(Date.parse(strGMT));
-   				 return date;
-			};
-
-
-function layerOut(title,goodsid,starttime,goodsapplyid,goodsapplytype)
-{
-	if(title != 1)
-	{
-	 			var obj={
-	   				goodsid : goodsid,
-	   			};
-	   		obj = JSON.stringify(obj);
-		$.ajax({
-				url : '${pageContext.request.contextPath }/cancelGoodsApply.action?goodsapplyid='+goodsapplyid+'&goodsapplytype='+goodsapplytype+'',
-				contentType : 'application/json;charset=utf-8',
-			   	type : "POST",
-				data : obj,
-				dataType : "json",
-				async : false,
-				success : function(data) {
-					
-					if(data.flag == 1)
-					{
-						alert("更新成功");
-						window.location.reload();
-					}
-					else
-					{
-						alert("更新失败");
-					}
-				},
-				error : function(data) {alert("error")},
-			})
-	}
-            //layer.msg('这是最常用的吧');
-    else
-    {  
-    	var time = starttime;
-    	if(starttime == "")
-    	{
-    		time = "1970-01-01 00:00:00";
-    		var obj={
-	   				goodsid : goodsid,
-					starttime : StrToGMT(time),
-					ishandle : -1,
-	   			};
-    	}
-    	else
-    	{
-    		var obj={
-	   				goodsid : goodsid,
-					starttime : dateToGMT(time),
-					ishandle : -1,
-	   			};	
-    	}
-      	 
-	   		obj = JSON.stringify(obj);
-	   		$.ajax({
-				url : '${pageContext.request.contextPath }/cancelGoodsApply.action?goodsapplyid='+goodsapplyid+'&goodsapplytype='+goodsapplytype+'',
-				contentType : 'application/json;charset=utf-8',
-			   	type : "POST",
-				data : obj,
-				dataType : "json",
-				async : false,
-				success : function(data) {
-					
-					if(data.flag == 1)
-					{
-						alert("更新成功");
-						window.location.reload();
-					}
-					else
-					{
-						alert("更新失败");
-					}
-				},
-				error : function(data) {alert("error")},
-			})
-    }
-}
-</script>
 </body>
 </html>

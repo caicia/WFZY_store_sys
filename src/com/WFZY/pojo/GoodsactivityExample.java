@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class GoodsapplyExample {
+public class GoodsactivityExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public GoodsapplyExample() {
+    public GoodsactivityExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -106,63 +106,123 @@ public class GoodsapplyExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andGoodsapplyidIsNull() {
-            addCriterion("goodsApplyId is null");
+        public Criteria andGoodsidIsNull() {
+            addCriterion("goodsId is null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidIsNotNull() {
-            addCriterion("goodsApplyId is not null");
+        public Criteria andGoodsidIsNotNull() {
+            addCriterion("goodsId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidEqualTo(Integer value) {
-            addCriterion("goodsApplyId =", value, "goodsapplyid");
+        public Criteria andGoodsidEqualTo(Integer value) {
+            addCriterion("goodsId =", value, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidNotEqualTo(Integer value) {
-            addCriterion("goodsApplyId <>", value, "goodsapplyid");
+        public Criteria andGoodsidNotEqualTo(Integer value) {
+            addCriterion("goodsId <>", value, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidGreaterThan(Integer value) {
-            addCriterion("goodsApplyId >", value, "goodsapplyid");
+        public Criteria andGoodsidGreaterThan(Integer value) {
+            addCriterion("goodsId >", value, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("goodsApplyId >=", value, "goodsapplyid");
+        public Criteria andGoodsidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("goodsId >=", value, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidLessThan(Integer value) {
-            addCriterion("goodsApplyId <", value, "goodsapplyid");
+        public Criteria andGoodsidLessThan(Integer value) {
+            addCriterion("goodsId <", value, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidLessThanOrEqualTo(Integer value) {
-            addCriterion("goodsApplyId <=", value, "goodsapplyid");
+        public Criteria andGoodsidLessThanOrEqualTo(Integer value) {
+            addCriterion("goodsId <=", value, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidIn(List<Integer> values) {
-            addCriterion("goodsApplyId in", values, "goodsapplyid");
+        public Criteria andGoodsidIn(List<Integer> values) {
+            addCriterion("goodsId in", values, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidNotIn(List<Integer> values) {
-            addCriterion("goodsApplyId not in", values, "goodsapplyid");
+        public Criteria andGoodsidNotIn(List<Integer> values) {
+            addCriterion("goodsId not in", values, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidBetween(Integer value1, Integer value2) {
-            addCriterion("goodsApplyId between", value1, value2, "goodsapplyid");
+        public Criteria andGoodsidBetween(Integer value1, Integer value2) {
+            addCriterion("goodsId between", value1, value2, "goodsid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsapplyidNotBetween(Integer value1, Integer value2) {
-            addCriterion("goodsApplyId not between", value1, value2, "goodsapplyid");
+        public Criteria andGoodsidNotBetween(Integer value1, Integer value2) {
+            addCriterion("goodsId not between", value1, value2, "goodsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeIsNull() {
+            addCriterion("startTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeIsNotNull() {
+            addCriterion("startTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeEqualTo(Date value) {
+            addCriterion("startTime =", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeNotEqualTo(Date value) {
+            addCriterion("startTime <>", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeGreaterThan(Date value) {
+            addCriterion("startTime >", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("startTime >=", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeLessThan(Date value) {
+            addCriterion("startTime <", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeLessThanOrEqualTo(Date value) {
+            addCriterion("startTime <=", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeIn(List<Date> values) {
+            addCriterion("startTime in", values, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeNotIn(List<Date> values) {
+            addCriterion("startTime not in", values, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeBetween(Date value1, Date value2) {
+            addCriterion("startTime between", value1, value2, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeNotBetween(Date value1, Date value2) {
+            addCriterion("startTime not between", value1, value2, "starttime");
             return (Criteria) this;
         }
 
@@ -226,126 +286,6 @@ public class GoodsapplyExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodsidIsNull() {
-            addCriterion("goodsId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidIsNotNull() {
-            addCriterion("goodsId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidEqualTo(Integer value) {
-            addCriterion("goodsId =", value, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidNotEqualTo(Integer value) {
-            addCriterion("goodsId <>", value, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidGreaterThan(Integer value) {
-            addCriterion("goodsId >", value, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("goodsId >=", value, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidLessThan(Integer value) {
-            addCriterion("goodsId <", value, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidLessThanOrEqualTo(Integer value) {
-            addCriterion("goodsId <=", value, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidIn(List<Integer> values) {
-            addCriterion("goodsId in", values, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidNotIn(List<Integer> values) {
-            addCriterion("goodsId not in", values, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidBetween(Integer value1, Integer value2) {
-            addCriterion("goodsId between", value1, value2, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsidNotBetween(Integer value1, Integer value2) {
-            addCriterion("goodsId not between", value1, value2, "goodsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidIsNull() {
-            addCriterion("shopId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidIsNotNull() {
-            addCriterion("shopId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidEqualTo(Integer value) {
-            addCriterion("shopId =", value, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidNotEqualTo(Integer value) {
-            addCriterion("shopId <>", value, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidGreaterThan(Integer value) {
-            addCriterion("shopId >", value, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("shopId >=", value, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidLessThan(Integer value) {
-            addCriterion("shopId <", value, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidLessThanOrEqualTo(Integer value) {
-            addCriterion("shopId <=", value, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidIn(List<Integer> values) {
-            addCriterion("shopId in", values, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidNotIn(List<Integer> values) {
-            addCriterion("shopId not in", values, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidBetween(Integer value1, Integer value2) {
-            addCriterion("shopId between", value1, value2, "shopid");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopidNotBetween(Integer value1, Integer value2) {
-            addCriterion("shopId not between", value1, value2, "shopid");
-            return (Criteria) this;
-        }
-
         public Criteria andCreatetimeIsNull() {
             addCriterion("createTime is null");
             return (Criteria) this;
@@ -403,66 +343,6 @@ public class GoodsapplyExample {
 
         public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
             addCriterion("createTime not between", value1, value2, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeIsNull() {
-            addCriterion("startTime is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeIsNotNull() {
-            addCriterion("startTime is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeEqualTo(Date value) {
-            addCriterion("startTime =", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeNotEqualTo(Date value) {
-            addCriterion("startTime <>", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeGreaterThan(Date value) {
-            addCriterion("startTime >", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("startTime >=", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeLessThan(Date value) {
-            addCriterion("startTime <", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeLessThanOrEqualTo(Date value) {
-            addCriterion("startTime <=", value, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeIn(List<Date> values) {
-            addCriterion("startTime in", values, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeNotIn(List<Date> values) {
-            addCriterion("startTime not in", values, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeBetween(Date value1, Date value2) {
-            addCriterion("startTime between", value1, value2, "starttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStarttimeNotBetween(Date value1, Date value2) {
-            addCriterion("startTime not between", value1, value2, "starttime");
             return (Criteria) this;
         }
 
@@ -583,6 +463,66 @@ public class GoodsapplyExample {
 
         public Criteria andStorknumNotBetween(Integer value1, Integer value2) {
             addCriterion("storkNum not between", value1, value2, "storknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumIsNull() {
+            addCriterion("saleNum is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumIsNotNull() {
+            addCriterion("saleNum is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumEqualTo(Integer value) {
+            addCriterion("saleNum =", value, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumNotEqualTo(Integer value) {
+            addCriterion("saleNum <>", value, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumGreaterThan(Integer value) {
+            addCriterion("saleNum >", value, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("saleNum >=", value, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumLessThan(Integer value) {
+            addCriterion("saleNum <", value, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumLessThanOrEqualTo(Integer value) {
+            addCriterion("saleNum <=", value, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumIn(List<Integer> values) {
+            addCriterion("saleNum in", values, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumNotIn(List<Integer> values) {
+            addCriterion("saleNum not in", values, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumBetween(Integer value1, Integer value2) {
+            addCriterion("saleNum between", value1, value2, "salenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalenumNotBetween(Integer value1, Integer value2) {
+            addCriterion("saleNum not between", value1, value2, "salenum");
             return (Criteria) this;
         }
 

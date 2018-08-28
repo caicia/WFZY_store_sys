@@ -501,6 +501,19 @@
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
+		{
+			"accessPath" : "${pageContext.request.contextPath }/shop/showCancleMarketShowList.action",
+			"checked" : false,
+			"delFlag" : 0,
+			"parentID" : 13,
+			"resourceCode" : "",
+			"resourceDesc" : "",
+			"resourceGrade" : 13,
+			"resourceID" : 133,
+			"resourceName" : "已被取消的活动",
+			"resourceOrder" : 0,
+			"resourceType" : ""
+		},
 		];
 		// 如果返回数据不为空，加载"业务模块"目录
 		if (data != null) {

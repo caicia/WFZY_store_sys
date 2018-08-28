@@ -10,11 +10,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.WFZY.mapper.ExpressMapper;
+import com.WFZY.mapper.GoodsactivityMapper;
 import com.WFZY.mapper.OrdersMapper;
 import com.WFZY.order.service.orderService;
 import com.WFZY.pojo.Banks;
 import com.WFZY.pojo.Express;
 import com.WFZY.pojo.ExpressExample;
+import com.WFZY.pojo.Goodsactivity;
+import com.WFZY.pojo.GoodsactivityExample;
 import com.WFZY.pojo.Orders;
 import com.WFZY.pojo.OrdersExample;
 
@@ -26,6 +29,9 @@ public class orderServiceImpl implements orderService{
 	
 	@Resource
 	private ExpressMapper expressMapper;
+	
+	@Resource
+	private GoodsactivityMapper goodsactivityMapper;
 	
 	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
 
@@ -63,5 +69,11 @@ public class orderServiceImpl implements orderService{
 		
 	}
 
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
 
+	@Override
+	public List<Goodsactivity> selectactivity(GoodsactivityExample example) {
+		// TODO Auto-generated method stub
+		return goodsactivityMapper.selectByExample(example);
+	}
 }

@@ -51,10 +51,20 @@
 				<div class="formControls col-xs-8 col-sm-9">
 					<select name="applyGoods" id="applyGoods">
 					<c:forEach items="${goods}" var="k">
-					<option value="${k.goodsid}" title="${k.goodsstock}">${k.goodsname}   库存量:${k.goodsstock}
+					<option value="${k.goodsid}" title="${k.goodsstock}" >${k.goodsname}   库存量:${k.goodsstock} 原价:${k.shopprice}
 					</option>
 					</c:forEach>
 					</select>
+				</div>
+			</div>
+			<br>
+			
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span
+					class="c-red">*</span>申请的商品价格：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" name="applyprice" id="applyprice" placeholder="" value=""
+						class="input-text" >
 				</div>
 			</div>
 			<br>
@@ -176,14 +186,14 @@
 			var datemin = document.getElementById("datemin").value;
 			var applyNum = parseInt(document.getElementById("applyNum").value);
 			var applyReason = document.getElementById("applyReason").value;
-			
+			var applyprice = document.getElementById("applyprice").value;
 			if(applyType != 1)
 			{
 				datemin = "limitApply";
 				applyNum = "umlimit"
 			}
 			
-			if(applyReason == "" || datemin == "" || applyNum == "")
+			if(applyReason == "" || datemin == "" || applyNum == "" || applyprice == "")
 			{
 				alert("请填写完整信息");
 			}
@@ -210,6 +220,7 @@
 					storknum : applyNum,
 					ishandle : '0',
 	   				applytext : applyReason,
+	   				applyprice : applyprice,
 	   				};
 				}
 				else
@@ -224,6 +235,7 @@
 					storknum : null,
 					ishandle : '0',
 	   				applytext : applyReason,
+	   				applyprice : applyprice,
 	   				};
 				}
 	   		obj = JSON.stringify(obj);

@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.WFZY.mapper.GoodsapplyMapper" >
-  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Goodsapply" >
-    <id column="goodsApplyId" property="goodsapplyid" jdbcType="INTEGER" />
+<mapper namespace="com.WFZY.mapper.GoodsactivityMapper" >
+  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Goodsactivity" >
+    <id column="goodsId" property="goodsid" jdbcType="INTEGER" />
+    <id column="startTime" property="starttime" jdbcType="TIMESTAMP" />
     <result column="goodsType" property="goodstype" jdbcType="TINYINT" />
-    <result column="goodsId" property="goodsid" jdbcType="INTEGER" />
-    <result column="shopId" property="shopid" jdbcType="INTEGER" />
     <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
     <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
     <result column="storkNum" property="storknum" jdbcType="INTEGER" />
+    <result column="saleNum" property="salenum" jdbcType="INTEGER" />
     <result column="ishandle" property="ishandle" jdbcType="TINYINT" />
     <result column="applyPrice" property="applyprice" jdbcType="DECIMAL" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.WFZY.pojo.Goodsapply" extends="BaseResultMap" >
-    <result column="applyText" property="applytext" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,21 +71,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    goodsApplyId, goodsType, goodsId, shopId, createTime, startTime, endTime, storkNum, 
-    ishandle, applyPrice
+    goodsId, startTime, goodsType, createTime, endTime, storkNum, saleNum, ishandle, 
+    applyPrice
   </sql>
-  <sql id="Blob_Column_List" >
-    applyText
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.WFZY.pojo.GoodsapplyExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.GoodsactivityExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from goodsapply
+    from goodsactivity
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,68 +88,48 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.GoodsapplyExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from goodsapply
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.GoodsactivityKey" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from goodsapply
-    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+    from goodsactivity
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+      and startTime = #{starttime,jdbcType=TIMESTAMP}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from goodsapply
-    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="com.WFZY.pojo.GoodsactivityKey" >
+    delete from goodsactivity
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+      and startTime = #{starttime,jdbcType=TIMESTAMP}
   </delete>
-  <delete id="deleteByExample" parameterType="com.WFZY.pojo.GoodsapplyExample" >
-    delete from goodsapply
+  <delete id="deleteByExample" parameterType="com.WFZY.pojo.GoodsactivityExample" >
+    delete from goodsactivity
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.WFZY.pojo.Goodsapply" >
-    insert into goodsapply (goodsApplyId, goodsType, goodsId, 
-      shopId, createTime, startTime, 
-      endTime, storkNum, ishandle, 
-      applyPrice, applyText)
-    values (#{goodsapplyid,jdbcType=INTEGER}, #{goodstype,jdbcType=TINYINT}, #{goodsid,jdbcType=INTEGER}, 
-      #{shopid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{starttime,jdbcType=TIMESTAMP}, 
-      #{endtime,jdbcType=TIMESTAMP}, #{storknum,jdbcType=INTEGER}, #{ishandle,jdbcType=TINYINT}, 
-      #{applyprice,jdbcType=DECIMAL}, #{applytext,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.WFZY.pojo.Goodsactivity" >
+    insert into goodsactivity (goodsId, startTime, goodsType, 
+      createTime, endTime, storkNum, 
+      saleNum, ishandle, applyPrice
+      )
+    values (#{goodsid,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{goodstype,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{storknum,jdbcType=INTEGER}, 
+      #{salenum,jdbcType=INTEGER}, #{ishandle,jdbcType=TINYINT}, #{applyprice,jdbcType=DECIMAL}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.WFZY.pojo.Goodsapply" >
-    insert into goodsapply
+  <insert id="insertSelective" parameterType="com.WFZY.pojo.Goodsactivity" >
+    insert into goodsactivity
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsapplyid != null" >
-        goodsApplyId,
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="starttime != null" >
+        startTime,
       </if>
       <if test="goodstype != null" >
         goodsType,
       </if>
-      <if test="goodsid != null" >
-        goodsId,
-      </if>
-      <if test="shopid != null" >
-        shopId,
-      </if>
       <if test="createtime != null" >
         createTime,
-      </if>
-      <if test="starttime != null" >
-        startTime,
       </if>
       <if test="endtime != null" >
         endTime,
@@ -166,34 +137,28 @@
       <if test="storknum != null" >
         storkNum,
       </if>
+      <if test="salenum != null" >
+        saleNum,
+      </if>
       <if test="ishandle != null" >
         ishandle,
       </if>
       <if test="applyprice != null" >
         applyPrice,
       </if>
-      <if test="applytext != null" >
-        applyText,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsapplyid != null" >
-        #{goodsapplyid,jdbcType=INTEGER},
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="goodstype != null" >
         #{goodstype,jdbcType=TINYINT},
       </if>
-      <if test="goodsid != null" >
-        #{goodsid,jdbcType=INTEGER},
-      </if>
-      <if test="shopid != null" >
-        #{shopid,jdbcType=INTEGER},
-      </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="starttime != null" >
-        #{starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="endtime != null" >
         #{endtime,jdbcType=TIMESTAMP},
@@ -201,43 +166,37 @@
       <if test="storknum != null" >
         #{storknum,jdbcType=INTEGER},
       </if>
+      <if test="salenum != null" >
+        #{salenum,jdbcType=INTEGER},
+      </if>
       <if test="ishandle != null" >
         #{ishandle,jdbcType=TINYINT},
       </if>
       <if test="applyprice != null" >
         #{applyprice,jdbcType=DECIMAL},
       </if>
-      <if test="applytext != null" >
-        #{applytext,jdbcType=LONGVARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.WFZY.pojo.GoodsapplyExample" resultType="java.lang.Integer" >
-    select count(*) from goodsapply
+  <select id="countByExample" parameterType="com.WFZY.pojo.GoodsactivityExample" resultType="java.lang.Integer" >
+    select count(*) from goodsactivity
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update goodsapply
+    update goodsactivity
     <set >
-      <if test="record.goodsapplyid != null" >
-        goodsApplyId = #{record.goodsapplyid,jdbcType=INTEGER},
+      <if test="record.goodsid != null" >
+        goodsId = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.goodstype != null" >
         goodsType = #{record.goodstype,jdbcType=TINYINT},
       </if>
-      <if test="record.goodsid != null" >
-        goodsId = #{record.goodsid,jdbcType=INTEGER},
-      </if>
-      <if test="record.shopid != null" >
-        shopId = #{record.shopid,jdbcType=INTEGER},
-      </if>
       <if test="record.createtime != null" >
         createTime = #{record.createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.starttime != null" >
-        startTime = #{record.starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.endtime != null" >
         endTime = #{record.endtime,jdbcType=TIMESTAMP},
@@ -245,70 +204,43 @@
       <if test="record.storknum != null" >
         storkNum = #{record.storknum,jdbcType=INTEGER},
       </if>
+      <if test="record.salenum != null" >
+        saleNum = #{record.salenum,jdbcType=INTEGER},
+      </if>
       <if test="record.ishandle != null" >
         ishandle = #{record.ishandle,jdbcType=TINYINT},
       </if>
       <if test="record.applyprice != null" >
         applyPrice = #{record.applyprice,jdbcType=DECIMAL},
       </if>
-      <if test="record.applytext != null" >
-        applyText = #{record.applytext,jdbcType=LONGVARCHAR},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update goodsapply
-    set goodsApplyId = #{record.goodsapplyid,jdbcType=INTEGER},
-      goodsType = #{record.goodstype,jdbcType=TINYINT},
-      goodsId = #{record.goodsid,jdbcType=INTEGER},
-      shopId = #{record.shopid,jdbcType=INTEGER},
-      createTime = #{record.createtime,jdbcType=TIMESTAMP},
-      startTime = #{record.starttime,jdbcType=TIMESTAMP},
-      endTime = #{record.endtime,jdbcType=TIMESTAMP},
-      storkNum = #{record.storknum,jdbcType=INTEGER},
-      ishandle = #{record.ishandle,jdbcType=TINYINT},
-      applyPrice = #{record.applyprice,jdbcType=DECIMAL},
-      applyText = #{record.applytext,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map" >
-    update goodsapply
-    set goodsApplyId = #{record.goodsapplyid,jdbcType=INTEGER},
-      goodsType = #{record.goodstype,jdbcType=TINYINT},
-      goodsId = #{record.goodsid,jdbcType=INTEGER},
-      shopId = #{record.shopid,jdbcType=INTEGER},
-      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+    update goodsactivity
+    set goodsId = #{record.goodsid,jdbcType=INTEGER},
       startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      goodsType = #{record.goodstype,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
       endTime = #{record.endtime,jdbcType=TIMESTAMP},
       storkNum = #{record.storknum,jdbcType=INTEGER},
+      saleNum = #{record.salenum,jdbcType=INTEGER},
       ishandle = #{record.ishandle,jdbcType=TINYINT},
       applyPrice = #{record.applyprice,jdbcType=DECIMAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Goodsapply" >
-    update goodsapply
+  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Goodsactivity" >
+    update goodsactivity
     <set >
       <if test="goodstype != null" >
         goodsType = #{goodstype,jdbcType=TINYINT},
       </if>
-      <if test="goodsid != null" >
-        goodsId = #{goodsid,jdbcType=INTEGER},
-      </if>
-      <if test="shopid != null" >
-        shopId = #{shopid,jdbcType=INTEGER},
-      </if>
       <if test="createtime != null" >
         createTime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="starttime != null" >
-        startTime = #{starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="endtime != null" >
         endTime = #{endtime,jdbcType=TIMESTAMP},
@@ -316,43 +248,29 @@
       <if test="storknum != null" >
         storkNum = #{storknum,jdbcType=INTEGER},
       </if>
+      <if test="salenum != null" >
+        saleNum = #{salenum,jdbcType=INTEGER},
+      </if>
       <if test="ishandle != null" >
         ishandle = #{ishandle,jdbcType=TINYINT},
       </if>
       <if test="applyprice != null" >
         applyPrice = #{applyprice,jdbcType=DECIMAL},
       </if>
-      <if test="applytext != null" >
-        applyText = #{applytext,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+      and startTime = #{starttime,jdbcType=TIMESTAMP}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.WFZY.pojo.Goodsapply" >
-    update goodsapply
+  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Goodsactivity" >
+    update goodsactivity
     set goodsType = #{goodstype,jdbcType=TINYINT},
-      goodsId = #{goodsid,jdbcType=INTEGER},
-      shopId = #{shopid,jdbcType=INTEGER},
       createTime = #{createtime,jdbcType=TIMESTAMP},
-      startTime = #{starttime,jdbcType=TIMESTAMP},
       endTime = #{endtime,jdbcType=TIMESTAMP},
       storkNum = #{storknum,jdbcType=INTEGER},
-      ishandle = #{ishandle,jdbcType=TINYINT},
-      applyPrice = #{applyprice,jdbcType=DECIMAL},
-      applyText = #{applytext,jdbcType=LONGVARCHAR}
-    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Goodsapply" >
-    update goodsapply
-    set goodsType = #{goodstype,jdbcType=TINYINT},
-      goodsId = #{goodsid,jdbcType=INTEGER},
-      shopId = #{shopid,jdbcType=INTEGER},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      startTime = #{starttime,jdbcType=TIMESTAMP},
-      endTime = #{endtime,jdbcType=TIMESTAMP},
-      storkNum = #{storknum,jdbcType=INTEGER},
+      saleNum = #{salenum,jdbcType=INTEGER},
       ishandle = #{ishandle,jdbcType=TINYINT},
       applyPrice = #{applyprice,jdbcType=DECIMAL}
-    where goodsApplyId = #{goodsapplyid,jdbcType=INTEGER}
+    where goodsId = #{goodsid,jdbcType=INTEGER}
+      and startTime = #{starttime,jdbcType=TIMESTAMP}
   </update>
 </mapper>

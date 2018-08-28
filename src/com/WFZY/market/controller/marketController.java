@@ -16,6 +16,8 @@ import com.WFZY.market.service.marketService;
 import com.WFZY.order.service.orderService;
 import com.WFZY.pojo.GoodsExample;
 import com.WFZY.pojo.GoodsWithBLOBs;
+import com.WFZY.pojo.Goodsactivity;
+import com.WFZY.pojo.GoodsactivityExample;
 import com.WFZY.pojo.Goodsapply;
 import com.WFZY.pojo.GoodsapplyExample;
 import com.WFZY.pojo.Goodstime;
@@ -114,6 +116,7 @@ public class marketController {
 		GoodsapplyExample goodsapplyExample = new GoodsapplyExample();
 		GoodsapplyExample.Criteria goodsapplyCriteria = goodsapplyExample.createCriteria();
 		goodsapplyCriteria.andShopidEqualTo(shopList.get(0).getShopid());
+		goodsapplyCriteria.andIshandleNotEqualTo((byte)-2);
 		List<Goodsapply>  i = marketService.selectMarket(goodsapplyExample);
 		
 		for(int j=0;j<i.size();j++)
@@ -131,5 +134,65 @@ public class marketController {
 		modelAndView.addObject("goodsapply", i);
 		modelAndView.setViewName("/marketShowPage");
 		return modelAndView;
+	}
+	
+	@RequestMapping("/shop/showCancleMarketShowList.action")
+	public ModelAndView showCancleMarketShowList(HttpServletRequest request) throws ParseException
+	{
+		List<Shops> shopList = shopList(request);
+		
+		GoodsactivityExample goodsapplyExample = new GoodsactivityExample();
+		GoodsactivityExample.Criteria goodsCriteria = goodsapplyExample.createCriteria();
+		goodsCriteria.andIshandleEqualTo((byte)-1);
+		List<Goodsactivity>  i = orderService.selectactivity(goodsapplyExample);
+		
+		for(int j=0;j<i.size();j++)
+		{
+		GoodsExample example = new GoodsExample();
+		GoodsExample.Criteria goodsCriteria2 = example.createCriteria();
+		goodsCriteria2.andGoodsidEqualTo(i.get(j).getGoodsid());
+		List<GoodsWithBLOBs> goods = marketService.selectGoods(example);
+		i.get(j).setgoodsName(goods.get(0).getGoodsname());
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("shops", shopList.get(0).getShopname());
+		modelAndView.addObject("goodsapply", i);
+		modelAndView.setViewName("/marketCancleShowPage");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/cancelGoodsApply.action")
+	@ResponseBody
+	public String cancelGoodsApply(@RequestBody Goodsactivity goodsactivity,HttpServletRequest request) {
+		int goodsapplyid = Integer.valueOf(request.getParameter("goodsapplyid"));
+		int goodsapplytype = Integer.valueOf(request.getParameter("goodsapplytype"));
+		Goodsapply record = new Goodsapply();
+		record.setGoodsid(goodsactivity.getGoodsid());
+		record.setGoodstype((byte)goodsapplyid);
+		record.setIshandle((byte)-2);
+		record.setGoodsapplyid(goodsapplytype);
+		int flag = marketService.updataApply(record);
+		
+		if(flag==1)
+		{
+			flag = marketService.cancleMarket(goodsactivity);
+		}
+		
+		return "{\"flag\":" + flag + "}";
+	}
+	
+	@RequestMapping("/cancelGoodsApplytwo.action")
+	@ResponseBody
+	public String cancelGoodsApplytwo(@RequestBody Goodsactivity goodsactivity,HttpServletRequest request) {
+		int goodsapplyid = Integer.valueOf(request.getParameter("goodsapplyid"));
+		int goodsapplytype = Integer.valueOf(request.getParameter("goodsapplytype"));
+		Goodsapply record = new Goodsapply();
+		record.setGoodsid(goodsactivity.getGoodsid());
+		record.setGoodstype((byte)goodsapplyid);
+		record.setIshandle((byte)-2);
+		record.setGoodsapplyid(goodsapplytype);
+		int flag = marketService.updataApply(record);
+		
+		return "{\"flag\":" + flag + "}";
 	}
 }

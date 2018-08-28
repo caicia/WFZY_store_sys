@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.WFZY.pojo.GoodsExample;
 import com.WFZY.pojo.GoodsWithBLOBs;
+import com.WFZY.pojo.Goodsactivity;
 import com.WFZY.pojo.Goodsapply;
 import com.WFZY.pojo.GoodsapplyExample;
 import com.WFZY.pojo.Goodstime;
@@ -20,6 +21,10 @@ public interface marketService {
 	public int insertMarket(Goodsapply record);
 
 	public List<Goodsapply> selectMarket(GoodsapplyExample example);
+
+	public int cancleMarket(Goodsactivity record);
+
+	public int updataApply(Goodsapply record);
 
 	
 

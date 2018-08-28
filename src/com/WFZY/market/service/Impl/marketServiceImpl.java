@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.WFZY.mapper.GoodsMapper;
+import com.WFZY.mapper.GoodsactivityMapper;
 import com.WFZY.mapper.GoodsapplyMapper;
 import com.WFZY.mapper.GoodstimeMapper;
 import com.WFZY.mapper.OrdersMapper;
@@ -18,6 +19,8 @@ import com.WFZY.order.service.orderService;
 import com.WFZY.pojo.Banks;
 import com.WFZY.pojo.GoodsExample;
 import com.WFZY.pojo.GoodsWithBLOBs;
+import com.WFZY.pojo.Goodsactivity;
+import com.WFZY.pojo.GoodsactivityExample;
 import com.WFZY.pojo.Goodsapply;
 import com.WFZY.pojo.GoodsapplyExample;
 import com.WFZY.pojo.Goodstime;
@@ -36,6 +39,9 @@ public class marketServiceImpl implements marketService{
 	
 	@Resource
 	private GoodsapplyMapper goodsapplyMapper;
+	
+	@Resource
+	private GoodsactivityMapper goodsactivityMapper;
 
 	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
 
@@ -70,6 +76,24 @@ public class marketServiceImpl implements marketService{
 	public List<Goodsapply> selectMarket(GoodsapplyExample example) {
 		// TODO Auto-generated method stub
 		return goodsapplyMapper.selectByExampleWithBLOBs(example);
+		
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public int cancleMarket(Goodsactivity record) {
+		// TODO Auto-generated method stub
+		return goodsactivityMapper.updateByPrimaryKeySelective(record);
+		
+	}
+
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public int updataApply(Goodsapply record) {
+		// TODO Auto-generated method stub
+		return goodsapplyMapper.updateByPrimaryKeySelective(record);
 		
 	}
 
