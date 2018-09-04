@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.WFZY.mapper.GoodsMapper;
 import com.WFZY.mapper.GoodsactivityMapper;
 import com.WFZY.mapper.GoodsapplyMapper;
+import com.WFZY.mapper.GoodscommentMapper;
 import com.WFZY.mapper.GoodstimeMapper;
 import com.WFZY.mapper.OrdersMapper;
 import com.WFZY.market.service.marketService;
@@ -23,6 +24,8 @@ import com.WFZY.pojo.Goodsactivity;
 import com.WFZY.pojo.GoodsactivityExample;
 import com.WFZY.pojo.Goodsapply;
 import com.WFZY.pojo.GoodsapplyExample;
+import com.WFZY.pojo.GoodscommentExample;
+import com.WFZY.pojo.GoodscommentWithBLOBs;
 import com.WFZY.pojo.Goodstime;
 import com.WFZY.pojo.GoodstimeExample;
 import com.WFZY.pojo.Orders;
@@ -42,6 +45,9 @@ public class marketServiceImpl implements marketService{
 	
 	@Resource
 	private GoodsactivityMapper goodsactivityMapper;
+	
+	@Resource
+	private GoodscommentMapper goodscommentMapper;
 
 	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
 
@@ -95,6 +101,14 @@ public class marketServiceImpl implements marketService{
 		// TODO Auto-generated method stub
 		return goodsapplyMapper.updateByPrimaryKeySelective(record);
 		
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public List<GoodscommentWithBLOBs> selectComment(GoodscommentExample example) {
+		// TODO Auto-generated method stub
+		return goodscommentMapper.selectByExampleWithBLOBs(example);
 	}
 
 }

@@ -45,8 +45,8 @@
 					class="c-red">*</span>店铺营销类型：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<select name="shopShowType" id="shopShowType">
-					<c:if test="${i.isself eq '1'}"><option value="1">自营</option></c:if>
-					<c:if test="${i.isself eq '0'}"><option value="0">非自营</option></c:if>	
+					<c:if test="${i.isself eq '1'}"><option value="1">自营</option><option value="0">非自营</option></c:if>
+					<c:if test="${i.isself eq '0'}"><option value="0">非自营</option><option value="1">自营</option></c:if>	
 					</select>
 				</div>
 			</div>

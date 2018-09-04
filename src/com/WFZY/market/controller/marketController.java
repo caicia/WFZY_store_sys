@@ -31,7 +31,7 @@ import com.WFZY.shop.service.ShopService;
 
 @Controller
 public class marketController {
-
+	
 	@Resource(name = "marketServiceImpl")
 	private marketService marketService;
 	

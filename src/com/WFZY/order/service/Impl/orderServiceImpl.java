@@ -10,14 +10,21 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.WFZY.mapper.ExpressMapper;
+import com.WFZY.mapper.GoodsMapper;
 import com.WFZY.mapper.GoodsactivityMapper;
+import com.WFZY.mapper.GoodscommentMapper;
 import com.WFZY.mapper.OrdersMapper;
 import com.WFZY.order.service.orderService;
 import com.WFZY.pojo.Banks;
 import com.WFZY.pojo.Express;
 import com.WFZY.pojo.ExpressExample;
+import com.WFZY.pojo.GoodsExample;
+import com.WFZY.pojo.GoodsWithBLOBs;
 import com.WFZY.pojo.Goodsactivity;
 import com.WFZY.pojo.GoodsactivityExample;
+import com.WFZY.pojo.Goodscomment;
+import com.WFZY.pojo.GoodscommentExample;
+import com.WFZY.pojo.GoodscommentWithBLOBs;
 import com.WFZY.pojo.Orders;
 import com.WFZY.pojo.OrdersExample;
 
@@ -32,6 +39,12 @@ public class orderServiceImpl implements orderService{
 	
 	@Resource
 	private GoodsactivityMapper goodsactivityMapper;
+	
+	@Resource
+	private GoodscommentMapper goodscommentMapper;
+	
+	@Resource
+	private GoodsMapper goodsMapper;
 	
 	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
 
@@ -75,5 +88,29 @@ public class orderServiceImpl implements orderService{
 	public List<Goodsactivity> selectactivity(GoodsactivityExample example) {
 		// TODO Auto-generated method stub
 		return goodsactivityMapper.selectByExample(example);
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public List<GoodscommentWithBLOBs> selectComment(GoodscommentExample example) {
+		// TODO Auto-generated method stub
+		return goodscommentMapper.selectByExampleWithBLOBs(example);
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public int updateComment(GoodscommentWithBLOBs record) {
+		// TODO Auto-generated method stub
+		return goodscommentMapper.updateByPrimaryKeySelective(record);
+	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, readOnly = false, propagation = Propagation.REQUIRED)
+
+	@Override
+	public List<GoodsWithBLOBs> selectgoods(GoodsExample example) {
+		// TODO Auto-generated method stub
+		return goodsMapper.selectByExampleWithBLOBs(example);
 	}
 }

@@ -21,6 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.WFZY.order.service.orderService;
 import com.WFZY.pojo.Express;
 import com.WFZY.pojo.ExpressExample;
+import com.WFZY.pojo.GoodsExample;
+import com.WFZY.pojo.GoodsWithBLOBs;
+import com.WFZY.pojo.Goodscomment;
+import com.WFZY.pojo.GoodscommentExample;
+import com.WFZY.pojo.GoodscommentWithBLOBs;
 import com.WFZY.pojo.Orders;
 import com.WFZY.pojo.OrdersExample;
 import com.WFZY.pojo.Shops;
@@ -73,14 +78,13 @@ public class orderController {
 		{
 			String userName = userList(order.get(i).getUserid());
 			order.get(i).setusername(userName);
-			for(int j=0;j<order.size() && j!=i;j++)
+			for(int j=i+1;j<order.size();j++)
 			{
 				if(order.get(i).getOrderno().equals(order.get(j).getOrderno()))
 				{
 					System.out.println(order.get(i).getOrderno()+"=="+order.get(j).getOrderno());
 					order.remove(j);
 				}
-				
 			}
 		}
 		ModelAndView modelAndView = new ModelAndView();
@@ -106,17 +110,17 @@ public class orderController {
 		{
 			String userName = userList(order.get(i).getUserid());
 			order.get(i).setusername(userName);
-			for(int j=0;j<order.size() && j!=i;j++)
+			for(int j=i+1;j<order.size();j++)
 			{
 				if(order.get(i).getOrderno().equals(order.get(j).getOrderno()))
 				{
 					System.out.println(order.get(i).getOrderno()+"=="+order.get(j).getOrderno());
 					order.remove(j);
 				}
-				
 			}
 		}
 		
+		System.out.println(order.get(1).getusername());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("order", order);
@@ -140,14 +144,13 @@ public class orderController {
 		{
 			String userName = userList(order.get(i).getUserid());
 			order.get(i).setusername(userName);
-			for(int j=0;j<order.size() && j!=i;j++)
+			for(int j=i+1;j<order.size();j++)
 			{
 				if(order.get(i).getOrderno().equals(order.get(j).getOrderno()))
 				{
 					System.out.println(order.get(i).getOrderno()+"=="+order.get(j).getOrderno());
 					order.remove(j);
 				}
-				
 			}
 		}
 		
@@ -209,6 +212,58 @@ public class orderController {
 		modelAndView.addObject("expressName" , express.get(0).getExpressname());
 		modelAndView.setViewName("/orderDeliveryPage");
 		return modelAndView;
+	}
+	
+	@RequestMapping("/shop/showComment.action")
+	public ModelAndView showOrderComment(HttpServletRequest request) throws ParseException
+	{
+		List<Shops> shopList = shopList(request);
+		
+		GoodscommentExample example = new GoodscommentExample();
+		GoodscommentExample.Criteria commentCriteria = example.createCriteria();
+		commentCriteria.andShopidEqualTo(shopList.get(0).getShopid());
+		commentCriteria.andIsshowEqualTo((byte)1);
+		commentCriteria.andDataflagEqualTo((byte)1);
+		List<GoodscommentWithBLOBs> commnet = orderService.selectComment(example);
+		
+		List<String> orderno = new ArrayList<String>();
+		List<String> goodsname = new ArrayList<String>();
+		List<String> username = new ArrayList<String>();
+		
+		for(int i=0;i<commnet.size();i++)
+		{
+			OrdersExample ordersExample = new OrdersExample();
+			OrdersExample.Criteria orderCriteria = ordersExample.createCriteria();
+			orderCriteria.andOrderidEqualTo(commnet.get(i).getOrderid());
+			List<Orders> order = orderService.selectOrder(ordersExample);
+			orderno.add(order.get(0).getOrderno());
+		
+			GoodsExample goodsExample = new GoodsExample();
+			GoodsExample.Criteria goodsCriteria = goodsExample.createCriteria();
+			goodsCriteria.andGoodsidEqualTo(commnet.get(i).getGoodsid());
+			List<GoodsWithBLOBs> goods = orderService.selectgoods(goodsExample);
+			goodsname.add(goods.get(0).getGoodsname());
+		
+			UsersExample usersExample = new UsersExample();
+			UsersExample.Criteria userCriteria = usersExample.createCriteria();
+			userCriteria.andUseridEqualTo(commnet.get(i).getUserid());
+			List<Users> user = shopservice.getUserID(usersExample);
+			username.add(user.get(0).getUsername());
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("comment", commnet);
+		modelAndView.addObject("orderno", orderno);
+		modelAndView.addObject("goodsname", goodsname);
+		modelAndView.addObject("username", username);
+		modelAndView.setViewName("/showComment");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/updateComment.action")
+	@ResponseBody
+	public String updateComment(@RequestBody GoodscommentWithBLOBs goodscommentWithBLOBs) {
+		int flag = orderService.updateComment(goodscommentWithBLOBs);
+		return "{\"flag\":" + flag + "}";
 	}
 	
 	@RequestMapping("/insertOrderExpress.action")

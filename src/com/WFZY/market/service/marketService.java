@@ -7,6 +7,8 @@ import com.WFZY.pojo.GoodsWithBLOBs;
 import com.WFZY.pojo.Goodsactivity;
 import com.WFZY.pojo.Goodsapply;
 import com.WFZY.pojo.GoodsapplyExample;
+import com.WFZY.pojo.GoodscommentExample;
+import com.WFZY.pojo.GoodscommentWithBLOBs;
 import com.WFZY.pojo.Goodstime;
 import com.WFZY.pojo.GoodstimeExample;
 import com.WFZY.pojo.Orders;
@@ -25,6 +27,8 @@ public interface marketService {
 	public int cancleMarket(Goodsactivity record);
 
 	public int updataApply(Goodsapply record);
+
+	public List<GoodscommentWithBLOBs> selectComment(GoodscommentExample example);
 
 	
 

@@ -25,7 +25,7 @@
 
 		<!-- targetProject:生成PO类的位置 -->
 		<javaModelGenerator targetPackage="com.WFZY.pojo"
-			targetProject=".\src">
+			targetProject="./src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 			<!-- 从数据库返回的值被清理前后的空格 -->
@@ -33,13 +33,13 @@
 		</javaModelGenerator>
 		<!-- targetProject:mapper映射文件生成的位置 -->
 		<sqlMapGenerator targetPackage="com.WFZY.mapper"
-			targetProject=".\src">
+			targetProject="./src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!-- targetPackage：mapper接口生成的位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.WFZY.mapper" targetProject=".\src">
+			targetPackage="com.WFZY.mapper" targetProject="./src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
@@ -66,8 +66,7 @@
 		<table schema="" tableName="message"></table>
 		<table schema="" tableName="shopsexpress"></table>
 		<table schema="" tableName="limittimes"></table>-->
-		<table schema="" tableName="goodsactivity"></table>
-		<table schema="" tableName="goodsapply"></table>
+		<table schema="" tableName="goodscomment"></table>
 		<!-- 有些表的字段需要指定java类型 <table schema="" tableName="user"> <columnOverride 
 			column="id" javaType="Long" /> </table> -->
 	</context>

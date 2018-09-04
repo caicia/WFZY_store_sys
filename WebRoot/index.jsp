@@ -268,7 +268,7 @@
 				"resourceType" : ""
 			},
 			{
-				"accessPath" : "loupanchart.html",
+				"accessPath" : "${pageContext.request.contextPath }/shop/showComment.action",
 				"checked" : false,
 				"delFlag" : 0,
 				"parentID" : 3,

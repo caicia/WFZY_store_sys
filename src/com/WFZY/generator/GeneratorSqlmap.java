@@ -16,7 +16,7 @@ public class GeneratorSqlmap {
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
 		// 指定 逆向工程配置文件
-		File configFile = new File("c://Users//Administrator//Workspaces//MyEclipse 2017 CI//WFZY_store_sys//src//generatorConfig.xml");
+		File configFile = new File("/home/caicai/git/WFZY_store_sys/src/generatorConfig.xml");
 		ConfigurationParser cp = new ConfigurationParser(warnings);
 		Configuration config = cp.parseConfiguration(configFile);
 		DefaultShellCallback callback = new DefaultShellCallback(overwrite);
