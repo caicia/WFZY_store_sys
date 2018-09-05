@@ -8,4 +8,5 @@
 	<context:component-scan base-package="com.WFZY.shop.service"></context:component-scan>
 	<context:component-scan base-package="com.WFZY.order.service"></context:component-scan>
 	<context:component-scan base-package="com.WFZY.market.service"></context:component-scan>
+	<context:component-scan base-package="com.WFZY.goodsclassify.service"></context:component-scan>
 </beans>

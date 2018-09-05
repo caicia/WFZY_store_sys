@@ -359,7 +359,7 @@
 			"resourceType" : ""
 		},
 		{
-			"accessPath" : "",
+			"accessPath" : "${pageContext.request.contextPath }/shop/product/product_list.action",
 			"checked" : false,
 			"delFlag" : 0,
 			"parentID" : 11,
@@ -367,20 +367,7 @@
 			"resourceDesc" : "",
 			"resourceGrade" : 11,
 			"resourceID" : 111,
-			"resourceName" : "发布宝贝",
-			"resourceOrder" : 0,
-			"resourceType" : ""
-		},
-		{
-			"accessPath" : "",
-			"checked" : false,
-			"delFlag" : 0,
-			"parentID" : 11,
-			"resourceCode" : "",
-			"resourceDesc" : "",
-			"resourceGrade" : 11,
-			"resourceID" : 112,
-			"resourceName" : "出售中的宝贝",
+			"resourceName" : "宝贝管理",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
@@ -394,19 +381,6 @@
 			"resourceGrade" : 11,
 			"resourceID" : 113,
 			"resourceName" : "体检中心",
-			"resourceOrder" : 0,
-			"resourceType" : ""
-		},
-		{
-			"accessPath" : "",
-			"checked" : false,
-			"delFlag" : 0,
-			"parentID" : 11,
-			"resourceCode" : "",
-			"resourceDesc" : "",
-			"resourceGrade" : 11,
-			"resourceID" : 113,
-			"resourceName" : "仓库中的宝贝",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
