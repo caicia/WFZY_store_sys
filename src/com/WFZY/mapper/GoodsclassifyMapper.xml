@@ -1,261 +1,433 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.WFZY.mapper.GoodsclassifyMapper" >
-  <resultMap id="BaseResultMap" type="com.WFZY.pojo.Goodsclassify" >
-    <id column="goodsClassifyId" property="goodsclassifyid" jdbcType="INTEGER" />
-    <result column="goodsClassifyParentId" property="goodsclassifyparentid" jdbcType="INTEGER" />
-    <result column="goodsClassifyGrade" property="goodsclassifygrade" jdbcType="INTEGER" />
-    <result column="goodsClassifyName" property="goodsclassifyname" jdbcType="VARCHAR" />
-    <result column="goodsClassifyParentName" property="goodsclassifyparentname" jdbcType="VARCHAR" />
-    <result column="goodsClassifySort" property="goodsclassifysort" jdbcType="INTEGER" />
-    <result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
-    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    goodsClassifyId, goodsClassifyParentId, goodsClassifyGrade, goodsClassifyName, goodsClassifyParentName, 
-    goodsClassifySort, dataFlag, createTime
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.WFZY.pojo.GoodsclassifyExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from goodsclassify
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from goodsclassify
-    where goodsClassifyId = #{goodsclassifyid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from goodsclassify
-    where goodsClassifyId = #{goodsclassifyid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.WFZY.pojo.GoodsclassifyExample" >
-    delete from goodsclassify
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.WFZY.pojo.Goodsclassify" >
-    insert into goodsclassify (goodsClassifyId, goodsClassifyParentId, 
-      goodsClassifyGrade, goodsClassifyName, 
-      goodsClassifyParentName, goodsClassifySort, 
-      dataFlag, createTime)
-    values (#{goodsclassifyid,jdbcType=INTEGER}, #{goodsclassifyparentid,jdbcType=INTEGER}, 
-      #{goodsclassifygrade,jdbcType=INTEGER}, #{goodsclassifyname,jdbcType=VARCHAR}, 
-      #{goodsclassifyparentname,jdbcType=VARCHAR}, #{goodsclassifysort,jdbcType=INTEGER}, 
-      #{dataflag,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.WFZY.pojo.Goodsclassify" >
-    insert into goodsclassify
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsclassifyid != null" >
-        goodsClassifyId,
-      </if>
-      <if test="goodsclassifyparentid != null" >
-        goodsClassifyParentId,
-      </if>
-      <if test="goodsclassifygrade != null" >
-        goodsClassifyGrade,
-      </if>
-      <if test="goodsclassifyname != null" >
-        goodsClassifyName,
-      </if>
-      <if test="goodsclassifyparentname != null" >
-        goodsClassifyParentName,
-      </if>
-      <if test="goodsclassifysort != null" >
-        goodsClassifySort,
-      </if>
-      <if test="dataflag != null" >
-        dataFlag,
-      </if>
-      <if test="createtime != null" >
-        createTime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsclassifyid != null" >
-        #{goodsclassifyid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsclassifyparentid != null" >
-        #{goodsclassifyparentid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsclassifygrade != null" >
-        #{goodsclassifygrade,jdbcType=INTEGER},
-      </if>
-      <if test="goodsclassifyname != null" >
-        #{goodsclassifyname,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsclassifyparentname != null" >
-        #{goodsclassifyparentname,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsclassifysort != null" >
-        #{goodsclassifysort,jdbcType=INTEGER},
-      </if>
-      <if test="dataflag != null" >
-        #{dataflag,jdbcType=TINYINT},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.WFZY.pojo.GoodsclassifyExample" resultType="java.lang.Integer" >
-    select count(*) from goodsclassify
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update goodsclassify
-    <set >
-      <if test="record.goodsclassifyid != null" >
-        goodsClassifyId = #{record.goodsclassifyid,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsclassifyparentid != null" >
-        goodsClassifyParentId = #{record.goodsclassifyparentid,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsclassifygrade != null" >
-        goodsClassifyGrade = #{record.goodsclassifygrade,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsclassifyname != null" >
-        goodsClassifyName = #{record.goodsclassifyname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.goodsclassifyparentname != null" >
-        goodsClassifyParentName = #{record.goodsclassifyparentname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.goodsclassifysort != null" >
-        goodsClassifySort = #{record.goodsclassifysort,jdbcType=INTEGER},
-      </if>
-      <if test="record.dataflag != null" >
-        dataFlag = #{record.dataflag,jdbcType=TINYINT},
-      </if>
-      <if test="record.createtime != null" >
-        createTime = #{record.createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update goodsclassify
-    set goodsClassifyId = #{record.goodsclassifyid,jdbcType=INTEGER},
-      goodsClassifyParentId = #{record.goodsclassifyparentid,jdbcType=INTEGER},
-      goodsClassifyGrade = #{record.goodsclassifygrade,jdbcType=INTEGER},
-      goodsClassifyName = #{record.goodsclassifyname,jdbcType=VARCHAR},
-      goodsClassifyParentName = #{record.goodsclassifyparentname,jdbcType=VARCHAR},
-      goodsClassifySort = #{record.goodsclassifysort,jdbcType=INTEGER},
-      dataFlag = #{record.dataflag,jdbcType=TINYINT},
-      createTime = #{record.createtime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Goodsclassify" >
-    update goodsclassify
-    <set >
-      <if test="goodsclassifyparentid != null" >
-        goodsClassifyParentId = #{goodsclassifyparentid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsclassifygrade != null" >
-        goodsClassifyGrade = #{goodsclassifygrade,jdbcType=INTEGER},
-      </if>
-      <if test="goodsclassifyname != null" >
-        goodsClassifyName = #{goodsclassifyname,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsclassifyparentname != null" >
-        goodsClassifyParentName = #{goodsclassifyparentname,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsclassifysort != null" >
-        goodsClassifySort = #{goodsclassifysort,jdbcType=INTEGER},
-      </if>
-      <if test="dataflag != null" >
-        dataFlag = #{dataflag,jdbcType=TINYINT},
-      </if>
-      <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where goodsClassifyId = #{goodsclassifyid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Goodsclassify" >
-    update goodsclassify
-    set goodsClassifyParentId = #{goodsclassifyparentid,jdbcType=INTEGER},
-      goodsClassifyGrade = #{goodsclassifygrade,jdbcType=INTEGER},
-      goodsClassifyName = #{goodsclassifyname,jdbcType=VARCHAR},
-      goodsClassifyParentName = #{goodsclassifyparentname,jdbcType=VARCHAR},
-      goodsClassifySort = #{goodsclassifysort,jdbcType=INTEGER},
-      dataFlag = #{dataflag,jdbcType=TINYINT},
-      createTime = #{createtime,jdbcType=TIMESTAMP}
-    where goodsClassifyId = #{goodsclassifyid,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.WFZY.mapper.GoodsclassifyMapper">
+	<resultMap id="BaseResultMap" type="com.WFZY.pojo.Goodsclassify">
+		<id column="goodsClassifyId" property="goodsclassifyid" jdbcType="INTEGER" />
+		<result column="goodsClassifyParentId" property="goodsclassifyparentid"
+			jdbcType="INTEGER" />
+		<result column="goodsClassifyGrade" property="goodsclassifygrade"
+			jdbcType="INTEGER" />
+		<result column="goodsClassifyName" property="goodsclassifyname"
+			jdbcType="VARCHAR" />
+		<result column="goodsClassifyParentName" property="goodsclassifyparentname"
+			jdbcType="VARCHAR" />
+		<result column="goodsClassifySort" property="goodsclassifysort"
+			jdbcType="INTEGER" />
+		<result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
+		<result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="BaseResultMapVo" type="com.WFZY.vo.GoodsclassifyVo">
+		<id column="goodsclassifyid" property="goodsclassifyid" />
+		<result column="goodsClassifyParentId" property="goodsclassifyparentid"
+			jdbcType="INTEGER" />
+		<result column="goodsClassifyGrade" property="goodsclassifygrade"
+			jdbcType="INTEGER" />
+		<result column="goodsClassifyName" property="goodsclassifyname"
+			jdbcType="VARCHAR" />
+		<result column="goodsClassifyParentName" property="goodsclassifyparentname"
+			jdbcType="VARCHAR" />
+		<result column="goodsClassifySort" property="goodsclassifysort"
+			jdbcType="INTEGER" />
+		<result column="dataFlag" property="dataflag" jdbcType="TINYINT" />
+		<result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="childcount" property="childcount" />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		goodsClassifyId, goodsClassifyParentId, goodsClassifyGrade,
+		goodsClassifyName,
+		goodsClassifyParentName,
+		goodsClassifySort, dataFlag,
+		createTime
+	</sql>
+
+	<!-- ==================================== com.WFZY.vo.GoodsclassifyVo =========================================== -->
+	<!-- 查询一级商品分类 -->
+	<select id="selectOneGoodsClassifyVoByPid" resultMap="BaseResultMapVo">
+
+		SELECT p.*,count(s.goodsclassifyname) as childcount FROM
+		goodsclassify
+		AS p
+		LEFT JOIN goodsclassify AS s ON
+		s.goodsClassifyParentId =
+		p.goodsClassifyId
+		WHERE p.goodsClassifyGrade = 1
+		GROUP BY
+		p.goodsClassifyName
+		ORDER BY p.goodsclassifysort;
+	</select>
+
+	<!-- 查询二级商品分类 -->
+	<select id="selectTwoGoodsClassifyVoByPid" resultMap="BaseResultMapVo">
+
+		SELECT p.*,count(s.goodsclassifyname) as childcount FROM
+		goodsclassify
+		AS p
+		LEFT JOIN goodsclassify AS s ON
+		s.goodsClassifyParentId =
+		p.goodsClassifyId
+		WHERE p.goodsClassifyGrade = 2
+		GROUP BY
+		p.goodsClassifyName
+		ORDER BY p.goodsclassifysort;
+	</select>
+	<!-- 查询三级商品分类 -->
+	<select id="selectThreeGoodsClassifyVoByPid" resultMap="BaseResultMapVo">
+
+		SELECT p.*,count(s.goodsclassifyname) as childcount FROM
+		goodsclassify
+		AS p
+		LEFT JOIN goodsclassify AS s ON
+		s.goodsClassifyParentId =
+		p.goodsClassifyId
+		WHERE p.goodsClassifyGrade = 3
+		GROUP BY
+		p.goodsClassifyName
+		ORDER BY p.goodsclassifysort;
+	</select>
+	<!-- ==================================com.WFZY.pojo.Goodsclassify====================================== -->
+	<!-- 查询一级商品分类 -->
+	<select id="selectOneGoodsClassifyByPid" resultMap="BaseResultMap">
+		select * from
+		goodsclassify where goodsClassifyGrade = 1
+
+	</select>
+
+	<!-- 查询二级商品分类 -->
+	<select id="selectTwoGoodsClassifyByPid" resultMap="BaseResultMap">
+		select * from
+		goodsclassify where goodsClassifyGrade = 2
+
+	</select>
+	<!-- 查询三级商品分类 -->
+	<select id="selectThreeGoodsClassifyByPid" resultMap="BaseResultMap">
+		select *
+		from goodsclassify where goodsClassifyGrade = 3
+
+	</select>
+
+	<!-- 查询父类商品分类名称 -->
+	<select id="selectGnameByGid" parameterType="Integer" resultMap="BaseResultMap">
+		select * from goodsclassify where goodsclassifyid = #{goodsclassifyid}
+	</select>
+
+	<!-- 查询父类下面 子类的数目 （自连接 方法 查询数据） -->
+	<select id="selectChildCount" parameterType="Integer"
+		resultType="Integer">
+		SELECT count(s.goodsclassifyname) FROM
+		goodsclassify AS p
+		LEFT JOIN goodsclassify AS s ON
+		s.goodsClassifyParentId =
+		p.goodsClassifyId
+		WHERE p.goodsclassifyid = #{goodsclassifyid}
+		GROUP
+		BY
+		p.goodsClassifyName
+		ORDER BY p.goodsClassifyId;
+
+	</select>
+
+	<!-- 搜索 商品分类 <select id="searchGoodsClassify" parameterType="String" resultMap="BaseResultMapVo"> 
+		SELECT p.*, count(s.goodsclassifyname) as childcount FROM goodsclassify AS 
+		p LEFT JOIN goodsclassify AS s ON s.goodsClassifyParentId = p.goodsClassifyId 
+		WHERE p.goodsClassifyName like '%' #{searchInput} '%' or p.goodsClassifyParentName 
+		like '%' #{searchInput} '%' GROUP BY p.goodsClassifyName ORDER BY p.goodsClassifyId; 
+		</select> -->
+
+
+
+
+
+
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.WFZY.pojo.GoodsclassifyExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from goodsclassify
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from goodsclassify
+		where goodsClassifyId =
+		#{goodsclassifyid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		goodsclassify
+		where goodsClassifyId =
+		#{goodsclassifyid,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.WFZY.pojo.GoodsclassifyExample">
+		delete from goodsclassify
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.WFZY.pojo.Goodsclassify">
+		insert into goodsclassify
+		(goodsClassifyId, goodsClassifyParentId,
+		goodsClassifyGrade,
+		goodsClassifyName,
+		goodsClassifyParentName, goodsClassifySort,
+		dataFlag, createTime)
+		values (#{goodsclassifyid,jdbcType=INTEGER},
+		#{goodsclassifyparentid,jdbcType=INTEGER},
+		#{goodsclassifygrade,jdbcType=INTEGER},
+		#{goodsclassifyname,jdbcType=VARCHAR},
+		#{goodsclassifyparentname,jdbcType=VARCHAR},
+		#{goodsclassifysort,jdbcType=INTEGER},
+		#{dataflag,jdbcType=TINYINT},
+		#{createtime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.WFZY.pojo.Goodsclassify">
+		insert into goodsclassify
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="goodsclassifyid != null">
+				goodsClassifyId,
+			</if>
+			<if test="goodsclassifyparentid != null">
+				goodsClassifyParentId,
+			</if>
+			<if test="goodsclassifygrade != null">
+				goodsClassifyGrade,
+			</if>
+			<if test="goodsclassifyname != null">
+				goodsClassifyName,
+			</if>
+			<if test="goodsclassifyparentname != null">
+				goodsClassifyParentName,
+			</if>
+			<if test="goodsclassifysort != null">
+				goodsClassifySort,
+			</if>
+			<if test="dataflag != null">
+				dataFlag,
+			</if>
+			<if test="createtime != null">
+				createTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="goodsclassifyid != null">
+				#{goodsclassifyid,jdbcType=INTEGER},
+			</if>
+			<if test="goodsclassifyparentid != null">
+				#{goodsclassifyparentid,jdbcType=INTEGER},
+			</if>
+			<if test="goodsclassifygrade != null">
+				#{goodsclassifygrade,jdbcType=INTEGER},
+			</if>
+			<if test="goodsclassifyname != null">
+				#{goodsclassifyname,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsclassifyparentname != null">
+				#{goodsclassifyparentname,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsclassifysort != null">
+				#{goodsclassifysort,jdbcType=INTEGER},
+			</if>
+			<if test="dataflag != null">
+				#{dataflag,jdbcType=TINYINT},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.WFZY.pojo.GoodsclassifyExample"
+		resultType="java.lang.Integer">
+		select count(*) from goodsclassify
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update goodsclassify
+		<set>
+			<if test="record.goodsclassifyid != null">
+				goodsClassifyId =
+				#{record.goodsclassifyid,jdbcType=INTEGER},
+			</if>
+			<if test="record.goodsclassifyparentid != null">
+				goodsClassifyParentId =
+				#{record.goodsclassifyparentid,jdbcType=INTEGER},
+			</if>
+			<if test="record.goodsclassifygrade != null">
+				goodsClassifyGrade =
+				#{record.goodsclassifygrade,jdbcType=INTEGER},
+			</if>
+			<if test="record.goodsclassifyname != null">
+				goodsClassifyName =
+				#{record.goodsclassifyname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.goodsclassifyparentname != null">
+				goodsClassifyParentName =
+				#{record.goodsclassifyparentname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.goodsclassifysort != null">
+				goodsClassifySort =
+				#{record.goodsclassifysort,jdbcType=INTEGER},
+			</if>
+			<if test="record.dataflag != null">
+				dataFlag = #{record.dataflag,jdbcType=TINYINT},
+			</if>
+			<if test="record.createtime != null">
+				createTime = #{record.createtime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update goodsclassify
+		set goodsClassifyId =
+		#{record.goodsclassifyid,jdbcType=INTEGER},
+		goodsClassifyParentId =
+		#{record.goodsclassifyparentid,jdbcType=INTEGER},
+		goodsClassifyGrade =
+		#{record.goodsclassifygrade,jdbcType=INTEGER},
+		goodsClassifyName =
+		#{record.goodsclassifyname,jdbcType=VARCHAR},
+		goodsClassifyParentName =
+		#{record.goodsclassifyparentname,jdbcType=VARCHAR},
+		goodsClassifySort =
+		#{record.goodsclassifysort,jdbcType=INTEGER},
+		dataFlag =
+		#{record.dataflag,jdbcType=TINYINT},
+		createTime =
+		#{record.createtime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.WFZY.pojo.Goodsclassify">
+		update goodsclassify
+		<set>
+			<if test="goodsclassifyparentid != null">
+				goodsClassifyParentId =
+				#{goodsclassifyparentid,jdbcType=INTEGER},
+			</if>
+			<if test="goodsclassifygrade != null">
+				goodsClassifyGrade =
+				#{goodsclassifygrade,jdbcType=INTEGER},
+			</if>
+			<if test="goodsclassifyname != null">
+				goodsClassifyName =
+				#{goodsclassifyname,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsclassifyparentname != null">
+				goodsClassifyParentName =
+				#{goodsclassifyparentname,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsclassifysort != null">
+				goodsClassifySort =
+				#{goodsclassifysort,jdbcType=INTEGER},
+			</if>
+			<if test="dataflag != null">
+				dataFlag = #{dataflag,jdbcType=TINYINT},
+			</if>
+			<if test="createtime != null">
+				createTime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where goodsClassifyId = #{goodsclassifyid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.WFZY.pojo.Goodsclassify">
+		update
+		goodsclassify
+		set goodsClassifyParentId =
+		#{goodsclassifyparentid,jdbcType=INTEGER},
+		goodsClassifyGrade =
+		#{goodsclassifygrade,jdbcType=INTEGER},
+		goodsClassifyName =
+		#{goodsclassifyname,jdbcType=VARCHAR},
+		goodsClassifyParentName =
+		#{goodsclassifyparentname,jdbcType=VARCHAR},
+		goodsClassifySort =
+		#{goodsclassifysort,jdbcType=INTEGER},
+		dataFlag =
+		#{dataflag,jdbcType=TINYINT},
+		createTime =
+		#{createtime,jdbcType=TIMESTAMP}
+		where goodsClassifyId =
+		#{goodsclassifyid,jdbcType=INTEGER}
+	</update>
 </mapper>
