@@ -255,19 +255,6 @@
 			"resourceType" : ""
 		},
 			{
-				"accessPath" : "house_list.jsp",
-				"checked" : false,
-				"delFlag" : 0,
-				"parentID" : 3,
-				"resourceCode" : "",
-				"resourceDesc" : "",
-				"resourceGrade" : 3,
-				"resourceID" : 7,
-				"resourceName" : "已卖出的宝贝",
-				"resourceOrder" : 0,
-				"resourceType" : ""
-			},
-			{
 				"accessPath" : "${pageContext.request.contextPath }/shop/showComment.action",
 				"checked" : false,
 				"delFlag" : 0,
@@ -368,19 +355,6 @@
 			"resourceGrade" : 11,
 			"resourceID" : 111,
 			"resourceName" : "宝贝管理",
-			"resourceOrder" : 0,
-			"resourceType" : ""
-		},
-		{
-			"accessPath" : "",
-			"checked" : false,
-			"delFlag" : 0,
-			"parentID" : 11,
-			"resourceCode" : "",
-			"resourceDesc" : "",
-			"resourceGrade" : 11,
-			"resourceID" : 113,
-			"resourceName" : "体检中心",
 			"resourceOrder" : 0,
 			"resourceType" : ""
 		},
