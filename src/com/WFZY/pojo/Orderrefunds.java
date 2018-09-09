@@ -8,25 +8,23 @@ public class Orderrefunds {
 
     private Integer orderid;
 
-    private Integer refundto;
+    private Integer userid;
 
-    private String refundtradeno;
+    private Integer shopid;
+
+    private String refundotherreson;
+
+    private Date createtime;
+
+    private BigDecimal backmoney;
 
     private String refundremark;
 
     private Date refundtime;
 
-    private Integer refundreson;
-
-    private String refundotherreson;
-
-    private BigDecimal backmoney;
-
     private String shoprejectreason;
 
     private Byte refundstatus;
-
-    private Date createtime;
 
     public Integer getOrderrefundsid() {
         return orderrefundsid;
@@ -44,20 +42,44 @@ public class Orderrefunds {
         this.orderid = orderid;
     }
 
-    public Integer getRefundto() {
-        return refundto;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setRefundto(Integer refundto) {
-        this.refundto = refundto;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
-    public String getRefundtradeno() {
-        return refundtradeno;
+    public Integer getShopid() {
+        return shopid;
     }
 
-    public void setRefundtradeno(String refundtradeno) {
-        this.refundtradeno = refundtradeno == null ? null : refundtradeno.trim();
+    public void setShopid(Integer shopid) {
+        this.shopid = shopid;
+    }
+
+    public String getRefundotherreson() {
+        return refundotherreson;
+    }
+
+    public void setRefundotherreson(String refundotherreson) {
+        this.refundotherreson = refundotherreson == null ? null : refundotherreson.trim();
+    }
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public BigDecimal getBackmoney() {
+        return backmoney;
+    }
+
+    public void setBackmoney(BigDecimal backmoney) {
+        this.backmoney = backmoney;
     }
 
     public String getRefundremark() {
@@ -76,30 +98,6 @@ public class Orderrefunds {
         this.refundtime = refundtime;
     }
 
-    public Integer getRefundreson() {
-        return refundreson;
-    }
-
-    public void setRefundreson(Integer refundreson) {
-        this.refundreson = refundreson;
-    }
-
-    public String getRefundotherreson() {
-        return refundotherreson;
-    }
-
-    public void setRefundotherreson(String refundotherreson) {
-        this.refundotherreson = refundotherreson == null ? null : refundotherreson.trim();
-    }
-
-    public BigDecimal getBackmoney() {
-        return backmoney;
-    }
-
-    public void setBackmoney(BigDecimal backmoney) {
-        this.backmoney = backmoney;
-    }
-
     public String getShoprejectreason() {
         return shoprejectreason;
     }
@@ -114,13 +112,5 @@ public class Orderrefunds {
 
     public void setRefundstatus(Byte refundstatus) {
         this.refundstatus = refundstatus;
-    }
-
-    public Date getCreatetime() {
-        return createtime;
-    }
-
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
     }
 }

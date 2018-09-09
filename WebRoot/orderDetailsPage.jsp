@@ -58,6 +58,7 @@
 							<th>商品规格：</th>
 							<th>商品价格：</th>
 							<th>购买数量：</th>
+							<th>商品状态：</th>
 						</tr>
 							<c:forEach begin="0" end="${count-1}" var="step" step="1">
 							<tr>
@@ -65,6 +66,7 @@
 								<td>${goodsremarks.get(step)}</td>
 								<td>${goodsprice.get(step)}</td>
 								<td>${goodscount.get(step)}</td>
+								<td><c:if test='${i.orderstatus==-2}'>为付款的订单</c:if><c:if test='${i.orderstatus==0}'>待发货</c:if><c:if test='${goodsstatus.get(step)==1}'>配送中</c:if><c:if test='${goodsstatus.get(step)==2}'>用户确认收货</c:if><c:if test='${goodsstatus.get(step)==-3}'>用户拒收</c:if><c:if test='${goodsstatus.get(step)==-1}'>用户取消</c:if></td>
 							</tr>
 							</c:forEach>
 					</table>
@@ -86,21 +88,6 @@
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" placeholder=""
 						placeholder="订单备注" id="orderNote" name="orderNote"   value="${i.orderremarks}" readonly="readonly" >
-				</div>
-			</div>
-			<br>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>订单状态：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-				
-				<input type="text" class="input-text" placeholder=""
-						placeholder="订单状态" id="orderStats" name="orderStats"   value="<c:if test='${i.orderstatus==-2}'>待发货</c:if>
-																						<c:if test='${i.orderstatus==1}'>配送中</c:if>
-																						<c:if test='${i.orderstatus==2}'>用户确认收货</c:if>
-																						<c:if test='${i.orderstatus==-3}'>用户拒收</c:if>
-																						<c:if test='${i.orderstatus==-1}'>用户取消</c:if>
-						" readonly="readonly" >
 				</div>
 			</div>
 			<br>

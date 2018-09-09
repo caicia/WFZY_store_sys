@@ -51,7 +51,8 @@
 							
 								<td>${i.orderno }</td>
 								<td>${i.username }</td>
-								<td><c:if test='${i.orderstatus==-2}'>待发货</c:if>
+								<td><c:if test='${i.orderstatus==-2}'>为付款的订单</c:if>
+									<c:if test='${i.orderstatus==0}'>待发货</c:if>
 									<c:if test='${i.orderstatus==1}'>配送中</c:if>
 									<c:if test='${i.orderstatus==2}'>用户确认收货</c:if>
 									<c:if test='${i.orderstatus==-3}'>用户拒收</c:if>

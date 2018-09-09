@@ -1,6 +1,7 @@
 package com.WFZY.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,14 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.WFZY.pojo.Shops;
+import com.WFZY.pojo.ShopsExample;
 import com.WFZY.pojo.Users;
 import com.WFZY.service.loginService;
+import com.WFZY.shop.service.ShopService;
 
 @Controller
 public class loginController {
 
 	@Resource(name = "loginServiceImpl")
 	private loginService loginService;
+	
+	@Resource(name = "ShopServiceImpl")
+	private ShopService shopservice;
 	
 	@RequestMapping(value = "/userLogin.action")
 	public @ResponseBody String userLogin(HttpServletRequest request, HttpSession session) {
@@ -35,11 +42,22 @@ public class loginController {
 			if(Integer.valueOf(loginuser.getUsertype())==2)
 			{
 				flag=1;
+				ShopsExample shopsExample = new ShopsExample();
+				ShopsExample.Criteria shopsCriteria = shopsExample.createCriteria();
+				shopsCriteria.andUseridEqualTo(loginuser.getUserid());
+				List<Shops> shops = shopservice.getShopsID(shopsExample);
+				
+				if(shops.get(0).getShopstatus() != 1)
+				{
+					flag = shops.get(0).getShopstatus();
+				}
 			}
 			else
 			{
-				flag=-1;
+				flag=-10;
 			}
+			
+			
 		}
 		System.out.println(flag);
 		return "{\"flag\":" + flag + "}";

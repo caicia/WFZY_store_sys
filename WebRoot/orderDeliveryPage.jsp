@@ -77,7 +77,8 @@
 				<div class="formControls col-xs-8 col-sm-9">
 				
 				<input type="text" class="input-text" placeholder=""
-						placeholder="订单状态" id="orderStats" name="orderStats"   value="<c:if test='${i.orderstatus==-2}'>待发货</c:if>
+						placeholder="订单状态" id="orderStats" name="orderStats"   value="<c:if test='${i.orderstatus==-2}'>为付款的订单</c:if>
+									<c:if test='${i.orderstatus==0}'>待发货</c:if>
 									<c:if test='${i.orderstatus==1}'>配送中</c:if>
 									<c:if test='${i.orderstatus==2}'>用户确认收货</c:if>
 									<c:if test='${i.orderstatus==-3}'>用户拒收</c:if>

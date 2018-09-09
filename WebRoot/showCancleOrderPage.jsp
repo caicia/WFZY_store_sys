@@ -32,48 +32,51 @@
 </style>
 </head>
 <body>
+	
 			<div class="ui_content">
 				<div class="ui_tb">
 					<table class="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
 						<tr>
 							<th>订单编号</th>
 							<th>购买用户</th>
-							<th>购买商品</th>
-							<th>商品评分</th>
-							<th>服务评分</th>
-							<th>快递评分</th>
-							<th>评价内容</th>
-							<th>评价图片</th>
-							<th>评价时间</th>
-							<th>回复评论</th>
+							<th>订单状态</th>
+							<th>收货方式</th>
+							<th>是否支付</th>
+							<th>订单详情</th>
+							<th>发货时间</th>
+							<th>物流状态</th>
+							<th>取消理由</th>
 						</tr>
-							<c:forEach begin="0" end="${comment.size()-1 }" var="step" step="1">
+							<c:forEach items="${order}" var="i">
 							<tr>
 							
-								<td>${orderno.get(step) }</td>
-								<td>${username.get(step) }</td>
-								<td>${goodsname.get(step) }</td>
-								<td>${comment.get(step).goodsscore }</td>
-								<td>${comment.get(step).servicescore }</td>
-								<td>${comment.get(step).timescore }</td>
+								<td>${i.orderno}</td>
+								<td>${i.username}</td>
+								<td><c:if test='${i.orderstatus==-2}'>待发货</c:if>
+									<c:if test='${i.orderstatus==1}'>配送中</c:if>
+									<c:if test='${i.orderstatus==2}'>用户确认收货</c:if>
+									<c:if test='${i.orderstatus==-3}'>用户拒收</c:if>
+									<c:if test='${i.orderstatus==-1}'>用户取消</c:if></td>
+								<td><c:if test="${i.delivertype==0 }">自提</c:if>
+									<c:if test="${i.delivertype==1 }">快递</c:if>
+								</td>
 								<td>
-								<button class="btn btn-primary radius" onclick="layerOut('评论内容','${comment.get(step).content }','${comment.get(step).commentid}')">
-										评论内容
+								<c:if test="${i.ispay==0 }">未支付</c:if>
+									<c:if test="${i.ispay==1 }">已支付</c:if>
+								</td>
+								<td><button class="btn btn-primary radius" onclick="layerOut('订单详情','${pageContext.request.contextPath }/shop/showDetailsPage.action?orderid=${i.orderno}')">
+										订单详情
+								</button></td>
+								<td>
+								<fmt:formatDate value="${i.deliverytime}" pattern="yyyy-MM-dd　HH:mm:ss"/>  
+								</td>
+								<td>
+								<button class="btn btn-primary radius" onclick="layerOut('物流追踪','${pageContext.request.contextPath }/shop/showWLList.action?nu=${i.expressno}&com=${i.expressid}&time=${i.deliverytime }')">
+										物流追踪
 								</button>
 								</td>
 								<td>
-								<button class="btn btn-primary radius" onclick="layerPhoto('评论图片','${comment.get(step).images }')">
-										评论图片
-								</button>
-								</td>
-								<td><fmt:formatDate value="${comment.get(step).createtime}" pattern="yyyy-MM-dd　HH:mm:ss"/> </td>
-								<td>
-								<c:if test='${comment.get(step).replytime==null }'><button class="btn btn-primary radius" onclick="layerOut('回复评论','${comment.get(step).content }','${comment.get(step).commentid}')">
-										评论内容
-								</button></c:if>
-								<c:if test='${comment.get(step).replytime!=null }'><button class="btn btn-primary radius" onclick="layerOut('已经评论','${comment.get(step).content }','${comment.get(step).commentid}')">
-										已经评论
-								</button></c:if>
+								<font color="red">已被取消</font>
 								</td>
 							</tr>
 							</c:forEach>
@@ -112,88 +115,27 @@
 		src="${pageContext.request.contextPath }/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 
 <script type="text/javascript">
-
 	
-function layerOut(title,url,commentid)
+function layerOut(title,url)
 {
-	if(title == "评论内容")
-      layer.alert(url);
-    else if(title == "已经评论")
-    {
-    	layer.alert("已经评论过了，不要再点了");
-    }
+	if(title == "自提")
+	{
+		alert("该商品为自提，不需要发货");
+	}
+            //layer.msg('这是最常用的吧');
     else
-    {
-    	layer.confirm('<textarea style="width: 400px; height: 300px; font-size:18px" id="shopreply"></textarea>',{
-			btn:["确定",'取消']
-		}, function(){
-			var shopreply = document.getElementById("shopreply").value;
-				var obj={
-					commentid : commentid,
-					replytime : new Date(),
-	   				shopreply : shopreply,
-	   			};
-	   			obj = JSON.stringify(obj);
-	   			$.ajax({
-					url : '${pageContext.request.contextPath }/updateComment.action',
-					contentType : 'application/json;charset=utf-8',
-			   		type : "POST",
-					data : obj,
-					dataType : "json",
-					async : false,
-					success : function(data) {
-						if(data.flag == 1)
-						{
-							alert("更新成功");
-							window.parent.location.reload();
-							var index = parent.layer.getFrameIndex(window.name);
-							parent.layer.close(index);
-						}
-						else
-						{
-							alert("更新失败");
-							window.parent.location.reload();
-							var index = parent.layer.getFrameIndex(window.name);
-							parent.layer.close(index);
-						}
-				},
-				error : function(data) {alert("error")},
-				});
-			}); 
+    {  
+       layer.open({
+                type: 2,
+                title: title,
+                fix: false,
+                maxmin: true,
+                shadeClose: true,
+                area: ['1100px', '600px'],
+                content: url,
+       });
     }
 }
-
-function layerPhoto(title,url)
-{
-		if(url == "")
-		{
-			layer.alert("此评论没有图片");
-		}
-		else
-		{
-		var json=url.split("&WFZY.com&");
-	 	
-	 	for(var i=0;i<json.length;i++)
-	 		{
-	 		if(json[i]!="")
-	 		{
-	 		var img = "<img src='${pageContext.request.contextPath }/images/login/timg.jpeg' height='720' width='1280' />";  
-			layer.open({  
-	    		type: 1,  
-	    		shade: false,  
-	    		title: "第"+(i+1)+"张图片", //不显示标题  
-	    		area:['auto','auto'],  
-	   	 		area: [img.width + 'px', img.height+'px'],  
-	    		content: img, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响  
-	    		cancel: function () {  
-	        	//layer.msg('图片查看结束！', { time: 5000, icon: 6 });  
-	    		}  
-			});  
-			}
-	 		}
- 	 	}
-}
-
 
 </script>
 

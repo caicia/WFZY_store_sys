@@ -63,9 +63,34 @@ $('#login_sub').click(function() {
 					alert("登录成功");
 					window.location='${pageContext.request.contextPath }/index.jsp';
 				}
-				else if(data.flag==-1)
+				else if(data.flag==-10)
 				{
 					alert("登录的账号并非商家用户");
+					window.location='${pageContext.request.contextPath }/login.jsp';
+				}
+				else if(data.flag==0)
+				{
+					alert("你的帐号正在申请还未通过，请耐心等待");
+					window.location='${pageContext.request.contextPath }/login.jsp';
+				}
+				else if(data.flag==-1)
+				{
+					alert("你的帐号申请未通过，请重新申请");
+					window.location='${pageContext.request.contextPath }/login.jsp';
+				}
+				else if(data.flag==-2)
+				{
+					alert("你的帐号已被停止，请联系管理员");
+					window.location='${pageContext.request.contextPath }/login.jsp';
+				}
+				else if(data.flag==-3)
+				{
+					alert("你的帐号已被冻结，请联系管理员");
+					window.location='${pageContext.request.contextPath }/login.jsp';
+				}
+				else if(data.flag==-4)
+				{
+					alert("你的帐号已被删除，请联系管理员");
 					window.location='${pageContext.request.contextPath }/login.jsp';
 				}
 				else{

@@ -226,133 +226,313 @@ public class OrderrefundsExample {
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoIsNull() {
-            addCriterion("refundTo is null");
+        public Criteria andUseridIsNull() {
+            addCriterion("userId is null");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoIsNotNull() {
-            addCriterion("refundTo is not null");
+        public Criteria andUseridIsNotNull() {
+            addCriterion("userId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoEqualTo(Integer value) {
-            addCriterion("refundTo =", value, "refundto");
+        public Criteria andUseridEqualTo(Integer value) {
+            addCriterion("userId =", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoNotEqualTo(Integer value) {
-            addCriterion("refundTo <>", value, "refundto");
+        public Criteria andUseridNotEqualTo(Integer value) {
+            addCriterion("userId <>", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoGreaterThan(Integer value) {
-            addCriterion("refundTo >", value, "refundto");
+        public Criteria andUseridGreaterThan(Integer value) {
+            addCriterion("userId >", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoGreaterThanOrEqualTo(Integer value) {
-            addCriterion("refundTo >=", value, "refundto");
+        public Criteria andUseridGreaterThanOrEqualTo(Integer value) {
+            addCriterion("userId >=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoLessThan(Integer value) {
-            addCriterion("refundTo <", value, "refundto");
+        public Criteria andUseridLessThan(Integer value) {
+            addCriterion("userId <", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoLessThanOrEqualTo(Integer value) {
-            addCriterion("refundTo <=", value, "refundto");
+        public Criteria andUseridLessThanOrEqualTo(Integer value) {
+            addCriterion("userId <=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoIn(List<Integer> values) {
-            addCriterion("refundTo in", values, "refundto");
+        public Criteria andUseridIn(List<Integer> values) {
+            addCriterion("userId in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoNotIn(List<Integer> values) {
-            addCriterion("refundTo not in", values, "refundto");
+        public Criteria andUseridNotIn(List<Integer> values) {
+            addCriterion("userId not in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoBetween(Integer value1, Integer value2) {
-            addCriterion("refundTo between", value1, value2, "refundto");
+        public Criteria andUseridBetween(Integer value1, Integer value2) {
+            addCriterion("userId between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtoNotBetween(Integer value1, Integer value2) {
-            addCriterion("refundTo not between", value1, value2, "refundto");
+        public Criteria andUseridNotBetween(Integer value1, Integer value2) {
+            addCriterion("userId not between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoIsNull() {
-            addCriterion("refundTradeNo is null");
+        public Criteria andShopidIsNull() {
+            addCriterion("shopId is null");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoIsNotNull() {
-            addCriterion("refundTradeNo is not null");
+        public Criteria andShopidIsNotNull() {
+            addCriterion("shopId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoEqualTo(String value) {
-            addCriterion("refundTradeNo =", value, "refundtradeno");
+        public Criteria andShopidEqualTo(Integer value) {
+            addCriterion("shopId =", value, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoNotEqualTo(String value) {
-            addCriterion("refundTradeNo <>", value, "refundtradeno");
+        public Criteria andShopidNotEqualTo(Integer value) {
+            addCriterion("shopId <>", value, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoGreaterThan(String value) {
-            addCriterion("refundTradeNo >", value, "refundtradeno");
+        public Criteria andShopidGreaterThan(Integer value) {
+            addCriterion("shopId >", value, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoGreaterThanOrEqualTo(String value) {
-            addCriterion("refundTradeNo >=", value, "refundtradeno");
+        public Criteria andShopidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("shopId >=", value, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoLessThan(String value) {
-            addCriterion("refundTradeNo <", value, "refundtradeno");
+        public Criteria andShopidLessThan(Integer value) {
+            addCriterion("shopId <", value, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoLessThanOrEqualTo(String value) {
-            addCriterion("refundTradeNo <=", value, "refundtradeno");
+        public Criteria andShopidLessThanOrEqualTo(Integer value) {
+            addCriterion("shopId <=", value, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoLike(String value) {
-            addCriterion("refundTradeNo like", value, "refundtradeno");
+        public Criteria andShopidIn(List<Integer> values) {
+            addCriterion("shopId in", values, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoNotLike(String value) {
-            addCriterion("refundTradeNo not like", value, "refundtradeno");
+        public Criteria andShopidNotIn(List<Integer> values) {
+            addCriterion("shopId not in", values, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoIn(List<String> values) {
-            addCriterion("refundTradeNo in", values, "refundtradeno");
+        public Criteria andShopidBetween(Integer value1, Integer value2) {
+            addCriterion("shopId between", value1, value2, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoNotIn(List<String> values) {
-            addCriterion("refundTradeNo not in", values, "refundtradeno");
+        public Criteria andShopidNotBetween(Integer value1, Integer value2) {
+            addCriterion("shopId not between", value1, value2, "shopid");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoBetween(String value1, String value2) {
-            addCriterion("refundTradeNo between", value1, value2, "refundtradeno");
+        public Criteria andRefundotherresonIsNull() {
+            addCriterion("refundOtherReson is null");
             return (Criteria) this;
         }
 
-        public Criteria andRefundtradenoNotBetween(String value1, String value2) {
-            addCriterion("refundTradeNo not between", value1, value2, "refundtradeno");
+        public Criteria andRefundotherresonIsNotNull() {
+            addCriterion("refundOtherReson is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonEqualTo(String value) {
+            addCriterion("refundOtherReson =", value, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonNotEqualTo(String value) {
+            addCriterion("refundOtherReson <>", value, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonGreaterThan(String value) {
+            addCriterion("refundOtherReson >", value, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonGreaterThanOrEqualTo(String value) {
+            addCriterion("refundOtherReson >=", value, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonLessThan(String value) {
+            addCriterion("refundOtherReson <", value, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonLessThanOrEqualTo(String value) {
+            addCriterion("refundOtherReson <=", value, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonLike(String value) {
+            addCriterion("refundOtherReson like", value, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonNotLike(String value) {
+            addCriterion("refundOtherReson not like", value, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonIn(List<String> values) {
+            addCriterion("refundOtherReson in", values, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonNotIn(List<String> values) {
+            addCriterion("refundOtherReson not in", values, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonBetween(String value1, String value2) {
+            addCriterion("refundOtherReson between", value1, value2, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andRefundotherresonNotBetween(String value1, String value2) {
+            addCriterion("refundOtherReson not between", value1, value2, "refundotherreson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNull() {
+            addCriterion("createTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNotNull() {
+            addCriterion("createTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeEqualTo(Date value) {
+            addCriterion("createTime =", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotEqualTo(Date value) {
+            addCriterion("createTime <>", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThan(Date value) {
+            addCriterion("createTime >", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("createTime >=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThan(Date value) {
+            addCriterion("createTime <", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
+            addCriterion("createTime <=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIn(List<Date> values) {
+            addCriterion("createTime in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotIn(List<Date> values) {
+            addCriterion("createTime not in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeBetween(Date value1, Date value2) {
+            addCriterion("createTime between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
+            addCriterion("createTime not between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyIsNull() {
+            addCriterion("backMoney is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyIsNotNull() {
+            addCriterion("backMoney is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyEqualTo(BigDecimal value) {
+            addCriterion("backMoney =", value, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyNotEqualTo(BigDecimal value) {
+            addCriterion("backMoney <>", value, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyGreaterThan(BigDecimal value) {
+            addCriterion("backMoney >", value, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("backMoney >=", value, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyLessThan(BigDecimal value) {
+            addCriterion("backMoney <", value, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("backMoney <=", value, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyIn(List<BigDecimal> values) {
+            addCriterion("backMoney in", values, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyNotIn(List<BigDecimal> values) {
+            addCriterion("backMoney not in", values, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("backMoney between", value1, value2, "backmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackmoneyNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("backMoney not between", value1, value2, "backmoney");
             return (Criteria) this;
         }
 
@@ -486,196 +666,6 @@ public class OrderrefundsExample {
             return (Criteria) this;
         }
 
-        public Criteria andRefundresonIsNull() {
-            addCriterion("refundReson is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonIsNotNull() {
-            addCriterion("refundReson is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonEqualTo(Integer value) {
-            addCriterion("refundReson =", value, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonNotEqualTo(Integer value) {
-            addCriterion("refundReson <>", value, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonGreaterThan(Integer value) {
-            addCriterion("refundReson >", value, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonGreaterThanOrEqualTo(Integer value) {
-            addCriterion("refundReson >=", value, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonLessThan(Integer value) {
-            addCriterion("refundReson <", value, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonLessThanOrEqualTo(Integer value) {
-            addCriterion("refundReson <=", value, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonIn(List<Integer> values) {
-            addCriterion("refundReson in", values, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonNotIn(List<Integer> values) {
-            addCriterion("refundReson not in", values, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonBetween(Integer value1, Integer value2) {
-            addCriterion("refundReson between", value1, value2, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundresonNotBetween(Integer value1, Integer value2) {
-            addCriterion("refundReson not between", value1, value2, "refundreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonIsNull() {
-            addCriterion("refundOtherReson is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonIsNotNull() {
-            addCriterion("refundOtherReson is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonEqualTo(String value) {
-            addCriterion("refundOtherReson =", value, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonNotEqualTo(String value) {
-            addCriterion("refundOtherReson <>", value, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonGreaterThan(String value) {
-            addCriterion("refundOtherReson >", value, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonGreaterThanOrEqualTo(String value) {
-            addCriterion("refundOtherReson >=", value, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonLessThan(String value) {
-            addCriterion("refundOtherReson <", value, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonLessThanOrEqualTo(String value) {
-            addCriterion("refundOtherReson <=", value, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonLike(String value) {
-            addCriterion("refundOtherReson like", value, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonNotLike(String value) {
-            addCriterion("refundOtherReson not like", value, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonIn(List<String> values) {
-            addCriterion("refundOtherReson in", values, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonNotIn(List<String> values) {
-            addCriterion("refundOtherReson not in", values, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonBetween(String value1, String value2) {
-            addCriterion("refundOtherReson between", value1, value2, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundotherresonNotBetween(String value1, String value2) {
-            addCriterion("refundOtherReson not between", value1, value2, "refundotherreson");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyIsNull() {
-            addCriterion("backMoney is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyIsNotNull() {
-            addCriterion("backMoney is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyEqualTo(BigDecimal value) {
-            addCriterion("backMoney =", value, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyNotEqualTo(BigDecimal value) {
-            addCriterion("backMoney <>", value, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyGreaterThan(BigDecimal value) {
-            addCriterion("backMoney >", value, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("backMoney >=", value, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyLessThan(BigDecimal value) {
-            addCriterion("backMoney <", value, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("backMoney <=", value, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyIn(List<BigDecimal> values) {
-            addCriterion("backMoney in", values, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyNotIn(List<BigDecimal> values) {
-            addCriterion("backMoney not in", values, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("backMoney between", value1, value2, "backmoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackmoneyNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("backMoney not between", value1, value2, "backmoney");
-            return (Criteria) this;
-        }
-
         public Criteria andShoprejectreasonIsNull() {
             addCriterion("shopRejectReason is null");
             return (Criteria) this;
@@ -803,66 +793,6 @@ public class OrderrefundsExample {
 
         public Criteria andRefundstatusNotBetween(Byte value1, Byte value2) {
             addCriterion("refundStatus not between", value1, value2, "refundstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeIsNull() {
-            addCriterion("createTime is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeIsNotNull() {
-            addCriterion("createTime is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeEqualTo(Date value) {
-            addCriterion("createTime =", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeNotEqualTo(Date value) {
-            addCriterion("createTime <>", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeGreaterThan(Date value) {
-            addCriterion("createTime >", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("createTime >=", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeLessThan(Date value) {
-            addCriterion("createTime <", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
-            addCriterion("createTime <=", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeIn(List<Date> values) {
-            addCriterion("createTime in", values, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeNotIn(List<Date> values) {
-            addCriterion("createTime not in", values, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeBetween(Date value1, Date value2) {
-            addCriterion("createTime between", value1, value2, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
-            addCriterion("createTime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
     }

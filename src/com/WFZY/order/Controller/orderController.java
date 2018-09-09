@@ -26,6 +26,8 @@ import com.WFZY.pojo.GoodsWithBLOBs;
 import com.WFZY.pojo.Goodscomment;
 import com.WFZY.pojo.GoodscommentExample;
 import com.WFZY.pojo.GoodscommentWithBLOBs;
+import com.WFZY.pojo.Orderrefunds;
+import com.WFZY.pojo.OrderrefundsExample;
 import com.WFZY.pojo.Orders;
 import com.WFZY.pojo.OrdersExample;
 import com.WFZY.pojo.Shops;
@@ -62,6 +64,121 @@ public class orderController {
 		userCriteria.andUseridEqualTo(userid);
 		List<Users> i = shopservice.getUserID(usersExample);
 		return i.get(0).getUsername();
+	}
+	
+	@RequestMapping("/CancleOrder.action")
+	@ResponseBody
+	public String CancleOrder(@RequestBody Orderrefunds orderrefunds) {
+		int flag = orderService.Cancleorder(orderrefunds);
+		return "{\"flag\":" + flag + "}";
+	}
+	
+	
+	@RequestMapping("/shop/CancleList.action")
+	public ModelAndView CancleList(HttpServletRequest request) throws ParseException
+	{
+		List<Shops> shopList = shopList(request);
+		
+		List<String> orderstatus = new ArrayList<String>();
+		List<String> orderno = new ArrayList<String>();
+		List<String> username = new ArrayList<String>();
+		List<String> goodsname = new ArrayList<String>();
+		
+		OrderrefundsExample orderrefundsExample = new OrderrefundsExample();
+		OrderrefundsExample.Criteria orderrefundsCriteria = orderrefundsExample.createCriteria();
+		orderrefundsCriteria.andShopidEqualTo(shopList.get(0).getShopid());
+		orderrefundsCriteria.andRefundstatusEqualTo((byte)-1);
+		List<Orderrefunds> orderrefunds = orderService.selectCanclegoods(orderrefundsExample);
+		
+		for(int i=0;i<orderrefunds.size();i++)
+		{
+			OrdersExample ordersExample = new OrdersExample();
+			OrdersExample.Criteria orderCriteria = ordersExample.createCriteria();
+			orderCriteria.andOrderidEqualTo(orderrefunds.get(i).getOrderid());
+			
+			List<Orders> order = orderService.selectOrder(ordersExample);
+			orderstatus.add(String.valueOf(order.get(0).getOrderstatus()));
+			orderno.add(order.get(0).getOrderno());
+			username.add(userList(order.get(0).getUserid()));
+			goodsname.add(order.get(0).getGoodsname());
+		}
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("order", orderrefunds);
+		modelAndView.addObject("orderstatus", orderstatus);
+		modelAndView.addObject("orderno", orderno);
+		modelAndView.addObject("username", username);
+		modelAndView.addObject("goodsname", goodsname);
+		modelAndView.setViewName("/CancleOrderPage");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/shop/CancleOrderList.action")
+	public ModelAndView CancleOrderList(HttpServletRequest request) throws ParseException
+	{
+		List<Shops> shopList = shopList(request);
+		
+		List<String> orderstatus = new ArrayList<String>();
+		List<String> orderno = new ArrayList<String>();
+		List<String> username = new ArrayList<String>();
+		List<String> goodsname = new ArrayList<String>();
+		
+		OrderrefundsExample orderrefundsExample = new OrderrefundsExample();
+		OrderrefundsExample.Criteria orderrefundsCriteria = orderrefundsExample.createCriteria();
+		orderrefundsCriteria.andShopidEqualTo(shopList.get(0).getShopid());
+		orderrefundsCriteria.andRefundstatusEqualTo((byte)0);
+		List<Orderrefunds> orderrefunds = orderService.selectCanclegoods(orderrefundsExample);
+		
+		for(int i=0;i<orderrefunds.size();i++)
+		{
+			OrdersExample ordersExample = new OrdersExample();
+			OrdersExample.Criteria orderCriteria = ordersExample.createCriteria();
+			orderCriteria.andOrderidEqualTo(orderrefunds.get(i).getOrderid());
+			
+			List<Orders> order = orderService.selectOrder(ordersExample);
+			orderstatus.add(String.valueOf(order.get(0).getOrderstatus()));
+			orderno.add(order.get(0).getOrderno());
+			username.add(userList(order.get(0).getUserid()));
+			goodsname.add(order.get(0).getGoodsname());
+		}
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("order", orderrefunds);
+		modelAndView.addObject("orderstatus", orderstatus);
+		modelAndView.addObject("orderno", orderno);
+		modelAndView.addObject("username", username);
+		modelAndView.addObject("goodsname", goodsname);
+		modelAndView.setViewName("/CancleOrderPage");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/shop/showCancleOrderList.action")
+	public ModelAndView showCancleOrderList(HttpServletRequest request) throws ParseException
+	{
+		List<Shops> shopList = shopList(request);
+		OrdersExample ordersExample = new OrdersExample();
+		OrdersExample.Criteria orderCriteria = ordersExample.createCriteria();
+		orderCriteria.andShopidEqualTo(shopList.get(0).getShopid());
+		orderCriteria.andOrderstatusEqualTo((byte)-1);
+		List<Orders> order = orderService.selectOrder(ordersExample);
+		
+		for(int i=0;i<order.size();i++)
+		{
+			String userName = userList(order.get(i).getUserid());
+			order.get(i).setusername(userName);
+			for(int j=i+1;j<order.size();j++)
+			{
+				if(order.get(i).getOrderno().equals(order.get(j).getOrderno()))
+				{
+					System.out.println(order.get(i).getOrderno()+"=="+order.get(j).getOrderno());
+					order.remove(j);
+				}
+			}
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("order", order);
+		modelAndView.setViewName("/showCancleOrderPage");
+		return modelAndView;
 	}
 	
 	@RequestMapping("/shop/showNotExpressOrderList.action")
@@ -332,16 +449,17 @@ public class orderController {
 		List<String> goodscount = new ArrayList<String>();
 		List<String> goodsprice = new ArrayList<String>();
 		List<String> goodsremarks = new ArrayList<String>();
+		List<String> goodsstatus = new ArrayList<String>();
 		
 		BigDecimal totalmoney = new BigDecimal(0);
 		for(int i=0;i<order.size();i++)
 		{
-			
 			goodsname.add(order.get(i).getGoodsname());
 			goodscount.add(String.valueOf(order.get(i).getGoodscount()));
 			goodsprice.add(String.valueOf(order.get(i).getGoodsprice()));
 			goodsremarks.add(String.valueOf(order.get(i).getGoodsremarks()));
 			totalmoney = totalmoney.add(order.get(i).getGoodsmoney());
+			goodsstatus.add(String.valueOf(order.get(i).getOrderstatus()));
 			if(i!=0)
 			{
 				order.remove(i);
@@ -368,6 +486,7 @@ public class orderController {
 		modelAndView.addObject("goodsprice", goodsprice);
 		modelAndView.addObject("goodsremarks", goodsremarks);
 		modelAndView.addObject("count", goodscount.size());
+		modelAndView.addObject("goodsstatus", goodsstatus);
 		modelAndView.addObject("expressName" , express.get(0).getExpressname());
 		modelAndView.setViewName("/orderDetailsPage");
 		return modelAndView;

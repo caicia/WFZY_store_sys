@@ -11,6 +11,8 @@ import com.WFZY.pojo.GoodsactivityExample;
 import com.WFZY.pojo.Goodscomment;
 import com.WFZY.pojo.GoodscommentExample;
 import com.WFZY.pojo.GoodscommentWithBLOBs;
+import com.WFZY.pojo.Orderrefunds;
+import com.WFZY.pojo.OrderrefundsExample;
 import com.WFZY.pojo.Orders;
 import com.WFZY.pojo.OrdersExample;
 
@@ -31,5 +33,9 @@ public interface orderService {
 	public int updateComment(GoodscommentWithBLOBs record);
 
 	public List<GoodsWithBLOBs> selectgoods(GoodsExample example);
+
+	public List<Orderrefunds> selectCanclegoods(OrderrefundsExample example);
+
+	public int Cancleorder(Orderrefunds example);
 
 }

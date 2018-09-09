@@ -333,6 +333,45 @@
 			"resourceType" : ""
 		},
 		{
+			"accessPath" : "${pageContext.request.contextPath }/shop/CancleOrderList.action",
+			"checked" : false,
+			"delFlag" : 0,
+			"parentID" : 101,
+			"resourceCode" : "",
+			"resourceDesc" : "",
+			"resourceGrade" : 101,
+			"resourceID" : 1014,
+			"resourceName" : "申请取消的订单",
+			"resourceOrder" : 0,
+			"resourceType" : ""
+		},
+		{
+			"accessPath" : "${pageContext.request.contextPath }/shop/CancleList.action",
+			"checked" : false,
+			"delFlag" : 0,
+			"parentID" : 101,
+			"resourceCode" : "",
+			"resourceDesc" : "",
+			"resourceGrade" : 101,
+			"resourceID" : 1016,
+			"resourceName" : "拒绝取消的订单",
+			"resourceOrder" : 0,
+			"resourceType" : ""
+		},
+		{
+			"accessPath" : "${pageContext.request.contextPath }/shop/showCancleOrderList.action",
+			"checked" : false,
+			"delFlag" : 0,
+			"parentID" : 101,
+			"resourceCode" : "",
+			"resourceDesc" : "",
+			"resourceGrade" : 101,
+			"resourceID" : 1015,
+			"resourceName" : "已取消的订单",
+			"resourceOrder" : 0,
+			"resourceType" : ""
+		},
+		{
 			"accessPath" : "",
 			"checked" : false,
 			"delFlag" : 0,
