@@ -122,6 +122,10 @@ public class orderController {
 		List<String> orderno = new ArrayList<String>();
 		List<String> username = new ArrayList<String>();
 		List<String> goodsname = new ArrayList<String>();
+		List<String> expressno = new ArrayList<String>();
+		List<String> expressid = new ArrayList<String>();
+		List<String> deliverytime = new ArrayList<String>();
+		
 		
 		OrderrefundsExample orderrefundsExample = new OrderrefundsExample();
 		OrderrefundsExample.Criteria orderrefundsCriteria = orderrefundsExample.createCriteria();
@@ -140,6 +144,9 @@ public class orderController {
 			orderno.add(order.get(0).getOrderno());
 			username.add(userList(order.get(0).getUserid()));
 			goodsname.add(order.get(0).getGoodsname());
+			expressno.add(order.get(0).getExpressno());
+			expressid.add(String.valueOf(order.get(0).getExpressid()));
+			deliverytime.add(String.valueOf(order.get(0).getDeliverytime()));
 		}
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -148,6 +155,9 @@ public class orderController {
 		modelAndView.addObject("orderno", orderno);
 		modelAndView.addObject("username", username);
 		modelAndView.addObject("goodsname", goodsname);
+		modelAndView.addObject("expressno", expressno);
+		modelAndView.addObject("expressid", expressid);
+		modelAndView.addObject("deliverytime", deliverytime);
 		modelAndView.setViewName("/CancleOrderPage");
 		return modelAndView;
 	}

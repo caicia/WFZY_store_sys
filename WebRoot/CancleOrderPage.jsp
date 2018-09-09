@@ -75,7 +75,7 @@
 								</button>
 								</td>
 								<td>
-								<button class="btn btn-primary radius" onclick="layerOut('物流追踪','${pageContext.request.contextPath }/shop/showWLList.action?nu=${i.expressno}&com=${i.expressid}&time=${i.deliverytime }')">
+								<button class="btn btn-primary radius" onclick="layerOut('物流追踪','${pageContext.request.contextPath }/shop/showWLList.action?nu=${expressno.get(step)}&com=${expressid.get(step)}&time=${deliverytime.get(step)}')">
 										物流追踪
 								</button>
 								</td>
