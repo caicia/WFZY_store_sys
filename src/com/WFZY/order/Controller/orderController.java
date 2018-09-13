@@ -194,11 +194,14 @@ public class orderController {
 	@RequestMapping("/shop/showNotExpressOrderList.action")
 	public ModelAndView showOrderList(HttpServletRequest request) throws ParseException
 	{
+		List<Byte> values = new ArrayList<Byte>();
+		values.add((byte)-2);
+		values.add((byte)0);
 		List<Shops> shopList = shopList(request);
 		OrdersExample ordersExample = new OrdersExample();
 		OrdersExample.Criteria orderCriteria = ordersExample.createCriteria();
 		orderCriteria.andShopidEqualTo(shopList.get(0).getShopid());
-		orderCriteria.andOrderstatusEqualTo((byte)-2);
+		orderCriteria.andOrderstatusIn(values);
 		List<Orders> order = orderService.selectOrder(ordersExample);
 		
 		for(int i=0;i<order.size();i++)
@@ -246,8 +249,6 @@ public class orderController {
 				}
 			}
 		}
-		
-		System.out.println(order.get(1).getusername());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("order", order);
