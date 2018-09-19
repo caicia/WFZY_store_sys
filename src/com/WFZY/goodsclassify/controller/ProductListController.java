@@ -19,21 +19,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.WFZY.goodsclassify.service.ProductCategoryService;
 import com.WFZY.goodsclassify.service.ProductListService;
-import com.WFZY.mapper.GoodsMapper;
 import com.WFZY.mapper.ShopsMapper;
 import com.WFZY.pojo.Goods;
 import com.WFZY.pojo.GoodsWithBLOBs;
 import com.WFZY.pojo.Goodsclassify;
 import com.WFZY.pojo.Shops;
 import com.WFZY.pojo.ShopsExample;
-import com.WFZY.pojo.ShopsexpressExample;
 import com.WFZY.pojo.Users;
 import com.WFZY.ulits.DateUtils;
-import com.WFZY.vo.GoodsclassifyVo;
 
 @Controller(value = "ProductListController")
 public class ProductListController {
@@ -46,6 +42,9 @@ public class ProductListController {
 
 	@Autowired
 	private ShopsMapper shopsMapper;
+
+	// 用于多图上传存储路径
+	List<String> pathList = new ArrayList<String>();
 
 	/**
 	 * 
@@ -166,6 +165,10 @@ public class ProductListController {
 
 		int i = productListService.updateGoods(goodsWithBLOBs);
 
+		if (i > 0) {
+			// 插入数据库成功，清空pathList
+			pathList.removeAll(pathList);
+		}
 		return "{\"message\":" + i + "}";
 	}
 
@@ -194,12 +197,14 @@ public class ProductListController {
 			throws IllegalStateException, IOException {
 
 		if (fileUpload != null) {
-			String realPath = request.getSession().getServletContext().getRealPath("/images/goodsImg/");
-			String relaPath = request.getContextPath() + "/images/goodsImg/";
+
+			String realPath = request.getSession().getServletContext().getRealPath("/image/goodsImg/");
+			String relaPath = request.getContextPath() + "/image/goodsImg/";
 			String picName = DateUtils.getRandomDate() + fileUpload.getOriginalFilename();
 			String savePath = realPath + picName;
 			String saveUrl = relaPath + picName;
-			request.getSession().setAttribute("saveUrl", saveUrl);
+			pathList.add(saveUrl);
+
 			if (realPath == null) {
 				return;
 			}
@@ -208,6 +213,16 @@ public class ProductListController {
 		} else {
 			System.out.println("文件不存在");
 		}
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < pathList.size(); i++) {
+			sb.append(pathList.get(i));
+			if (pathList.size() > 1) {
+				sb.append("&WFZY.com&");
+			}
+		}
+		/* System.out.println(sb.toString()); */
+		request.getSession().setAttribute("saveUrl", sb.toString());
+
 	}
 
 	/**
@@ -249,6 +264,10 @@ public class ProductListController {
 
 		int i = productListService.addGoodsApply(goodsWithBLOBs);
 
+		if (i > 0) {
+			// 插入数据库成功，清空pathList
+			pathList.removeAll(pathList);
+		}
 		return "{\"message\":" + i + "}";
 	}
 
